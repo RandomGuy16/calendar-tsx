@@ -1,0 +1,17 @@
+{
+  "mallas": [
+    {
+      "name": "UNMSM-FISI-2023",
+      "courses": [
+        {
+          "name": "Electromagnetismo y óptica",
+          "sections": [
+            {
+
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

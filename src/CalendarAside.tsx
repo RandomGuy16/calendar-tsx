@@ -1,7 +1,11 @@
 import './styles/CalendarAside.scss'
+import { UseEffect } from 'react'
 
 
 function CalendarAside() {
+  let data;
+  
+
 	return (
 		<div className='sidebar'>
 			<h2>Tus cursos</h2>

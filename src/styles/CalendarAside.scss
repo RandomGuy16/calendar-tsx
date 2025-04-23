@@ -22,18 +22,32 @@
 	}
 
 	& > section {
-		width: calc(100% - 2rem);
+		width: 100%;
 		min-height: 5rem;
 		height: fit-content;
+
+    & > span {
+      font-weight: normal;
+    }
 	}
 
 	&__curriculums {
-		&__title {
-			font-weight: normal;
-		}
+    &__list {
+      width: 100%;
+      min-height: 3rem;
+      height: fit-content;
+      background-color: variables.$sidebar-lists-bg;
+      border-radius: 0.5rem;
+    }
 	}
 
 	&__courses {
-		min-height: 8rem;
+		height: fit-content;
+    &__list {
+      width: 100%;
+      min-height: 8rem;
+      background-color: variables.$sidebar-lists-bg;
+      border-radius: 0.5rem;
+    }
 	}
 }
