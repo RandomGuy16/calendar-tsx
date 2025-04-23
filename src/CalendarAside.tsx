@@ -4,13 +4,14 @@ import './styles/CalendarAside.scss'
 function CalendarAside() {
 	return (
 		<div className='sidebar'>
+			<h2>Tus cursos</h2>
 			<section className='sidebar__curriculums'>
-				<h2 className='sidebar__curriculums__title'>Tu malla curricular</h2>
+				<span className='sidebar__curriculums__title'>Malla curricular</span>
 				<div className='sidebar__curriculums__list'>
 				</div>
 			</section>
 			<section className='sidebar__courses'>
-				<h3 className='sidebar__courses__title'>Tus cursos</h3>
+				<span className='sidebar__courses__title'>Cursos</span>
 				<div className='sidebar__courses__list'></div>
 			</section>
 		</div>

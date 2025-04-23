@@ -17,9 +17,23 @@
 	background-color: variables.$background-transparent-light;
 	padding: 1rem;
 
+	h2 {
+		font-weight: normal	;
+	}
+
 	& > section {
 		width: calc(100% - 2rem);
-		min-height: 8rem;
+		min-height: 5rem;
 		height: fit-content;
+	}
+
+	&__curriculums {
+		&__title {
+			font-weight: normal;
+		}
+	}
+
+	&__courses {
+		min-height: 8rem;
 	}
 }
