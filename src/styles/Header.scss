@@ -1,0 +1,112 @@
+// Header.scss
+@use 'mixins';
+@use 'variables';
+
+
+.header {
+	@include mixins.flex-row;
+	justify-content: space-between;
+	position: relative;
+	height: 100%;
+	width: 100%;
+
+	background-color: transparent;
+	z-index: 1;
+
+	// opaque white transparent background
+	&::before {
+		position: absolute;
+		content: '';
+		width: 100%;
+		height: 100%;
+
+		background-color: variables.$background-transparent-light;
+		z-index: -1;
+	}
+	& > :first-child {
+		width: fit-content;
+	}
+
+
+	// these are left side elements
+	&__left {
+		@include mixins.flex-row;
+		align-items: center;
+		padding-left: 1rem;
+		
+		/* hit first child of whatever, and not second childs  */
+		& > :first-child {
+			margin: 0px 1rem;
+		}
+	}
+	&__sidebar-button {
+		padding: 0.5rem;
+		background-color: transparent;
+		border: none;
+		border-radius: 0.5rem;
+		/* light transition from #0000 to another color */
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: variables.$background-transparent-light;
+		}
+	}
+	&__sidebar-icon {
+		font-size: 1rem;
+		font-weight: lighter;
+	}
+	&__title {
+		font-size: 1.5rem;
+		font-weight: 600;
+		cursor: default;
+	}
+
+
+	// header right side elements	
+	&__right {
+		@include mixins.flex-row;
+		align-items: center;
+		padding-right: 2rem;
+		
+		& > :first-child {
+			margin: 0px 1rem;
+		}
+	}
+	&__search-bar {
+		width: 20rem;
+		height: 2.5rem;
+		padding: 0px 1rem;
+		border-radius: 1rem;
+		border: none;
+
+		background-color: variables.$background-transparent-light;
+		transition: background-color 0.2s ease;
+		color: white;
+
+		&:hover {
+			background-color: variables.$header-searchbar-color-transparent;
+		}
+		&:focus {
+			outline: none;
+			background-color: variables.$header-searchbar-color-transparent;
+		}
+		&::placeholder {
+			color: #fff8;
+		}
+	}
+	/* right settings button */
+	&__settings-button {
+		background-color: transparent;
+		border: none;
+		border-radius: 1.25rem;
+
+		font-size: 2rem;
+	}
+	/* right hi label */
+	&__profile-button {
+		cursor: default;
+		margin: 0px 1rem;
+	}
+}
+
+

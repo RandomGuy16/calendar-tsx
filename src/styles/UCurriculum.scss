@@ -1,0 +1,12 @@
+// UCurriculum.scss
+@use 'variables.scss';
+@use 'mixins.scss';
+
+
+.u-curriculum {
+	width: 100%;
+	min-height: 4rem;
+	height: fit-content;
+
+	font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

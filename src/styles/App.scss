@@ -1,0 +1,42 @@
+@use 'mixins';
+@use 'variables';
+
+
+/* Use background image located in assets folder */
+body {
+  background-image: url('../assets/rochlitzcastle_background.webp');
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}
+
+.App-main {
+  width: 100%;
+  height: calc(100% - 7rem);
+  @include mixins.flex-row;
+}
+
+.App-header {
+	height: 7rem;
+	width: 100%;
+	margin-bottom: 2rem;
+}
+
+.App-aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex: 7;
+	padding: 0px 1rem 0px 0px;
+}
+
+.App-content {
+  flex: 33;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem;
+}

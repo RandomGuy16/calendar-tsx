@@ -1,0 +1,25 @@
+@use 'mixins';
+@use 'variables';
+
+
+.sidebar {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+	border-top-right-radius: 1rem;
+	border-right: 1px solid;
+	border-top: 1px solid;
+	border-color: variables.$border-transparent-light;
+	backdrop-filter: blur(8px);
+
+	background-color: variables.$background-transparent-light;
+	padding: 1rem;
+
+	& > section {
+		width: calc(100% - 2rem);
+		min-height: 8rem;
+		height: fit-content;
+	}
+}
