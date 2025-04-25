@@ -65,19 +65,19 @@
 		flex-direction: row;
 		justify-content: space-evenly;
 		align-items: start;
-		overflow-y: scroll;
+		overflow-y: auto;
 		max-height: 67vh;
 
 		/* selectors for the scrollbar */
 		&::-webkit-scrollbar {
 			width: 0.5rem;
 			
-			&_track {
+			&-track {
 				background-color: vars.$calendar-scrollbar-track-color;
 				border-radius: 0.25rem;
 			}
 			
-			&_thumb {
+			&-thumb {
 				background-color: vars.$calendar-scrollbar-color;
 				border-radius: 0.25rem; /* 4px */
 				&:hover {
