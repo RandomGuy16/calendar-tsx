@@ -3,55 +3,24 @@
 
 
 .sidebar {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
+	@include mixins.full-size;
+	@include mixins.flex-column;
+	padding: 0.5rem;
 
 	border-top-right-radius: 1rem;
 	border-right: 1px solid;
 	border-top: 1px solid;
 	border-color: vars.$border-transparent-light;
 	backdrop-filter: blur(8px);
-
 	background-color: vars.$background-transparent-light;
-	padding: 1rem 0.5rem;
-
-	&__buttons_nav {
-		@include mixins.flex-row;
-	}
-
+	
 	&__menu {
+		@include mixins.full-size;
 		background-color: vars.$background-transparent-light;
 		padding: 0.5rem 1rem;
-		height: 100%;
 		border-radius: 0px 0.5rem 0.5rem 0.5rem;
-		
-		&_button {
-			display: inline-block;
-			background-color: transparent;
-			border: none;
-			border-radius: 0.5rem 0.5rem 0px 0px;
-			width: fit-content;
-			max-width: 10rem;
-			height: 2rem;
-			padding: 0.5rem 1rem;
-			margin-right: 0.5rem;
-			text-align: center;
-			justify-content: center;
-			transition: background-color 0.2s ease;
-			
-			&:hover {
-				background-color: vars.$sidebar-button-hover;
-			}
-
-			&.active {
-				background-color: vars.$background-transparent-light;
-			}
-		}
 	}
 	
-
 	h2 {
 		font-weight: normal	;
 	}
@@ -68,11 +37,25 @@
 
 	&__curriculums {
     &__list {
-      width: 100%;
-      min-height: 3rem;
-      height: fit-content;
-      background-color: vars.$sidebar-lists-bg;
-      border-radius: 0.5rem;
+			.react-select__control {
+				background-color: vars.$background-transparent-light;
+				border: 1px solid vars.$border-transparent-light;
+				border-radius: 0.5rem;
+				padding: 0.25rem;
+				font-size: 1rem;
+				cursor: pointer;
+			}
+
+			.react-select__menu {
+				background-color: vars.$background-transparent-light;
+				border-radius: 0.5rem;
+			}
+
+			.react-select__option {
+				&:hover {
+					background-color: vars.$sidebar-button-hover;
+				}
+			}
     }
 		&__title {
 			font-weight: normal;
