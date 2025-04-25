@@ -1,12 +1,16 @@
 import styles from './CalendarAside.module.scss'
-import Tabs from '../Tabs/Tabs.tsx'
+import reactSelectStyles from './ReactSelectStyles.ts'
+import Tabs from './Tabs/Tabs.tsx'
 import Select from 'react-select'
 
 
 function CalendarAside() {
-	let options = [
-	{ value: 'curriculum1', label: 'Curriculum 1'},
-	{ value: 'curriculum2', label: 'Curriculum 2'}
+	let curriculums = [
+		{ value: 'curriculum1', label: 'Curriculum 1'},
+		{ value: 'curriculum2', label: 'Curriculum 2'}
+	]
+	let courses = [
+		{ value: 'course1', label: 'Course 1'}
 	]
 	return (
 	<div className={styles.sidebar}>
@@ -23,12 +27,15 @@ function CalendarAside() {
 							<span className={styles.sidebar__curriculums__title}>Malla curricular</span>
 							<Select
 							className={styles.sidebar__curriculums__list}
-							options={options}>
+							options={curriculums}
+							defaultValue={curriculums[0]}
+							placeholder={curriculums[0].label}
+							styles={reactSelectStyles}>
 							</Select>
 						</section>
 						<section className={styles.sidebar__courses}>
-							<span className={styles.sidebar__courses__title}>Cursos</span>
-							<div className={styles.sidebar__courses__list}>
+							<span className={styles.sidebar__subtitle}>Cursos</span>
+							<div className={styles.sidebar__list}>
 							</div>
 						</section>
 					</div>

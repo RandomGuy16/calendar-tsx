@@ -2,6 +2,8 @@
 @use '../global/variables.scss' as vars;
 
 
+$sidebar-list-bg: #3d68a0;
+
 .sidebar {
 	@include mixins.full-size;
 	@include mixins.flex-column;
@@ -29,48 +31,35 @@
 		width: 100%;
 		min-height: 5rem;
 		height: fit-content;
+		margin-bottom: 1rem;
 
     & > span {
       font-weight: normal;
     }
 	}
 
-	&__curriculums {
-    &__list {
-			.react-select__control {
-				background-color: vars.$background-transparent-light;
-				border: 1px solid vars.$border-transparent-light;
-				border-radius: 0.5rem;
-				padding: 0.25rem;
-				font-size: 1rem;
-				cursor: pointer;
+	&__list {
+		font-size: 0.80rem;
+		width: 100%;
+		min-height: 8rem;
+		border: 1px solid transparent;
+		border-radius: 0.25rem;
+		background-color: $sidebar-list-bg;
+		&:hover {
+			border-color: blue;
 			}
-
-			.react-select__menu {
-				background-color: vars.$background-transparent-light;
-				border-radius: 0.5rem;
-			}
-
-			.react-select__option {
-				&:hover {
-					background-color: vars.$sidebar-button-hover;
-				}
-			}
-    }
-		&__title {
-			font-weight: normal;
-		}
+	}
+	&__subtitle {
+		font-weight: normal;
 	}
 
-	&__courses {
-		height: fit-content;
-    &__list {
-      width: 100%;
-      min-height: 8rem;
-      background-color: vars.$sidebar-lists-bg;
-      border-radius: 0.5rem;
-    }
-		&__title {
+	&__curriculums {
+    font-size: 1rem;
+		margin-bottom: 1rem;
+		&__list {
+			font-size: 0.80rem;
+		}
+		&__subtitle {
 			font-weight: normal;
 		}
 	}

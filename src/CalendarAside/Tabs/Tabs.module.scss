@@ -1,5 +1,5 @@
-@use '../global/mixins.scss' as mixins;
-@use '../global/variables.scss' as vars;
+@use '../../global/mixins.scss' as mixins;
+@use '../../global/variables.scss' as vars;
 
 
 .tabs {
@@ -20,10 +20,10 @@
 		border-radius: 0.5rem 0.5rem 0px 0px;
 		width: fit-content;
 		height: 2rem;
-		transition: background-color 0.2s ease;
+		transition: border-color 0.2s ease;
 		
 		&:hover {
-			background-color: vars.$sidebar-button-hover;
+			text-decoration: underline;
 		}
 
 		&.active {
