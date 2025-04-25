@@ -9,9 +9,6 @@ function CalendarAside() {
 		{ value: 'curriculum1', label: 'Curriculum 1'},
 		{ value: 'curriculum2', label: 'Curriculum 2'}
 	]
-	let courses = [
-		{ value: 'course1', label: 'Course 1'}
-	]
 	return (
 	<div className={styles.sidebar}>
 		<Tabs

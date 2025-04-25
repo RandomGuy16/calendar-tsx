@@ -1,0 +1,29 @@
+@use '../global/mixins.scss' as mixins;
+@use '../global/variables.scss' as vars;
+
+
+.course_item {
+	@include mixins.content-height;
+	font-size: 0.8rem;
+	color: white;
+
+	&__title {
+		color: white;
+	}
+
+	&__class_groups {
+		@include mixins.content-height;
+		@include mixins.flex-row;
+	}
+	&__class_group {
+		@include mixins.content-height;
+		@include mixins.text-padding;
+		background-color: black;
+		border-radius: 0.25rem;
+
+		&:active {
+			background-color: gray;
+			color: white;
+		}
+	}
+}
