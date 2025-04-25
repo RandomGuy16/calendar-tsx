@@ -1,6 +1,6 @@
 // UCurriculum.scss
-@use 'variables.scss';
-@use 'mixins.scss';
+@use '../global/mixins.scss' as mixins;
+@use '../global/vars.scss' as vars;
 
 
 .u-curriculum {

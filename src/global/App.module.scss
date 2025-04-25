@@ -3,26 +3,20 @@
 
 
 /* Use background image located in assets folder */
-body {
-  background-image: url('../assets/rochlitzcastle_background.webp');
-  background-size: cover;
-  background-position: center;
-  height: 100%;
-}
 
-.App-main {
+.App_main {
   width: 100%;
   height: calc(100% - 7rem);
   @include mixins.flex-row;
 }
 
-.App-header {
+.App_header {
 	height: 7rem;
 	width: 100%;
 	margin-bottom: 2rem;
 }
 
-.App-aside {
+.App_aside {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +26,7 @@ body {
 	padding: 0px 1rem 0px 0px;
 }
 
-.App-content {
+.App_content {
   flex: 33;
   display: flex;
   flex-direction: row;

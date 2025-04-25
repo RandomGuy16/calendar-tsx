@@ -1,6 +1,6 @@
 // Header.scss
-@use 'mixins';
-@use 'variables';
+@use '../global/mixins.scss' as mixins;
+@use '../global/vars.scss' as vars;
 
 
 .header {
@@ -20,7 +20,7 @@
 		width: 100%;
 		height: 100%;
 
-		background-color: variables.$background-transparent-light;
+		background-color: vars.$background-transparent-light;
 		z-index: -1;
 	}
 	& > :first-child {
@@ -39,7 +39,7 @@
 			margin: 0px 1rem;
 		}
 	}
-	&__sidebar-button {
+	&__sidebar_button {
 		padding: 0.5rem;
 		background-color: transparent;
 		border: none;
@@ -48,10 +48,10 @@
 		transition: background-color 0.2s ease;
 
 		&:hover {
-			background-color: variables.$background-transparent-light;
+			background-color: vars.$background-transparent-light;
 		}
 	}
-	&__sidebar-icon {
+	&__sidebar_icon {
 		font-size: 1rem;
 		font-weight: lighter;
 	}
@@ -72,30 +72,30 @@
 			margin: 0px 1rem;
 		}
 	}
-	&__search-bar {
+	&__search_bar {
 		width: 20rem;
 		height: 2.5rem;
 		padding: 0px 1rem;
 		border-radius: 1rem;
 		border: none;
 
-		background-color: variables.$background-transparent-light;
+		background-color: vars.$background-transparent-light;
 		transition: background-color 0.2s ease;
 		color: white;
 
 		&:hover {
-			background-color: variables.$header-searchbar-color-transparent;
+			background-color: vars.$header-searchbar-color-transparent;
 		}
 		&:focus {
 			outline: none;
-			background-color: variables.$header-searchbar-color-transparent;
+			background-color: vars.$header-searchbar-color-transparent;
 		}
 		&::placeholder {
 			color: #fff8;
 		}
 	}
 	/* right settings button */
-	&__settings-button {
+	&__settings_button {
 		background-color: transparent;
 		border: none;
 		border-radius: 1.25rem;
@@ -103,7 +103,7 @@
 		font-size: 2rem;
 	}
 	/* right hi label */
-	&__profile-button {
+	&__profile_button {
 		cursor: default;
 		margin: 0px 1rem;
 	}

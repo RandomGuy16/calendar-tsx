@@ -1,20 +1,20 @@
-import Calendar from './Calendar.tsx'
-import Header from './Header.tsx'
-import CalendarAside from './CalendarAside.tsx'
-import './styles/App.scss'
+import Calendar from './Calendar/Calendar.tsx'
+import Header from './Header/Header.tsx'
+import CalendarAside from './CalendarAside/CalendarAside.tsx'
+import styles from './global/App.module.scss'
 
 function App() {
 
   return (
     <>
-      <header className='App-header'>
+      <header className={styles.App_header}>
         <Header />
       </header>
-      <main className="App-main">
-        <aside className='App-aside'>
+      <main className={styles.App_main}>
+        <aside className={styles.App_aside}>
           <CalendarAside />
         </aside>
-        <div className='App-content'>
+        <div className={styles.App_content}>
           <Calendar />
         </div>
       </main>

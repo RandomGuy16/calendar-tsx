@@ -13,7 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
 }
-html, body {
+html {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -24,6 +24,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url('../assets/rochlitzcastle_background.webp');
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #root {

@@ -1,6 +1,6 @@
 // Calendar.scss
-@use 'mixins';
-@use 'variables';
+@use '../global/mixins.scss' as mixins;
+@use '../global/variables.scss' as vars;
 
 
 .calendar {
@@ -28,15 +28,15 @@
 			bottom: 0;
 
 			border-radius: 1rem;
-			border: 1px solid variables.$border-transparent-light;
-			background-color: variables.$background-transparent-light;
+			border: 1px solid vars.$border-transparent-light;
+			background-color: vars.$background-transparent-light;
 			
 			backdrop-filter: blur(4px);
 			z-index: -1;
 		}
 	}
 	
-	&__days-row {
+	&__days_row {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-evenly;
@@ -44,7 +44,7 @@
 		height: 5rem;
 
 		border-radius: 1rem 1rem 0px 0px;
-		background-color: variables.$calendar-days-row-bg;
+		background-color: vars.$calendar-days-row-bg;
 	
 		// open sans light
 		cursor: default;
@@ -53,11 +53,10 @@
 		font-optical-sizing: auto;
 		font-weight: lighter;
 		font-style: normal;
-		
-		& > div {
+	}
+	&__day {
 			flex: 1;
 		}
-	}
 
 
 	// appointments and stuff styles
@@ -73,31 +72,31 @@
 		&::-webkit-scrollbar {
 			width: 0.5rem;
 			
-			&-track {
-				background-color: variables.$calendar-scrollbar-track-color;
+			&_track {
+				background-color: vars.$calendar-scrollbar-track-color;
 				border-radius: 0.25rem;
 			}
 			
-			&-thumb {
-				background-color: variables.$calendar-scrollbar-color;
+			&_thumb {
+				background-color: vars.$calendar-scrollbar-color;
 				border-radius: 0.25rem; /* 4px */
 				&:hover {
-					background-color: variables.$calendar-scrollbar-color-hover;
+					background-color: vars.$calendar-scrollbar-color-hover;
 				}
 			}
 		}
 	}
 		
-	&__hours-column {
+	&__hours_column {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
 		flex: 1;
 		text-align: right;
 	}
-	&__hour-tag {
+	&__hour_tag {
 		padding-right: 1rem;
-		border-top: 1px solid variables.$border-transparent-light;
+		border-top: 1px solid vars.$border-transparent-light;
 		height: 5rem;
 		width: 100%;
 
@@ -116,7 +115,7 @@
 		align-items: center;
 		flex: 7;
 		
-		&-column {
+		&_column {
 			@include mixins.flex-column;
 			justify-content: space-evenly;
 			align-items: center;
