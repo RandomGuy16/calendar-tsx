@@ -4,8 +4,11 @@
 
 .course_item {
 	@include mixins.content-height;
-	font-size: 0.8rem;
+	font-size: 1rem;
 	color: white;
+  text-align: center;
+  background-color: #fff4;
+  margin-bottom: 1rem;
 
 	&__title {
 		color: white;
@@ -16,10 +19,12 @@
 		@include mixins.flex-row;
 	}
 	&__class_group {
-		@include mixins.content-height;
 		@include mixins.text-padding;
-		background-color: black;
+		background-color: transparent;
 		border-radius: 0.25rem;
+    border: 1px solid black;
+    font-size: 0.75rem;
+    width: fit-content;
 
 		&:active {
 			background-color: gray;
