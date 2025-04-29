@@ -1,4 +1,6 @@
 import styles from './Calendar.module.scss'
+import { Course } from '../global/types'
+
 
 const MONDAY_ID = "monday"
 const TUESDAY_ID = "tuesday"
@@ -9,8 +11,8 @@ const SATURDAY_ID = "saturday"
 const SUNDAY_ID = "sunday"
 
 
-function renderCourse() {
-
+export function renderCourse({title, courseGroups}: Readonly<Course>) {
+  console.log({title, courseGroups})
 }
 
 function Calendar() {

@@ -1,29 +1,33 @@
 import styles from './CourseItem.module.scss';
-
-interface CourseItemProps {
-	title: string;
-	classGroups?: ClassGroup[];
-}
-interface ClassGroup {
-	id: string;
-	shift: string;
-}
+import { Course, CourseGroup } from '../global/types.ts';
+import { renderCourse } from '../Calendar/Calendar.tsx';
 
 
-function CourseItem({title, classGroups}: Readonly<CourseItemProps>) {
-  const groups = classGroups?.map(classGroup => {
-    let shifts = classGroup.shift.split(' - ')
-    let shiftStr = shifts[0].slice(0, 2) + "-" + shifts[1].slice(0, 2)
+/**
+ * 
+ *
+  */
+function CourseItem(course: Readonly<Course>) {
+  // give format to groups: 08:00-10:00 to 08-10
+  const groups: CourseGroup[]  = course.courseGroups.map(group => {
+    // unpack start and end, split by half
+    let [startShift, endShift] = group.shift.split('-')
+    let formattedShift = startShift.slice(0, 2) + "-" + endShift.slice(0, 2)
     
-    return {id: classGroup.id, shift: shiftStr}
+    // every element in groups[] is a CourseGroup
+    return {courseTitle: course.title, shift: formattedShift}
   })
-	return (
+	
+  return (
 	<div className={styles.course_item}>
-	<span className={styles.course_item__title}>{title}</span>
+	<span className={styles.course_item__title}>{course.title}</span>
 	<div className={styles.course_item__class_groups}>
     {/* creates a button for every shift in classGroups */}
-		{groups?.map(group => (
-			<button className={styles.course_item__class_group} key={group.id}>
+		{groups.map(group => (
+			<button
+      className={styles.course_item__class_group}
+      key={group.courseTitle + group.shift}
+      onClick={() => renderCourse(course)}>
 			{group.shift}
 			</button>
 		))}

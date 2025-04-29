@@ -36,10 +36,11 @@ function CalendarAside() {
 							<div className={styles.sidebar__list}>
                 <CourseItem
                 title='calculo II'
-                classGroups={[
+                id='INO02'
+                courseGroups={[
                   {
-                    id: 'INO02',
-                    shift: '08:00 - 14:00'
+                    courseTitle: 'calculo II',
+                    shift: '08:00-14:00'
                   }
                 ]}></CourseItem>
 							</div>
