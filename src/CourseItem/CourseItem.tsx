@@ -11,13 +11,20 @@ interface ClassGroup {
 
 
 function CourseItem({title, classGroups}: Readonly<CourseItemProps>) {
+  const groups = classGroups?.map(classGroup => {
+    let shifts = classGroup.shift.split(' - ')
+    let shiftStr = shifts[0].slice(0, 2) + "-" + shifts[1].slice(0, 2)
+    
+    return {id: classGroup.id, shift: shiftStr}
+  })
 	return (
 	<div className={styles.course_item}>
 	<span className={styles.course_item__title}>{title}</span>
 	<div className={styles.course_item__class_groups}>
-		{classGroups?.map(classGroup => (
-			<button className={styles.course_item__class_group} key={classGroup.id}>
-			{classGroup.shift}
+    {/* creates a button for every shift in classGroups */}
+		{groups?.map(group => (
+			<button className={styles.course_item__class_group} key={group.id}>
+			{group.shift}
 			</button>
 		))}
 	</div>

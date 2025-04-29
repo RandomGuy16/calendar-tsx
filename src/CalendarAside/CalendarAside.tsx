@@ -2,6 +2,7 @@ import styles from './CalendarAside.module.scss'
 import reactSelectStyles from './ReactSelectStyles.ts'
 import Tabs from './Tabs/Tabs.tsx'
 import Select from 'react-select'
+import CourseItem from '../CourseItem/CourseItem.tsx'
 
 
 function CalendarAside() {
@@ -33,6 +34,14 @@ function CalendarAside() {
 						<section className={styles.sidebar__courses}>
 							<span className={styles.sidebar__subtitle}>Cursos</span>
 							<div className={styles.sidebar__list}>
+                <CourseItem
+                title='calculo II'
+                classGroups={[
+                  {
+                    id: 'INO02',
+                    shift: '08:00 - 14:00'
+                  }
+                ]}></CourseItem>
 							</div>
 						</section>
 					</div>
