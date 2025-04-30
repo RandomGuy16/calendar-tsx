@@ -18,7 +18,7 @@ export interface Career {
 
 export interface Cycle {
   name: string;
-  courseSections: CourseSections[];
+  courseSections: CourseSection[];
 }
 
 export interface Course {
@@ -26,14 +26,15 @@ export interface Course {
   name: string;
   credits: number;
   teacher: string;
-  sections: CourseSections[];
+  sections: CourseSection[];
 }
 
-export interface CourseSections {
+export interface CourseSection {
   asignment: string;
   sectionNumber: number;
   teacher: string;
   schedules: Schedule[];
+  credits: number;
 }
 
 export interface Schedule {

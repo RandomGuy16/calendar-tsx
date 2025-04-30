@@ -1,16 +1,50 @@
+'use client';
 import styles from './CalendarAside.module.scss'
 import reactSelectStyles from './ReactSelectStyles.ts'
 import Tabs from './Tabs/Tabs.tsx'
 import Select from 'react-select'
-import CourseItem from '../CourseItem/CourseItem.tsx'
+import { Course, UniversityCurriculumData, Year } from '../global/types'
+import { loadJSON, renderCoursesFromData } from '../global/loaddata'
+import { useEffect, useState } from 'react'
 
 
 function CalendarAside() {
-  // placeholder corriculums
-	let curriculums = [
-		{ value: 'UNMSM-FISI-2023', label: 'UNMSM-FISI-2023'},
-		{ value: 'UNMSM-FISI-2018', label: 'UNMSM-FISI-2018'}
-	]
+	// Data and error handling
+	let data: UniversityCurriculumData | null
+	const [dataState, setDataState] = useState<string>("Error loading data")
+	const [courses, setCourses] = useState<Course[]>([])
+	const [curriculums, setCurriculums] = useState<Year[]>([])
+	// const [cycle, setCycle] = useState<string>("CICLO 1")
+
+	// Load the JSON data and set the data state
+	// This is done in a useEffect to avoid blocking the main thread
+	// and to avoid the use of async/await in the main function
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				// get the data from the json file
+				data = await loadJSON()
+
+				// get the courses from the data
+				setCourses(renderCoursesFromData(data))
+				setCurriculums((data).years)
+				console.log(courses)
+			} catch (error) {
+				// Reserved line to call a future function to show a message to the user
+				// that the data is not available
+				console.error("Error loading JSON data: ", error)
+				setDataState("Error loading data")
+			}
+		}
+		fetchData()
+	}, [])
+
+	// placeholder corriculums
+	//let curriculums = [
+	//	{ value: 'UNMSM-FISI-2023', label: 'UNMSM-FISI-2023'},
+	//	{ value: 'UNMSM-FISI-2018', label: 'UNMSM-FISI-2018'}
+	//]
+	
 	return (
 	<div className={styles.sidebar}>
 		<Tabs
@@ -28,7 +62,7 @@ function CalendarAside() {
 							className={styles.sidebar__curriculums__list}
 							options={curriculums}
 							defaultValue={curriculums[0]}
-							placeholder={curriculums[0].label}
+							placeholder={dataState}
 							styles={reactSelectStyles}>
 							</Select>
 						</section>
