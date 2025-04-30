@@ -6,9 +6,10 @@ import CourseItem from '../CourseItem/CourseItem.tsx'
 
 
 function CalendarAside() {
+  // placeholder corriculums
 	let curriculums = [
-		{ value: 'curriculum1', label: 'Curriculum 1'},
-		{ value: 'curriculum2', label: 'Curriculum 2'}
+		{ value: 'UNMSM-FISI-2023', label: 'UNMSM-FISI-2023'},
+		{ value: 'UNMSM-FISI-2018', label: 'UNMSM-FISI-2018'}
 	]
 	return (
 	<div className={styles.sidebar}>
@@ -34,15 +35,35 @@ function CalendarAside() {
 						<section className={styles.sidebar__courses}>
 							<span className={styles.sidebar__subtitle}>Cursos</span>
 							<div className={styles.sidebar__list}>
-                <CourseItem
-                title='calculo II'
+                {/*
+								<CourseItem
+                name='calculo II'
                 id='INO02'
                 courseGroups={[
                   {
                     courseTitle: 'calculo II',
-                    shift: '08:00-14:00'
+                    shifts: [
+											{
+												courseTitle: 'calculo II',
+												start: '08:00',
+												end: '10:00',
+												shiftDay: 'Lunes',
+												detail: 'Teoria'
+											},
+											{
+												courseTitle: 'calculo II',
+												start: '10:00',
+												end: '12:00',
+												shiftDay: 'Martes',
+												detail: 'practica'
+											},
+										],
+										groupNumber: 1,
                   }
-                ]}></CourseItem>
+                ]}>
+								</CourseItem>
+								*/}
+								
 							</div>
 						</section>
 					</div>

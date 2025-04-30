@@ -1,5 +1,6 @@
 import styles from './Calendar.module.scss'
 import { Course } from '../global/types'
+import { loadJSON } from '../global/loaddata'
 
 
 const MONDAY_ID = "monday"
@@ -11,11 +12,19 @@ const SATURDAY_ID = "saturday"
 const SUNDAY_ID = "sunday"
 
 
-export function renderCourse({title, courseGroups}: Readonly<Course>) {
-  console.log({title, courseGroups})
+export function renderCourse({name: title, sections: courseGroups, id}: Readonly<Course>) {
+	// pick the target days
+	let days = []
+	// iterate over all groups
+	for (let group of courseGroups) {
+		for (let shift of group.schedules) {
+			days.push(shift.day)
+		}
+	}
 }
 
 function Calendar() {
+	loadJSON()
 	return (
 		<div className={styles.calendar}>
 			<div className={styles.calendar__header}>
