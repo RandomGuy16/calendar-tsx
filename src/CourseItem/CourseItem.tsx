@@ -1,6 +1,5 @@
 import styles from './CourseItem.module.scss';
 import { Course } from '../global/types.ts';
-import { renderCourse } from '../Calendar/Calendar.tsx';
 
 
 /**
@@ -19,7 +18,7 @@ function CourseItem(course: Readonly<Course>) {
 			<button
       className={styles.course_item__class_group}
       key={group.teacher + group.sectionNumber}
-      onClick={() => renderCourse(course)}>
+      onClick={() => {}}>
 			{group.sectionNumber}
 			</button>
 		))}

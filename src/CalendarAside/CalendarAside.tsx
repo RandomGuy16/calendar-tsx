@@ -1,4 +1,3 @@
-'use client';
 import styles from './CalendarAside.module.scss'
 import reactSelectStyles from './ReactSelectStyles.ts'
 import Tabs from './Tabs/Tabs.tsx'
@@ -10,11 +9,10 @@ import { useEffect, useState } from 'react'
 
 function CalendarAside() {
 	// Data and error handling
-	let data: UniversityCurriculumData | null
 	const [dataState, setDataState] = useState<string>("Error loading data")
 	const [courses, setCourses] = useState<Course[]>([])
 	const [curriculums, setCurriculums] = useState<Year[]>([])
-	// const [cycle, setCycle] = useState<string>("CICLO 1")
+	// const [cycle, setCycle] = useState<string>("CICLO 1") maybe uncomment later
 
 	// Load the JSON data and set the data state
 	// This is done in a useEffect to avoid blocking the main thread
@@ -22,13 +20,12 @@ function CalendarAside() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				// get the data from the json file
-				data = await loadJSON()
+				// load the json data
+				const data = await loadJSON()
 
 				// get the courses from the data
 				setCourses(renderCoursesFromData(data))
-				setCurriculums((data).years)
-				console.log(courses)
+				setCurriculums(data.years)
 			} catch (error) {
 				// Reserved line to call a future function to show a message to the user
 				// that the data is not available
@@ -39,6 +36,7 @@ function CalendarAside() {
 		fetchData()
 	}, [])
 
+	// were printing out curriculums
 	// placeholder corriculums
 	//let curriculums = [
 	//	{ value: 'UNMSM-FISI-2023', label: 'UNMSM-FISI-2023'},
@@ -60,8 +58,15 @@ function CalendarAside() {
 							<span className={styles.sidebar__curriculums__title}>Malla curricular</span>
 							<Select
 							className={styles.sidebar__curriculums__list}
-							options={curriculums}
-							defaultValue={curriculums[0]}
+							options={curriculums.map(curriculum => ({
+								value: curriculum.year,
+								label: curriculum.year,
+							}))}
+							value={curriculums.length > 0 ? {
+								value: curriculums[0].year,
+								label: curriculums[0].year,
+							} : null
+							}
 							placeholder={dataState}
 							styles={reactSelectStyles}>
 							</Select>

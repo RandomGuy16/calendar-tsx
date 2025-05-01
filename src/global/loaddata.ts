@@ -81,7 +81,7 @@ function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
 				teacher: section.teacher,
 				sections: []
 			})
-			console.log(courses)
+			
 			// push the section to the new course
 			courses[0].sections.push(section)
 		}
