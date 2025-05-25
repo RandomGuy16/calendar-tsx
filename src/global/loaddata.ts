@@ -34,8 +34,8 @@ function formatCycles([cycle, sectionsList]: [string, any]) {
 		courseSections: sectionsList.map((section: any) => { return {
 			asignment: section["Asignatura"],
 			teacher: section["Docente"],
-			sectionNumber: section["Sec."],
-			credits: Number(section["Créd."]),
+			sectionNumber: section["Sec_"],
+			credits: Number(section["Créd_"]),
 			schedules: section.Horarios.map((schedule: any) => { return {
 				day: schedule["Día"],
 				start: schedule["Inicio"],
