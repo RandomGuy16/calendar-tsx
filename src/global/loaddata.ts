@@ -1,6 +1,7 @@
-import { Course, Cycle, UniversityCurriculumData } from "./types"
+import { Course, Cycle, Year, UniversityCurriculumData, Filters, Career } from "./types"
 
 
+// entrypoint to load JSON
 /**
  * This function loads the JSON data from the server and formats it.
  * @returns the formatted data
@@ -51,12 +52,12 @@ function formatCycles([cycle, sectionsList]: [string, any]) {
 /**
  * This function formats the JSON data from the server into a more usable format.
  * Formats the data into the objects declared in global/types.ts
- * @param rawData the data from the JSON file
+ * @param rawJSONData the data from the JSON file
  * @returns the formatted data
  */
-function formatJSON(rawData: any) {
+function formatJSON(rawJSONData: any) {
 	const formattedData: UniversityCurriculumData = {
-		years: Object.entries(rawData).map(([year, careers]: [string, any]) => { return {
+		years: Object.entries(rawJSONData).map(([year, careers]: [string, any]) => { return {
 			year: year,
 			careerCurriculums: Object.entries(careers).map(([career, cyclesObj]: [string, any]) => { return {
 				name: career,
@@ -68,6 +69,13 @@ function formatJSON(rawData: any) {
 }
 
 
+// Rendering courses
+
+/**
+ * Appends courses to course list
+ *
+ *
+ * */
 function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
 	// course name checker, to filter out the courses
 	let prevCourseName
@@ -104,20 +112,43 @@ function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
 }
 
 
-export function renderCoursesFromData(data: UniversityCurriculumData) {
+// entrypoint for rendering courses
+/**
+ * Render courses once data is loaded from the json files
+ * @returns a list of courses based on filters established
+ * */
+export function renderCoursesFromData(
+  data: UniversityCurriculumData,
+  filters: Filters = {
+    year: '',
+    career: '',
+    cycle: ''
+  }) {
 	const courses: Course[] = []
-	// iterate over all years
-	for (let year of data.years) {
-		// iterate over all careers
-		for (let career of year.careerCurriculums) {
-			if (career.name === "Ingeniería De Sistemas") {
-			// iterate over all cycles
-				for (let cycle of career.cycles) {
-					if (cycle.name === "CICLO 1") {
-						// iterate over all cycles
-						appendCoursesToCourseList(cycle, courses)
-					}
-				}
+
+  /**
+   * NOTES ON SCOPE OF THE PROJECT
+   * for now, I'm not doing faculty level filtering. I'll first finish this in my faculty
+   * scope. Then, I'm expanding the scope of this project to new faculties
+   * */
+
+	// iterate over all years following the filters
+  const filteredYears: Year[] = data.years.filter((year: Year) => {
+    return filters.year ? year.year === filters.year : true
+  })
+	for (let year of filteredYears) {
+		// filter careers
+    const filteredCareers: Career[] = year.careerCurriculums.filter((career: Career) => {
+      return filters.career ? career.name === filters.career : true
+    })
+		for (let career of filteredCareers) {
+			// filter cycles
+      const filteredCycles: Cycle[] = career.cycles.filter((cycle: Cycle) => {
+        return filters.cycle ? cycle.name === filters.cycle : true
+      })
+			for (let cycle of filteredCycles) {
+				// iterate over all courses in the cycle
+				appendCoursesToCourseList(cycle, courses)
 			}
 		}
 	}

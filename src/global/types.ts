@@ -44,3 +44,19 @@ export interface Schedule {
   type: string;
   scheduleNumber: number;
 }
+
+// These interfaces help filter course
+// FilterChoose gets data from the webpage and outputs it to Filters
+
+export interface FilterChooser {
+  years: string[];
+  cycles: string[];
+  careers: string[];
+}
+
+export interface Filters {
+  year: string;
+  cycle: string;
+  career: string;
+}
+
