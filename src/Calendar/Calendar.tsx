@@ -1,6 +1,15 @@
 import styles from './Calendar.module.scss'
 
 
+const MONDAY_ID = "monday"
+const TUESDAY_ID = "tuesday"
+const WEDNESDAY_ID = "wednesday"
+const THURSDAY_ID = "thursday"
+const FRIDAY_ID = "friday"
+const SATURDAY_ID = "saturday"
+const SUNDAY_ID = "sunday"
+
+
 function Calendar() {
 	return (
 		<div className={styles.calendar}>
@@ -35,13 +44,13 @@ function Calendar() {
 					<div className={styles.calendar__hour_tag}>20:00</div>
 				</div>
 				<div className={styles.calendar__appointments}>
-					<div className={styles.calendar__appointments_column}></div>
-					<div className={styles.calendar__appointments_column}></div>
-					<div className={styles.calendar__appointments_column}></div>
-					<div className={styles.calendar__appointments_column}></div>
-					<div className={styles.calendar__appointments_column}></div>
-					<div className={styles.calendar__appointments_column}></div>
-					<div className={styles.calendar__appointments_column}></div>
+					<div className={styles.calendar__appointments_column} id={MONDAY_ID}></div>
+					<div className={styles.calendar__appointments_column} id={TUESDAY_ID}></div>
+					<div className={styles.calendar__appointments_column} id={WEDNESDAY_ID}></div>
+					<div className={styles.calendar__appointments_column} id={THURSDAY_ID}></div>
+					<div className={styles.calendar__appointments_column} id={FRIDAY_ID}></div>
+					<div className={styles.calendar__appointments_column} id={SATURDAY_ID}></div>
+					<div className={styles.calendar__appointments_column} id={SUNDAY_ID}></div>
 				</div>
 			</div>
 			</div>
