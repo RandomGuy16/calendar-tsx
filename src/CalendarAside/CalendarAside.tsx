@@ -2,16 +2,26 @@ import styles from './CalendarAside.module.scss'
 import reactSelectStyles from './ReactSelectStyles.ts'
 import Tabs from './Tabs/Tabs.tsx'
 import Select from 'react-select'
-import { Course, Year } from '../global/types'
+import { Course, Year, Career } from '../global/types'
 import { loadJSON, renderCoursesFromData } from '../global/loaddata'
 import { useEffect, useState } from 'react'
+import CourseItem from '../CourseItem/CourseItem.tsx'
+
+
+interface SelectCurriculumOption {
+  label: string;
+  value: Career[];
+}
 
 
 function CalendarAside() {
 	// Data and error handling
-	const [dataState, setDataState] = useState<string>("Error loading data")
+	const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false)
 	const [courses, setCourses] = useState<Course[]>([])
-	const [curriculums, setCurriculums] = useState<Year[]>([])
+	const [years, setYears] = useState<Year[]>([])
+  const [selectedValue, setSelectedValue] = useState<SelectCurriculumOption>()
+  const [userFilters, setUserFilters()] = useState<>
+  // const [data, setData] = useState<UniversityCurriculumData | null>()
 	// const [cycle, setCycle] = useState<string>("CICLO 1") maybe uncomment later
 
 	// Load the JSON data and set the data state
@@ -21,20 +31,32 @@ function CalendarAside() {
 		const fetchData = async () => {
 			try {
 				// load the json data
-				const data = await loadJSON()
+        const jsonData = await loadJSON()
+        console.log(jsonData)
 
+        setIsDataLoaded(true)
 				// get the courses from the data
-				setCourses(renderCoursesFromData(data))
-				setCurriculums(data.years)
+			  const renderedCourses = renderCoursesFromData(jsonData)
+				setCourses(renderedCourses)
+				setYears(jsonData.years)
+			  setSelectedValue({
+			    value: jsonData.years[0].careerCurriculums,
+			    label: jsonData.years[0].year
+			  })
 			} catch (error) {
 				// Reserved line to call a future function to show a message to the user
 				// that the data is not available
 				console.error("Error loading JSON data: ", error)
-				setDataState("Error loading data")
+				setIsDataLoaded(false)
 			}
 		}
 		fetchData()
 	}, [])
+  
+  // update the course list to render every time the filter object changes
+  useEffect(() => {
+
+  }, [])
 
 	// were printing out curriculums
 	// placeholder corriculums
@@ -44,70 +66,64 @@ function CalendarAside() {
 	//]
 	
 	return (
-	<div className={styles.sidebar}>
-		<Tabs
-			tabs={
-			[
-				{
-					id: "courses-menu",
-					label: "Tus cursos",
-					content: (
-					<div className={styles.sidebar__menu}>
-						<h2>Tus cursos</h2>
-						<section className={styles.sidebar__curriculums}>
-							<span className={styles.sidebar__curriculums__title}>Malla curricular</span>
-							<Select
-							className={styles.sidebar__curriculums__list}
-							options={curriculums.map(curriculum => ({
-								value: curriculum.year,
-								label: curriculum.year,
-							}))}
-							value={curriculums.length > 0 ? {
-								value: curriculums[0].year,
-								label: curriculums[0].year,
-							} : null
-							}
-							placeholder={dataState}
-							styles={reactSelectStyles}>
-							</Select>
-						</section>
-						<section className={styles.sidebar__courses}>
-							<span className={styles.sidebar__subtitle}>Cursos</span>
-							<div className={styles.sidebar__list}>
-                {/*
-								<CourseItem
-                name='calculo II'
-                id='INO02'
-                courseGroups={[
-                  {
-                    courseTitle: 'calculo II',
-                    shifts: [
-											{
-												courseTitle: 'calculo II',
-												start: '08:00',
-												end: '10:00',
-												shiftDay: 'Lunes',
-												detail: 'Teoria'
-											},
-											{
-												courseTitle: 'calculo II',
-												start: '10:00',
-												end: '12:00',
-												shiftDay: 'Martes',
-												detail: 'practica'
-											},
-										],
-										groupNumber: 1,
-                  }
-                ]}>
-								</CourseItem>
-								*/}
-								
-							</div>
-						</section>
-					</div>
-					)
-				},
+	  <div className={styles.sidebar}>
+		  <Tabs
+			  tabs={
+			    [
+				    {
+					    id: "courses-menu",
+					    label: "Tus cursos",
+					    content: (
+					      <div className={styles.sidebar__menu}>
+						    <h2>Tus cursos</h2>
+						    <section className={styles.sidebar__curriculums}>
+							    <span className={styles.sidebar__curriculums__title}>Malla curricular</span>
+							    <Select
+							      className={styles.sidebar__curriculums__list}
+							      options={
+                      years.map(curriculum => ({
+								        value: curriculum.careerCurriculums,
+								        label: curriculum.year,
+							        }))
+                    }
+							      value={selectedValue}
+							      defaultValue={selectedValue}
+										onChange={(newValue: unknown) => {
+											// Cast newValue to SelectCurriculumOption
+											const selected = newValue as SelectCurriculumOption | null;
+											// if isn't null or undefined update selectedValue
+											if (selected) {
+											setSelectedValue({
+												value: selected.value,
+												label: selected.label
+											});
+											}
+										}}
+							      styles={reactSelectStyles}>
+							    </Select>
+						    </section>
+						    <section className={styles.sidebar__courses}>
+							    <span className={styles.sidebar__subtitle}>Cursos</span>
+							    <div className={styles.sidebar__list}>
+										{isDataLoaded && courses.map((course: Course) => {
+                      const itemKey = course.id + course.name + course.credits + course.teacher + course.sections.map(section => section.sectionNumber).join('')
+										  return (
+											  <CourseItem
+											    key={itemKey}
+											    credits={course.credits}
+											    id={course.id}
+											    name={course.name}
+											    sections={course.sections}
+											    teacher={course.teacher}>
+											  </CourseItem>
+											)})
+										}
+							    </div>
+						    </section>
+					      </div>
+					    )
+				    }
+        /*,
 				{
 				id: "minicalendar-menu",
 				label: "Hoy",
@@ -118,12 +134,12 @@ function CalendarAside() {
 						</section>
 					</div>
 					)
-				}
-			]
-		}>
+				}*/
+			]}>
 		</Tabs>
 	</div>
 	)
 }
 
 export default CalendarAside
+
