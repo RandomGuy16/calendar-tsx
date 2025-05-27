@@ -20,7 +20,6 @@ function CalendarAside() {
 	const [courses, setCourses] = useState<Course[]>([])
 	const [years, setYears] = useState<Year[]>([])
   const [selectedValue, setSelectedValue] = useState<SelectCurriculumOption>()
-  const [userFilters, setUserFilters()] = useState<>
   // const [data, setData] = useState<UniversityCurriculumData | null>()
 	// const [cycle, setCycle] = useState<string>("CICLO 1") maybe uncomment later
 
