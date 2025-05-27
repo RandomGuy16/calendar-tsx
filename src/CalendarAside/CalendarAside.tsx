@@ -2,8 +2,8 @@ import styles from './CalendarAside.module.scss'
 import reactSelectStyles from './ReactSelectStyles.ts'
 import Tabs from './Tabs/Tabs.tsx'
 import Select from 'react-select'
-import { Course, Year, Career } from '../global/types'
-import { loadJSON, renderCoursesFromData } from '../global/loaddata'
+import { Course, Year, Career, UniversityCurriculumData, FilterChooser, Filters } from '../global/types'
+import { loadJSON, renderCoursesFromData as getCoursesFromData } from '../global/loaddata'
 import { useEffect, useState } from 'react'
 import CourseItem from '../CourseItem/CourseItem.tsx'
 
@@ -13,6 +13,61 @@ interface SelectCurriculumOption {
   value: Career[];
 }
 
+function renderCoursesSidebar(courses: Course[]) {
+  /*  const itemKey = course.id + course.name + course.credits + course.teacher + course.sections.map(section => section.sectionNumber).join('')
+    console.log(itemKey)
+		return (
+		<CourseItem
+		  key={itemKey}
+		  credits={course.credits}
+		  id={course.id}
+		  name={course.name}
+		  sections={course.sections}
+		  teacher={course.teacher}>
+		</CourseItem>
+	)}*/
+  const courseItemsList = []
+  for (let i = 0; i < courses.length; i++) {
+    // create course variable and initialize its unique key
+    let course = courses[i]
+    const itemKey = `${i} courseitem:` + course.id + course.name + course.credits + course.teacher
+    
+    // append the course to the list
+    courseItemsList.push(
+      <CourseItem
+		    key={itemKey}
+		    credits={course.credits}
+		    id={course.id}
+		    name={course.name}
+		    sections={course.sections}
+		    teacher={course.teacher}>
+		  </CourseItem>
+    )
+  }
+  return courseItemsList
+}
+
+
+function initializeFilters(filters: FilterChooser, data: UniversityCurriculumData) {
+  // initialize the filters to show
+  // years
+  for (const year of data.years) {
+    filters.years.push(year.year)  // just add every study plan
+
+    // career
+    for (const career of year.careerCurriculums) {
+      // if the career across the study plans isn't added, add it
+      if (!filters.careers.includes(career.name)) {
+        filters.careers.push(career.name)
+      }
+    }
+  }
+  // cycles, there's always 10, I'll update this if I expand the project
+  for (let i = 1; i <= 10; i++) {
+    filters.cycles.push(`CICLO {i}`)
+  }
+}
+
 
 function CalendarAside() {
 	// Data and error handling
@@ -20,7 +75,17 @@ function CalendarAside() {
 	const [courses, setCourses] = useState<Course[]>([])
 	const [years, setYears] = useState<Year[]>([])
   const [selectedValue, setSelectedValue] = useState<SelectCurriculumOption>()
-  // const [data, setData] = useState<UniversityCurriculumData | null>()
+  const [userFilters, setUserFilters] = useState<Filters>({
+    cycle: '',
+    career: '',
+    year: ''
+  })
+  const filtersAvailable: FilterChooser = {
+    cycles: [],
+    years: [],
+    careers: []
+  }
+  const [data, setData] = useState<UniversityCurriculumData>()
 	// const [cycle, setCycle] = useState<string>("CICLO 1") maybe uncomment later
 
 	// Load the JSON data and set the data state
@@ -30,32 +95,34 @@ function CalendarAside() {
 		const fetchData = async () => {
 			try {
 				// load the json data
-        const jsonData = await loadJSON()
-        console.log(jsonData)
-
+        const jsonData: UniversityCurriculumData = await loadJSON()
         setIsDataLoaded(true)
+
 				// get the courses from the data
-			  const renderedCourses = renderCoursesFromData(jsonData)
-				setCourses(renderedCourses)
+			  //const renderedCourses = renderCoursesFromData(jsonData)
+        setData(jsonData)
+				setCourses(getCoursesFromData(jsonData))
 				setYears(jsonData.years)
 			  setSelectedValue({
 			    value: jsonData.years[0].careerCurriculums,
 			    label: jsonData.years[0].year
 			  })
-			} catch (error) {
+        // initialize filters
+        initializeFilters(filtersAvailable, jsonData)
+      } catch (error) {
 				// Reserved line to call a future function to show a message to the user
 				// that the data is not available
 				console.error("Error loading JSON data: ", error)
 				setIsDataLoaded(false)
-			}
+      }
 		}
 		fetchData()
 	}, [])
   
   // update the course list to render every time the filter object changes
   useEffect(() => {
-
-  }, [])
+    if (isDataLoaded) setCourses(getCoursesFromData(data!, userFilters))
+  }, [userFilters])
 
 	// were printing out curriculums
 	// placeholder corriculums
@@ -104,8 +171,9 @@ function CalendarAside() {
 						    <section className={styles.sidebar__courses}>
 							    <span className={styles.sidebar__subtitle}>Cursos</span>
 							    <div className={styles.sidebar__list}>
-										{isDataLoaded && courses.map((course: Course) => {
+										{isDataLoaded && renderCoursesSidebar(courses) /*courses.map((course: Course) => {
                       const itemKey = course.id + course.name + course.credits + course.teacher + course.sections.map(section => section.sectionNumber).join('')
+                      console.log(itemKey)
 										  return (
 											  <CourseItem
 											    key={itemKey}
@@ -115,7 +183,7 @@ function CalendarAside() {
 											    sections={course.sections}
 											    teacher={course.teacher}>
 											  </CourseItem>
-											)})
+											)})*/
 										}
 							    </div>
 						    </section>

@@ -125,6 +125,7 @@ export function renderCoursesFromData(
     cycle: ''
   }) {
 	const courses: Course[] = []
+  console.log(data)
 
   /**
    * NOTES ON SCOPE OF THE PROJECT
