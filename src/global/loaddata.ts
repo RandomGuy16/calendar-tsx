@@ -81,6 +81,7 @@ function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
 	let prevCourseName
 	for (let section of cycle.courseSections) {
 		// check if the course name is already in the courses array
+    // start checking if the array is empty to add a new courseItem
 		if (courses.length == 0) {
 			courses.push({
 				id: section.asignment.split(" - ")[0],
@@ -117,7 +118,7 @@ function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
  * Render courses once data is loaded from the json files
  * @returns a list of courses based on filters established
  * */
-export function renderCoursesFromData(
+export function getCoursesFromData(
   data: UniversityCurriculumData,
   filters: Filters = {
     year: '',
@@ -125,7 +126,7 @@ export function renderCoursesFromData(
     cycle: ''
   }) {
 	const courses: Course[] = []
-  console.log(data)
+  console.log(filters)
 
   /**
    * NOTES ON SCOPE OF THE PROJECT
@@ -137,22 +138,27 @@ export function renderCoursesFromData(
   const filteredYears: Year[] = data.years.filter((year: Year) => {
     return filters.year ? year.year === filters.year : true
   })
+  console.log(filteredYears)
 	for (let year of filteredYears) {
 		// filter careers
     const filteredCareers: Career[] = year.careerCurriculums.filter((career: Career) => {
+      console.log(career.name, filters.career)
       return filters.career ? career.name === filters.career : true
     })
+    console.log(filteredCareers)
 		for (let career of filteredCareers) {
 			// filter cycles
       const filteredCycles: Cycle[] = career.cycles.filter((cycle: Cycle) => {
         return filters.cycle ? cycle.name === filters.cycle : true
       })
+      console.log(filteredCycles)
 			for (let cycle of filteredCycles) {
 				// iterate over all courses in the cycle
 				appendCoursesToCourseList(cycle, courses)
 			}
 		}
 	}
+  console.log("-----------------------------------------")
 	return courses
 }
 
