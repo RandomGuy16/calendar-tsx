@@ -1,5 +1,27 @@
 import styles from './CourseItem.module.scss';
-import { Course, CourseSection, Schedule } from '../global/types.ts';
+import { Course, CourseSection } from '../global/types.ts';
+
+
+function createSectionButtons(sections: CourseSection[]) {
+  // define array to return
+  let courseSectionsList = []
+  // iterate over all sections using a for loop
+  for (let i = 0; i < sections.length; i++) {
+    let section = sections[i]
+    const itemKey = `${i} courseitembutton:` + section.credits + section.teacher + section.asignment + section.sectionNumber
+    
+    // append a button for each section
+    courseSectionsList.push(
+      <button
+        className={styles.course_item__class_group}
+        key={itemKey}
+        onClick={()=>{}}>
+        {section.sectionNumber}
+      </button>
+    )
+  }
+  return courseSectionsList
+}
 
 
 /**
@@ -13,7 +35,7 @@ function CourseItem({id, credits, name, sections, teacher}: Readonly<Course>) {
 	<span className={styles.course_item__title}>{name}</span>
 	<div className={styles.course_item__class_groups}>
     {/* creates a button for every group in classGroups */}
-		{sections.map(group => (
+		{/*sections.map(group => (
 			<button
       className={styles.course_item__class_group}
       key={
@@ -23,7 +45,8 @@ function CourseItem({id, credits, name, sections, teacher}: Readonly<Course>) {
       onClick={() => {}}>
 			{group.sectionNumber}
 			</button>
-		))}
+		))*/}
+    {(sections.length > 0) && createSectionButtons(sections)}
 	</div>
 	</div>
 	)

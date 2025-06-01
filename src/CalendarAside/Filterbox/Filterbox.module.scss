@@ -1,0 +1,15 @@
+@use '../../global/variables.scss' as vars;
+@use '../../global/mixins.scss' as mixins;
+
+
+.filterbox {
+  @include mixins.flex-row;
+  @include mixins.content-height;
+  background-color: vars.$color-1;
+
+  &__list {
+    font-size: 0.8rem;
+    color: black;
+  }
+}
+
