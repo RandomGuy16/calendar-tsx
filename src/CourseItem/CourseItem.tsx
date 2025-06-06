@@ -35,17 +35,6 @@ function CourseItem({id, credits, name, sections, teacher}: Readonly<Course>) {
 	<span className={styles.course_item__title}>{name}</span>
 	<div className={styles.course_item__class_groups}>
     {/* creates a button for every group in classGroups */}
-		{/*sections.map(group => (
-			<button
-      className={styles.course_item__class_group}
-      key={
-			group.teacher + group.sectionNumber + group.schedules.map((schedule: Schedule) => schedule.day + schedule.start + schedule.end)
-			+ id + credits + name + sections.map((section: CourseSection) => section.sectionNumber).join('') + teacher
-			}
-      onClick={() => {}}>
-			{group.sectionNumber}
-			</button>
-		))*/}
     {(sections.length > 0) && createSectionButtons(sections)}
 	</div>
 	</div>

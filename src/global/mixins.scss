@@ -17,6 +17,11 @@
 	height: fit-content;
 }
 
+@mixin course-calendar-height {
+  width: 100%;
+  height: 2.5rem;
+}
+
 @mixin rounded {
 	border-radius: 0.5rem;
 }

@@ -1,0 +1,13 @@
+@use '../global/variables.scss' as vars;
+@use '../global/mixins.scss' as mixins;
+
+
+.course_calendar {
+  @include mixins.course-calendar-height;
+  background-color: #00000088;
+  margin: 0px 2px;
+  padding: 4px;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+}
+

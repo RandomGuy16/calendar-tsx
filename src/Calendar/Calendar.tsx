@@ -1,4 +1,5 @@
 import styles from './Calendar.module.scss'
+import CalendarCourseLabel from '../CalendarCourseLabel/CalendarCourseLabel.tsx'
 
 
 const MONDAY_ID = "monday"
@@ -8,6 +9,9 @@ const THURSDAY_ID = "thursday"
 const FRIDAY_ID = "friday"
 const SATURDAY_ID = "saturday"
 const SUNDAY_ID = "sunday"
+
+
+const schedulesToRender = Map<string, any>;
 
 
 function Calendar() {
@@ -43,8 +47,11 @@ function Calendar() {
 					<div className={styles.calendar__hour_tag}>19:00</div>
 					<div className={styles.calendar__hour_tag}>20:00</div>
 				</div>
-				<div className={styles.calendar__appointments}>
-					<div className={styles.calendar__appointments_column} id={MONDAY_ID}></div>
+				<div className={styles.calendar__appointments} id='calendar-appointments'>
+					<div className={styles.calendar__appointments_column} id={MONDAY_ID}>
+            <CalendarCourseLabel></CalendarCourseLabel>
+            <CalendarCourseLabel></CalendarCourseLabel>
+          </div>
 					<div className={styles.calendar__appointments_column} id={TUESDAY_ID}></div>
 					<div className={styles.calendar__appointments_column} id={WEDNESDAY_ID}></div>
 					<div className={styles.calendar__appointments_column} id={THURSDAY_ID}></div>

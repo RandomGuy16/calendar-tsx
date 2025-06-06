@@ -41,7 +41,7 @@
 		flex-direction: row;
 		justify-content: space-evenly;
 		align-items: center;
-		height: 2.5rem;
+		height: 1.5rem;
 
 		border-radius: 1rem 1rem 0px 0px;
 		background-color: vars.$calendar-days-row-bg;
@@ -56,6 +56,7 @@
 	}
 	&__day {
 			flex: 1;
+      height: inherit;
 		}
 
 
@@ -66,7 +67,7 @@
 		justify-content: space-evenly;
 		align-items: start;
 		overflow-y: auto;
-		max-height: 67vh;
+		max-height: 50.5rem;
 
 		/* selectors for the scrollbar */
 		&::-webkit-scrollbar {
@@ -114,13 +115,14 @@
 		justify-content: space-evenly;
 		align-items: center;
 		flex: 7;
+    height: 100%;
 		
 		&_column {
 			@include mixins.flex-column;
-			justify-content: space-evenly;
+			justify-content: start;
 			align-items: center;
-			height:100%;
-			flex: 1;
+			height: 100%;
+			flex: 14;
 		}
 	}
 	
