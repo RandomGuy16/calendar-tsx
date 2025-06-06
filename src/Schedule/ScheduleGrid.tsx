@@ -1,5 +1,5 @@
-import styles from './Calendar.module.scss'
-import CalendarCourseLabel from '../CalendarCourseLabel/CalendarCourseLabel.tsx'
+import styles from './ScheduleGrid.module.scss'
+import ScheduleEventCard from './ScheduleEventCard.tsx'
 
 
 const MONDAY_ID = "monday"
@@ -14,7 +14,7 @@ const SUNDAY_ID = "sunday"
 const schedulesToRender = Map<string, any>;
 
 
-function Calendar() {
+function ScheduleGrid() {
 	return (
 		<div className={styles.calendar}>
 			<div className={styles.calendar__header}>
@@ -49,8 +49,8 @@ function Calendar() {
 				</div>
 				<div className={styles.calendar__appointments} id='calendar-appointments'>
 					<div className={styles.calendar__appointments_column} id={MONDAY_ID}>
-            <CalendarCourseLabel></CalendarCourseLabel>
-            <CalendarCourseLabel></CalendarCourseLabel>
+            <ScheduleEventCard></ScheduleEventCard>
+            <ScheduleEventCard></ScheduleEventCard>
           </div>
 					<div className={styles.calendar__appointments_column} id={TUESDAY_ID}></div>
 					<div className={styles.calendar__appointments_column} id={WEDNESDAY_ID}></div>
@@ -65,4 +65,4 @@ function Calendar() {
 	)
 }
 
-export default Calendar
+export default ScheduleGrid

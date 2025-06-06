@@ -1,11 +1,11 @@
-import styles from './CalendarAside.module.scss'
+import styles from './CourseList.module.scss'
 import reactSelectStyles from './ReactSelectStyles.ts'
 import Tabs from './Tabs/Tabs.tsx'
 import Select from 'react-select'
 import { Course, Year, Career, UniversityCurriculumData, FilterChooser, Filters } from '../global/types'
 import { loadJSON, getCoursesFromData } from '../global/loaddata'
 import { useEffect, useState } from 'react'
-import CourseItem from '../CourseItem/CourseItem.tsx'
+import CourseCard from './CourseCard.tsx'
 import Filterbox from './Filterbox/Filterbox.tsx'
 
 
@@ -24,14 +24,14 @@ function renderCoursesSidebar(courses: Course[]) {
     
     // append the course item to the list
     courseItemsList.push(
-      <CourseItem
+      <CourseCard
 		    key={itemKey}
 		    credits={course.credits}
 		    id={course.id}
 		    name={course.name}
 		    sections={course.sections}
 		    teacher={course.teacher}>
-		  </CourseItem>
+		  </CourseCard>
     )
   }
   return courseItemsList
@@ -67,7 +67,7 @@ function initializeFilters(data: UniversityCurriculumData) {
 
 
 
-function CalendarAside() {
+function CourseList() {
 	// Data and error handling
 	const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false)
 	const [courses, setCourses] = useState<Course[]>([])
@@ -193,5 +193,5 @@ function CalendarAside() {
 	)
 }
 
-export default CalendarAside
+export default CourseList
 

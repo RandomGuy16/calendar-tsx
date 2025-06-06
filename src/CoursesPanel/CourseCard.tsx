@@ -1,4 +1,4 @@
-import styles from './CourseItem.module.scss';
+import styles from './CourseCard.module.scss';
 import { Course, CourseSection } from '../global/types.ts';
 
 
@@ -29,7 +29,7 @@ function createSectionButtons(sections: CourseSection[]) {
  * @param course to be displayed
  * @returns a styled div with the course
  */
-function CourseItem({id, credits, name, sections, teacher}: Readonly<Course>) {
+function CourseCard({id, credits, name, sections, teacher}: Readonly<Course>) {
   return (
 	<div className={styles.course_item}>
 	<span className={styles.course_item__title}>{name}</span>
@@ -41,5 +41,5 @@ function CourseItem({id, credits, name, sections, teacher}: Readonly<Course>) {
 	)
 }
 
-export default CourseItem;
+export default CourseCard;
 

@@ -1,8 +1,8 @@
-import styles from './CalendarCourseLabel.module.scss'
-import { CourseSection, Course, Schedule } from '../global/types'
+import styles from './ScheduleEventCard.module.scss'
+import { CourseSection, Course, Schedule } from '../global/types.ts'
 
 
-function CalendarCourseLabel(section: CourseSection) {
+function ScheduleEventCard(section: CourseSection) {
   // doing some tests
 
   window.addEventListener('load', (event: Event) => { console.log(document.getElementById('calendar-appointments')) })
@@ -14,5 +14,5 @@ function CalendarCourseLabel(section: CourseSection) {
 }
 
 
-export default CalendarCourseLabel
+export default ScheduleEventCard
 

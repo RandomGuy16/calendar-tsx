@@ -1,4 +1,4 @@
-import './styles/UCurriculum.scss'
+import './styles/Curriculum.scss'
 
 type CurriculumData = {
 	title: string,
@@ -6,7 +6,7 @@ type CurriculumData = {
 }
 
 
-function UCurriculum(data: Readonly<CurriculumData>) {
+function Curriculum(data: Readonly<CurriculumData>) {
 
 	return (
 	<div className='u-curriculum'>
@@ -16,4 +16,4 @@ function UCurriculum(data: Readonly<CurriculumData>) {
 	);
 }
 
-export default UCurriculum
+export default Curriculum

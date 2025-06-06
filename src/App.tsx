@@ -1,6 +1,6 @@
-import Calendar from './Calendar/Calendar.tsx'
+import ScheduleGrid from './Schedule/ScheduleGrid.tsx'
 import Header from './Header/Header.tsx'
-import CalendarAside from './CalendarAside/CalendarAside.tsx'
+import CourseList from './CoursesPanel/CourseList.tsx'
 import styles from './global/App.module.scss'
 
 function App() {
@@ -12,10 +12,10 @@ function App() {
       </header>
       <main className={styles.App_main}>
         <aside className={styles.App_aside}>
-          <CalendarAside />
+          <CourseList />
         </aside>
         <div className={styles.App_content}>
-          <Calendar />
+          <ScheduleGrid />
         </div>
       </main>
     </>

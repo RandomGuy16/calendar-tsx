@@ -22,7 +22,7 @@ function Filterbox({filterChooser, selectedFilters, selectedFiltersSetter}: Filt
     <div className={styles.filterbox}>
       {/* separate Select element for each category in filterChooser */}
       {/*
-        when a select element from here changes the filters, the useEffect of CalendarAside
+        when a select element from here changes the filters, the useEffect of CoursesPanel
         reconfigures the courses available
       */}
       <Select
