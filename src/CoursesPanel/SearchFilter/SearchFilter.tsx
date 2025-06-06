@@ -1,4 +1,4 @@
-import styles from './Filterbox.module.scss'
+import styles from './SearchFIlter.module.scss'
 import Select from 'react-select'
 import { useState, Dispatch } from 'react'
 import { FilterChooser, Filters } from '../../global/types'
@@ -17,7 +17,7 @@ interface selectArgument {
   value: string;
 }
 
-function Filterbox({filterChooser, selectedFilters, selectedFiltersSetter}: FilterboxArgs) {
+function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: FilterboxArgs) {
   return (
     <div className={styles.filterbox}>
       {/* separate Select element for each category in filterChooser */}
@@ -104,5 +104,5 @@ function Filterbox({filterChooser, selectedFilters, selectedFiltersSetter}: Filt
   )
 }
 
-export default Filterbox;
+export default SearchFilter;
 

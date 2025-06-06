@@ -2,25 +2,22 @@
 @use '../global/variables.scss' as vars;
 
 
-$sidebar-list-bg: #3d68a0;
-
 .sidebar {
-	@include mixins.full-size;
-	@include mixins.flex-column;
-	padding: 0.5rem;
+	@include mixins.glass-effect;
+	height: 100%;
+	width: 25rem;
 
-	border-top-right-radius: 1rem;
+	padding: 0.5rem;
+	border-radius: 0 0.5rem 0 0;
 	border-right: 1px solid;
 	border-top: 1px solid;
-	border-color: vars.$border-transparent-light;
-	backdrop-filter: blur(8px);
-	background-color: vars.$background-transparent-light;
 	
 	&__menu {
-		@include mixins.full-size;
+		width: 100%;
+		height: 100%;
 		background-color: vars.$background-transparent-light;
 		padding: 0.5rem 1rem;
-		border-radius: 0px 0.5rem 0.5rem 0.5rem;
+		border-radius: 0 0.5rem 0.5rem 0.5rem;
 	}
 	
 	h2 {
@@ -39,15 +36,14 @@ $sidebar-list-bg: #3d68a0;
 	}
 
 	&__list {
-    @include mixins.flex-column;
+    @include mixins.flex(column, flex-start, stretch);
 		font-size: 0.80rem;
-		width: 100%;
 		min-height: 8rem;
 		max-height: 35rem;
     padding: 0.5rem;
 		border: 1px solid transparent;
 		border-radius: 0.25rem;
-		background-color: $sidebar-list-bg;
+		background-color: #3d68a0;
 		overflow-y: scroll;
 		&:hover {
 			border-color: blue;

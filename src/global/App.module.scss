@@ -6,8 +6,8 @@
 
 .App_main {
   width: 100%;
-  height: calc(100% - 7rem);
-  @include mixins.flex-row;
+  height: calc(100% - 7rem);;
+  @include mixins.flex(row, normal, center);
 }
 
 .App_header {
@@ -23,7 +23,7 @@
   align-items: center;
   height: 100%;
   flex: 7;
-	padding: 0px 1rem 0px 0px;
+  padding-right: 1rem;
 }
 
 .App_content {

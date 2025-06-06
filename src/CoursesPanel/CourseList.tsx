@@ -6,7 +6,7 @@ import { Course, Year, Career, UniversityCurriculumData, FilterChooser, Filters 
 import { loadJSON, getCoursesFromData } from '../global/loaddata'
 import { useEffect, useState } from 'react'
 import CourseCard from './CourseCard.tsx'
-import Filterbox from './Filterbox/Filterbox.tsx'
+import SearchFilter from './SearchFilter/SearchFilter.tsx'
 
 
 interface SelectCurriculumOption {
@@ -160,12 +160,12 @@ function CourseList() {
 							      styles={reactSelectStyles}>
 							    </Select>
 						    </section>
-								<Filterbox
+								<SearchFilter
 								filterChooser={filtersAvailable}
 								selectedFilters={userFilters}
 								selectedFiltersSetter={setUserFilters}
 								>
-								</Filterbox>
+								</SearchFilter>
 						    <section className={styles.sidebar__courses}>
 							    <span className={styles.sidebar__subtitle}>Cursos</span>
 							    <div className={styles.sidebar__list}>

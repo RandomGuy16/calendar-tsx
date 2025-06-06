@@ -3,29 +3,27 @@
 
 
 .course_item {
-	@include mixins.content-height;
+	width: 100%;
 	font-size: 1rem;
 	color: white;
-  text-align: center;
-  background-color: #fff4;
-  margin-bottom: 1rem;
+  	text-align: center;
+  	background-color: #fff4;
+  	margin-bottom: 1rem;
+	border: 1px solid black;
 
 	&__title {
 		color: white;
 	}
 
 	&__class_groups {
-		@include mixins.content-height;
-		@include mixins.flex-row;
+		 @include mixins.flex(row, flex-start, center);
 	}
 	&__class_group {
-		@include mixins.content-height;
-		@include mixins.text-padding;
+		width: fit-content;
+		padding: 0.25rem 0.5rem;
 		background-color: transparent;
 		border-radius: 0.25rem;
-    border: 1px solid black;
-    font-size: 0.75rem;
-    width: fit-content;
+		font-size: 0.75rem;
 		
     &:active {
 			background-color: gray;

@@ -3,21 +3,17 @@
 
 
 .tabs {
-	@include mixins.full-size;
-	@include mixins.flex-column;
 	&__nav {
-		@include mixins.flex-row;
-		justify-content: start;
-		align-items: center;
+		@include mixins.flex(row, flex-start, center);
 		height: 2rem;
 	}
 	&__button {
-		@include mixins.center-content;
-		@include mixins.text-padding;
+		padding: 0.5rem 1rem;
+		justify-content: center;
 		display: inline-block;
 		background-color: transparent;
 		border: none;
-		border-radius: 0.5rem 0.5rem 0px 0px;
+		border-radius: 0.5rem 0.5rem 0 0;
 		width: fit-content;
 		height: 2rem;
 		transition: border-color 0.2s ease;
@@ -33,10 +29,7 @@
 
 
 	&__content {
-		@include mixins.flex-column;
-		@include mixins.content-height;
-		justify-content: center;
-		align-items: center;
+		@include mixins.flex(column, flex-start, center);
 		height: calc(100% - 2rem);
 	}
 }
