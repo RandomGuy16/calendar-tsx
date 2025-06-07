@@ -1,6 +1,6 @@
 import styles from './SearchFIlter.module.scss'
 import Select from 'react-select'
-import { useState, Dispatch } from 'react'
+import { Dispatch } from 'react'
 import { FilterChooser, Filters } from '../../global/types'
 
 
@@ -43,7 +43,7 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: F
       }}
       onChange={(newValue: unknown) => {
         selectedFiltersSetter({
-          career: newValue.value,
+          career: (newValue as selectArgument).value,
           cycle: selectedFilters.cycle,
           year: selectedFilters.year
         })
@@ -69,7 +69,7 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: F
       onChange={(newValue: unknown) => {
         selectedFiltersSetter({
           career: selectedFilters.career,
-          cycle: newValue.value as string,
+          cycle: (newValue as selectArgument).value,
           year: selectedFilters.year
         })
       }}>
@@ -95,7 +95,7 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: F
         selectedFiltersSetter({
           career: selectedFilters.career,
           cycle: selectedFilters.cycle,
-          year: newValue.value as string,
+          year: (newValue as selectArgument).value,
         })
       }}>
       </Select>

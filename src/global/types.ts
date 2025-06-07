@@ -60,3 +60,9 @@ export interface Filters {
   career: string;
 }
 
+export interface SelectCurriculumOption {
+  label: string;
+  value: Career[];
+}
+
+
