@@ -1,12 +1,19 @@
-import { Dispatch, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './CourseList.module.scss'
 import Select from 'react-select'
 import reactSelectStyles from './ReactSelectStyles.ts'
 import Tabs from './Tabs/Tabs.tsx'
 import CourseCard from './CourseCard.tsx'
 import SearchFilter from './SearchFilter/SearchFilter.tsx'
-import { Course, Year, UniversityCurriculumData, FilterChooser, Filters, SelectCurriculumOption } from '../global/types'
-import { getCoursesFromData } from '../global/loaddata'
+import {
+  Course,
+  Year,
+  UniversityCurriculumData,
+  FilterChooser,
+  Filters,
+  SelectFilterOption
+} from '../../global/types.ts'
+import { getCoursesFromData, initializeFilters } from '../../global/loaddata.ts'
 
 
 function renderCoursesSidebar(courses: Course[]) {
@@ -33,67 +40,44 @@ function renderCoursesSidebar(courses: Course[]) {
 }
 
 
-export function initializeFilters(data: UniversityCurriculumData) {
-  // initialize a new filters object, we'll return its value
-  const filters: FilterChooser = {
+interface CourseListProps {
+  data: UniversityCurriculumData | undefined;
+  isDataLoaded: boolean
+}
+
+function CourseList({ data, isDataLoaded }: CourseListProps) {
+  const [selectedValue, setSelectedValue] = useState<SelectFilterOption>()
+  const [courses, setCourses] = useState<Course[]>([])
+  const [years, setYears] = useState<Year[]>([])
+  const [filters, setFilters] = useState<FilterChooser>({
     cycles: [],
     years: [],
     careers: []
-  }
-
-  // years
-  for (const year of data.years) {
-    filters.years.push(year.year)  // just add every study plan
-
-    // career
-    for (const career of year.careerCurriculums) {
-      // if the career across the study plans isn't added, add it
-      if (!filters.careers.includes(career.name)) {
-        filters.careers.push(career.name)
-      }
-    }
-  }
-  // cycles, there's always 10; I'll update this if I expand the project
-  for (let i = 1; i <= 10; i++) {
-    filters.cycles.push(`CICLO ${i}`)
-  }
-  return filters
-}
-
-
-interface CourseListProps {
-  data: UniversityCurriculumData | undefined;
-  isDataLoaded: boolean;
-  courses: Course[];
-  setCourses: Dispatch<React.SetStateAction<Course[]>>
-  years: Year[];
-  filtersAvailable: FilterChooser;
-  selectedValue: SelectCurriculumOption | undefined;
-  setSelectedValue: Dispatch<React.SetStateAction<SelectCurriculumOption | undefined>>
-  userFilters: Filters;
-  setUserFilters: Dispatch<React.SetStateAction<Filters>>
-}
-
-
-function CourseList(
-  {
-    data,
-    isDataLoaded,
-    courses,
-    setCourses,
-    years,
-    filtersAvailable,
-    selectedValue,
-    setSelectedValue,
-    userFilters,
-    setUserFilters
-  }: CourseListProps) {
-
-
+  })
+  const [chosenFilters, setChosenFilters] = useState<Filters>({
+    cycle: 'CICLO 1',
+    career: 'Ingeniería De Sistemas',
+    year: '2023'
+  })
   // update the course list to render every time the filter object changes
   useEffect(() => {
-    if (isDataLoaded) setCourses(getCoursesFromData(data!, userFilters))
-  }, [data, isDataLoaded, setCourses, userFilters])
+    if (isDataLoaded && data) {
+      setCourses(getCoursesFromData(data, chosenFilters))
+      setFilters(initializeFilters(data))  // initialize filters
+      setCourses(getCoursesFromData(data))
+      setYears(data.years)
+      setSelectedValue({
+        value: data.years[0].careerCurriculums,
+        label: data.years[0].year
+      })
+    }
+  }, [data, isDataLoaded])
+
+  useEffect(() => {
+    if (isDataLoaded && data) {
+      setCourses(getCoursesFromData(data, chosenFilters))
+    }
+  }, [chosenFilters]);
 
   return (
     <div className={styles.sidebar}>
@@ -120,7 +104,7 @@ function CourseList(
                       defaultValue={selectedValue}
                       onChange={(newValue: unknown) => {
                         // Cast newValue to SelectCurriculumOption
-                        const selected = newValue as SelectCurriculumOption | null;
+                        const selected = newValue as SelectFilterOption | null;
                         // if isn't null or undefined update selectedValue
                         if (selected) {
                           setSelectedValue({
@@ -133,9 +117,9 @@ function CourseList(
                     </Select>
                   </section>
                   <SearchFilter
-                    filterChooser={filtersAvailable}
-                    selectedFilters={userFilters}
-                    selectedFiltersSetter={setUserFilters}
+                    filterChooser={filters}
+                    selectedFilters={chosenFilters}
+                    selectedFiltersSetter={setChosenFilters}
                   >
                   </SearchFilter>
                   <section className={styles.sidebar__courses}>

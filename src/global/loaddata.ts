@@ -1,4 +1,4 @@
-import { Course, Cycle, Year, UniversityCurriculumData, Filters, Career } from "./types"
+import {Course, Cycle, Year, UniversityCurriculumData, Filters, Career, FilterChooser} from "./types"
 
 
 // entrypoint to load JSON
@@ -79,7 +79,7 @@ function formatJSON(rawJSONData: any) {
 function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
 	// course name checker, to filter out the courses
 	let prevCourseName
-	for (let section of cycle.courseSections) {
+	for (const section of cycle.courseSections) {
 		// check if the course name is already in the courses array
     // start checking if the array is empty to add a new courseItem
 		if (courses.length == 0) {
@@ -120,13 +120,13 @@ function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
  * */
 export function getCoursesFromData(
   data: UniversityCurriculumData,
-  filters: Filters = {
-    year: '',
-    career: '',
-    cycle: ''
+  userFilters: Filters = {
+		year: '2023',
+		career: 'Ingeniería De Sistemas',
+		cycle: 'CICLO 1',
   }) {
 	const courses: Course[] = []
-  console.log(filters)
+  console.log(userFilters)
 
   /**
    * NOTES ON SCOPE OF THE PROJECT
@@ -136,23 +136,23 @@ export function getCoursesFromData(
 
 	// iterate over all years following the filters
   const filteredYears: Year[] = data.years.filter((year: Year) => {
-    return filters.year ? year.year === filters.year : true
+    return userFilters.year ? year.year === userFilters.year : true
   })
   console.log(filteredYears)
-	for (let year of filteredYears) {
+	for (const year of filteredYears) {
 		// filter careers
     const filteredCareers: Career[] = year.careerCurriculums.filter((career: Career) => {
-      console.log(career.name, filters.career)
-      return filters.career ? career.name === filters.career : true
+      console.log(career.name, userFilters.career)
+      return userFilters.career ? career.name === userFilters.career : true
     })
     console.log(filteredCareers)
-		for (let career of filteredCareers) {
+		for (const career of filteredCareers) {
 			// filter cycles
       const filteredCycles: Cycle[] = career.cycles.filter((cycle: Cycle) => {
-        return filters.cycle ? cycle.name === filters.cycle : true
+        return userFilters.cycle ? cycle.name === userFilters.cycle : true
       })
       console.log(filteredCycles)
-			for (let cycle of filteredCycles) {
+			for (const cycle of filteredCycles) {
 				// iterate over all courses in the cycle
 				appendCoursesToCourseList(cycle, courses)
 			}
@@ -162,3 +162,29 @@ export function getCoursesFromData(
 	return courses
 }
 
+export function initializeFilters(data: UniversityCurriculumData) {
+	// initialize a new filters object, we'll return its value
+	const filters: FilterChooser = {
+		cycles: [],
+		years: [],
+		careers: []
+	}
+
+	// years
+	for (const year of data.years) {
+		filters.years.push(year.year)  // just add every study plan
+
+		// career
+		for (const career of year.careerCurriculums) {
+			// if the career across the study plans isn't added, add it
+			if (!filters.careers.includes(career.name)) {
+				filters.careers.push(career.name)
+			}
+		}
+	}
+	// cycles, there's always 10; I'll update this if I expand the project
+	for (let i = 1; i <= 10; i++) {
+		filters.cycles.push(`CICLO ${i}`)
+	}
+	return filters
+}

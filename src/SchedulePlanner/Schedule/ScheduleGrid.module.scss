@@ -1,6 +1,6 @@
 // ScheduleGrid.module.scss
-@use '../global/mixins' as mixins;
-@use '../global/variables' as vars;
+@use '../../global/mixins' as mixins;
+@use '../../global/variables' as vars;
 
 .calendar {
   @include mixins.flex(column);

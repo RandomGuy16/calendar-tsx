@@ -1,5 +1,5 @@
 import styles from './CourseCard.module.scss';
-import { Course, CourseSection } from '../global/types.ts';
+import { Course, CourseSection } from '../../global/types.ts';
 
 
 function createSectionButtons(sections: CourseSection[]) {

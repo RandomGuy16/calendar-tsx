@@ -1,5 +1,5 @@
 import styles from './ScheduleEventCard.module.scss'
-import { CourseSection, Course, Schedule } from '../global/types.ts'
+import { CourseSection, Course, Schedule } from '../../global/types.ts'
 
 
 function ScheduleEventCard(section: CourseSection) {

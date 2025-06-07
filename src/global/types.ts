@@ -46,8 +46,7 @@ export interface Schedule {
 }
 
 // These interfaces help filter course
-// FilterChoose gets data from the webpage and outputs it to Filters
-
+// FilterChooser gets data from the webpage and outputs it to Filters
 export interface FilterChooser {
   years: string[];
   cycles: string[];
@@ -60,7 +59,8 @@ export interface Filters {
   career: string;
 }
 
-export interface SelectCurriculumOption {
+// interface used by SearchFilter in CourseList.tsx and SearchFilter.tsx
+export interface SelectFilterOption {
   label: string;
   value: Career[];
 }
