@@ -30,7 +30,7 @@ export interface Course {
 }
 
 export interface CourseSection {
-  asignment: string;
+  assignment: string;
   sectionNumber: number;
   teacher: string;
   schedules: Schedule[];

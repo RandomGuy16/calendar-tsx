@@ -84,8 +84,8 @@ function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
     // start checking if the array is empty to add a new courseItem
 		if (courses.length == 0) {
 			courses.push({
-				id: section.asignment.split(" - ")[0],
-				name: section.asignment.split(" - ")[1],
+				id: section.assignment.split(" - ")[0],
+				name: section.assignment.split(" - ")[1],
 				credits: section.credits,
 				teacher: section.teacher,
 				sections: []
@@ -94,13 +94,13 @@ function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
 			// push the section to the new course
 			courses[0].sections.push(section)
 		}
-		else if (prevCourseName === section.asignment) {
+		else if (prevCourseName === section.assignment) {
 			// if it is, just push the section to the course
 			courses[courses.length - 1].sections.push(section)
 		} else {  // if it is not, create a new course
 			courses.push({
-				id: section.asignment.split(" - ")[0],
-				name: section.asignment.split(" - ")[1],
+				id: section.assignment.split(" - ")[0],
+				name: section.assignment.split(" - ")[1],
 				credits: section.credits,
 				teacher: section.teacher,
 				sections: []
@@ -108,7 +108,7 @@ function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
 			// push the section to the new course
 			courses[courses.length - 1].sections.push(section)
 		}
-		prevCourseName = section.asignment
+		prevCourseName = section.assignment
 	}
 }
 

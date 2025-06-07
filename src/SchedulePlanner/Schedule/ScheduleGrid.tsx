@@ -1,5 +1,6 @@
 import styles from './ScheduleGrid.module.scss'
-//import ScheduleEventCard from './ScheduleEventCard.tsx'
+import { CourseSection } from "../../global/types.ts";
+import { useEffect } from 'react'
 
 
 const MONDAY_ID = "monday"
@@ -9,9 +10,28 @@ const THURSDAY_ID = "thursday"
 const FRIDAY_ID = "friday"
 const SATURDAY_ID = "saturday"
 const SUNDAY_ID = "sunday"
+const renderedSections = new Set<CourseSection>()
 
 
-function ScheduleGrid() {
+interface ScheduleGridProps {
+  selectedSections: Map<string, CourseSection> | undefined;
+}
+
+
+function renderSection(section: CourseSection) {
+  // if already rendered, don't do anything
+  if (renderedSections.has(section)) return
+}
+
+
+function ScheduleGrid({ selectedSections }: ScheduleGridProps) {
+
+  useEffect(() => {
+    for (const section of selectedSections!.values()) {
+      renderSection(section)
+    }
+  }, [selectedSections]);
+
   return (
     <div className={styles.calendar}>
       <div className={styles.calendar__header}>

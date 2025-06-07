@@ -46,9 +46,9 @@ interface CourseListProps {
 }
 
 function CourseList({ data, isDataLoaded }: CourseListProps) {
-  const [selectedValue, setSelectedValue] = useState<SelectFilterOption>()
   const [courses, setCourses] = useState<Course[]>([])
   const [years, setYears] = useState<Year[]>([])
+  const [selectedValue, setSelectedValue] = useState<SelectFilterOption>()
   const [filters, setFilters] = useState<FilterChooser>({
     cycles: [],
     years: [],

@@ -2,7 +2,7 @@ import styles from './SchedulePlanner.module.scss'
 import { useEffect, useState } from 'react'
 import ScheduleGrid from './Schedule/ScheduleGrid.tsx'
 import CourseList from "./CoursesPanel/CourseList.tsx"
-import { UniversityCurriculumData } from "../global/types.ts"
+import { UniversityCurriculumData, CourseSection } from "../global/types.ts"
 import { loadJSON } from "../global/loaddata.ts"
 
 
@@ -13,6 +13,8 @@ function SchedulePlanner() {
   // Core data state
   const [data, setData] = useState<UniversityCurriculumData>()
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false)
+  // Schedules to be rendered in ScheduleGrid
+  const [selectedSections, ] = useState<Map<string, CourseSection>>();
 
   // Load the JSON data and set the data state
   // This is done in a useEffect to avoid blocking the main thread
@@ -44,7 +46,9 @@ function SchedulePlanner() {
         />
       </aside>
       <div className={styles.App_content}>
-        <ScheduleGrid />
+        <ScheduleGrid
+          selectedSections={selectedSections}
+        />
       </div>
     </>
   )
