@@ -22,30 +22,30 @@ function renderCoursesSidebar(courses: Course[]) {
   for (let i = 0; i < courses.length; i++) {
     // create a course variable and initialize its unique key
     const course = courses[i]
-    const itemKey = `${i} course item:` + course.id + course.name + course.credits + course.teacher
+    const itemKey = `${i}CourseCard:` + course.id + course.name + course.credits + course.teacher
 
     // append the course item to the list
     courseItemsList.push(
       <CourseCard
         key={itemKey}
-        credits={course.credits}
         id={course.id}
         name={course.name}
-        sections={course.sections}
-        teacher={course.teacher}>
+        sections={course.sections}>
       </CourseCard>
     )
   }
   return courseItemsList
 }
 
-
+// attributes for CourseList
 interface CourseListProps {
   data: UniversityCurriculumData | undefined;
   isDataLoaded: boolean
 }
 
+// Element for the sidebar which currently displays only the list of available courses
 function CourseList({ data, isDataLoaded }: CourseListProps) {
+  // variables
   const [courses, setCourses] = useState<Course[]>([])
   const [years, setYears] = useState<Year[]>([])
   const [selectedValue, setSelectedValue] = useState<SelectFilterOption>()
@@ -59,10 +59,12 @@ function CourseList({ data, isDataLoaded }: CourseListProps) {
     career: 'Ingeniería De Sistemas',
     year: '2023'
   })
-  // update the course list to render every time the filter object changes
+
+  // initial script on startup. Is embedded in a useEffect because it doesn't load instantly.
+  // It's meant to only run once
   useEffect(() => {
     if (isDataLoaded && data) {
-      setCourses(getCoursesFromData(data, chosenFilters))
+      // setCourses(getCoursesFromData(data, chosenFilters))
       setFilters(initializeFilters(data))  // initialize filters
       setCourses(getCoursesFromData(data))
       setYears(data.years)
@@ -73,6 +75,7 @@ function CourseList({ data, isDataLoaded }: CourseListProps) {
     }
   }, [data, isDataLoaded])
 
+  // update the course list to render the filter object changes every time
   useEffect(() => {
     if (isDataLoaded && data) {
       setCourses(getCoursesFromData(data, chosenFilters))

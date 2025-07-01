@@ -14,7 +14,10 @@ function SchedulePlanner() {
   const [data, setData] = useState<UniversityCurriculumData>()
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false)
   // Schedules to be rendered in ScheduleGrid
-  const [selectedSections, ] = useState<Map<string, CourseSection>>();
+
+  // A set to keep tracking of selected courses
+  const renderedSectionsTracker: Set<CourseSection> = new Set()
+  const [selectedSections, ] = useState<CourseSection[]>([]);
 
   // Load the JSON data and set the data state
   // This is done in a useEffect to avoid blocking the main thread
@@ -48,6 +51,7 @@ function SchedulePlanner() {
       <div className={styles.App_content}>
         <ScheduleGrid
           selectedSections={selectedSections}
+          sectionsTracker={renderedSectionsTracker}
         />
       </div>
     </>

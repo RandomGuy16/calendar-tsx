@@ -1,4 +1,4 @@
-import {Course, Cycle, Year, UniversityCurriculumData, Filters, Career, FilterChooser} from "./types"
+import { Course, Cycle, Year, UniversityCurriculumData, Filters, Career, FilterChooser } from "./types"
 
 
 // entrypoint to load JSON
@@ -33,9 +33,9 @@ function formatCycles([cycle, sectionsList]: [string, any]) {
 	return {
 		name: cycle,
 		courseSections: sectionsList.map((section: any) => { return {
-			asignment: section["Asignatura"],
+			assignment: section["Asignatura"],
 			teacher: section["Docente"],
-			sectionNumber: section["Sec_"],
+			sectionNumber: Number(section["Sec_"]),
 			credits: Number(section["Créd_"]),
 			schedules: section.Horarios.map((schedule: any) => { return {
 				day: schedule["Día"],
@@ -72,7 +72,7 @@ function formatJSON(rawJSONData: any) {
 // Rendering courses
 
 /**
- * Appends courses to course list
+ * Appends courses to CourseList
  *
  *
  * */
@@ -83,6 +83,7 @@ function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
 		// check if the course name is already in the courses array
     // start checking if the array is empty to add a new courseItem
 		if (courses.length == 0) {
+			console.log(section)
 			courses.push({
 				id: section.assignment.split(" - ")[0],
 				name: section.assignment.split(" - ")[1],

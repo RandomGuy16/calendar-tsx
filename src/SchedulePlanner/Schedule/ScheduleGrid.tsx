@@ -10,26 +10,23 @@ const THURSDAY_ID = "thursday"
 const FRIDAY_ID = "friday"
 const SATURDAY_ID = "saturday"
 const SUNDAY_ID = "sunday"
-const renderedSections = new Set<CourseSection>()
 
 
 interface ScheduleGridProps {
-  selectedSections: Map<string, CourseSection> | undefined;
+  selectedSections: CourseSection[];
+  sectionsTracker: Set<CourseSection>;
 }
 
 
 function renderSection(section: CourseSection) {
-  // if already rendered, don't do anything
-  if (renderedSections.has(section)) return
+  return section
 }
 
 
-function ScheduleGrid({ selectedSections }: ScheduleGridProps) {
-
+function ScheduleGrid({ selectedSections, }: ScheduleGridProps) {
+  // render every selected CourseSection
   useEffect(() => {
-    for (const section of selectedSections!.values()) {
-      renderSection(section)
-    }
+    selectedSections.forEach((section: CourseSection) => renderSection(section))
   }, [selectedSections]);
 
   return (
