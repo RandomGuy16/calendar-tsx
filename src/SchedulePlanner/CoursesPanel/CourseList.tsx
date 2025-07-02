@@ -7,6 +7,7 @@ import CourseCard from './CourseCard.tsx'
 import SearchFilter from './SearchFilter/SearchFilter.tsx'
 import {
   Course,
+  CourseSection,
   Year,
   UniversityCurriculumData,
   FilterChooser,
@@ -16,7 +17,7 @@ import {
 import { getCoursesFromData, initializeFilters } from '../../global/loaddata.ts'
 
 
-function renderCoursesSidebar(courses: Course[]) {
+function renderCoursesSidebar(courses: Course[], sectionsTracker: Set<CourseSection>) {
   // list to append all formatted course items
   const courseItemsList = []
   for (let i = 0; i < courses.length; i++) {
@@ -30,7 +31,8 @@ function renderCoursesSidebar(courses: Course[]) {
         key={itemKey}
         id={course.id}
         name={course.name}
-        sections={course.sections}>
+        sections={course.sections}
+        sectionsTracker={sectionsTracker}>
       </CourseCard>
     )
   }
@@ -40,11 +42,12 @@ function renderCoursesSidebar(courses: Course[]) {
 // attributes for CourseList
 interface CourseListProps {
   data: UniversityCurriculumData | undefined;
-  isDataLoaded: boolean
+  isDataLoaded: boolean;
+  sectionsTracker: Set<CourseSection>;
 }
 
 // Element for the sidebar which currently displays only the list of available courses
-function CourseList({ data, isDataLoaded }: CourseListProps) {
+function CourseList({ data, isDataLoaded, sectionsTracker }: CourseListProps) {
   // variables
   const [courses, setCourses] = useState<Course[]>([])
   const [years, setYears] = useState<Year[]>([])
@@ -128,7 +131,7 @@ function CourseList({ data, isDataLoaded }: CourseListProps) {
                   <section className={styles.sidebar__courses}>
                     <span className={styles.sidebar__subtitle}>Cursos</span>
                     <div className={styles.sidebar__list}>
-                      {isDataLoaded && renderCoursesSidebar(courses)}
+                      {isDataLoaded && renderCoursesSidebar(courses, sectionsTracker)}
                     </div>
                   </section>
                 </div>

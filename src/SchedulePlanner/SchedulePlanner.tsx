@@ -17,7 +17,7 @@ function SchedulePlanner() {
 
   // A set to keep tracking of selected courses
   const renderedSectionsTracker: Set<CourseSection> = new Set()
-  const [selectedSections, ] = useState<CourseSection[]>([]);
+  const [selectedSections,] = useState<CourseSection[]>([]);
 
   // Load the JSON data and set the data state
   // This is done in a useEffect to avoid blocking the main thread
@@ -40,12 +40,14 @@ function SchedulePlanner() {
     fetchData()
   }, [])
 
+
   return (
     <>
       <aside className={styles.App_aside}>
         <CourseList
           data={data}
           isDataLoaded={isDataLoaded}
+          sectionsTracker={renderedSectionsTracker}
         />
       </aside>
       <div className={styles.App_content}>
