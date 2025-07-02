@@ -1,0 +1,9 @@
+@use '../../global/variables' as vars;
+@use '../../global/mixins' as mixins;
+
+
+.course_calendar {
+  @include mixins.event-card;
+  background-color: #00000088;
+}
+

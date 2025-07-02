@@ -1,0 +1,35 @@
+@use '../../../global/mixins' as mixins;
+@use '../../../global/variables' as vars;
+
+
+.tabs {
+	&__nav {
+		@include mixins.flex(row, flex-start, center);
+		height: 2rem;
+	}
+	&__button {
+		padding: 0.5rem 1rem;
+		justify-content: center;
+		display: inline-block;
+		background-color: transparent;
+		border: none;
+		border-radius: 0.5rem 0.5rem 0 0;
+		width: fit-content;
+		height: 2rem;
+		transition: border-color 0.2s ease;
+		
+		&:hover {
+			text-decoration: underline;
+		}
+
+		&.active {
+			background-color: vars.$background-transparent-light;
+		}
+	}
+
+
+	&__content {
+		@include mixins.flex(column, flex-start, center);
+		height: calc(100% - 2rem);
+	}
+}

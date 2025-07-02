@@ -1,31 +1,80 @@
+// src/global/mixins.scss
+@use 'variables' as vars;
 
-@mixin flex-row {
-	display: flex;
-	flex-direction: row;
-}
-@mixin flex-column {
-	display: flex;
-	flex-direction: column;
-}
-
-@mixin full-size {
-	width: 100%;
-	height: 100%;
-}
-@mixin content-height {
-	width: 100%;
-	height: fit-content;
+// Layout Mixins
+@mixin flex($direction: row, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
 }
 
-@mixin rounded {
-	border-radius: 0.5rem;
+@mixin grid($columns: 1fr, $gap: 0) {
+  display: grid;
+  grid-template-columns: $columns;
+  gap: $gap;
 }
 
-@mixin text-padding {
-	padding: 0.5rem 1rem;
+// Common Patterns
+@mixin glass-effect {
+  background-color: vars.$background-transparent-light;
+  backdrop-filter: blur(4px);
+  border: 1px solid vars.$border-transparent-light;
+  border-radius: 1rem;
 }
 
-@mixin center-content {
-	justify-content: center;
-	align-items: center;
+@mixin scrollable {
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    
+    &-track {
+      background-color: vars.$calendar-scrollbar-track-color;
+      border-radius: 0.25rem;
+    }
+    
+    &-thumb {
+      background-color: vars.$calendar-scrollbar-color;
+      border-radius: 0.25rem;
+      
+      &:hover {
+        background-color: vars.$calendar-scrollbar-color-hover;
+      }
+    }
+  }
+}
+
+// Typography
+@mixin text-light {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: lighter;
+  font-style: normal;
+}
+
+// Layout Components
+@mixin card {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: vars.$card-background;
+}
+
+// Calendar Specific
+@mixin calendar-cell {
+  height: 5rem;
+  border-top: 1px solid vars.$border-transparent-light;
+  padding: 0.25rem;
+}
+
+@mixin event-card {
+  margin: 0px 2px;
+  padding: 4px;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+
+  max-width: 100%;
+  width: 100%;
+  min-height: vars.$schedule-event-card-height;
+  height: vars.$schedule-event-card-height;
 }

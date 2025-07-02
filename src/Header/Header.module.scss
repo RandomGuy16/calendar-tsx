@@ -5,7 +5,7 @@
 $searchbar-color_hover: #fff4;
 
 .header {
-	@include mixins.flex-row;
+	@include mixins.flex(row, flex-start, center);
 	justify-content: space-between;
 	position: relative;
 	height: 100%;
@@ -31,13 +31,12 @@ $searchbar-color_hover: #fff4;
 
 	// these are left side elements
 	&__left {
-		@include mixins.flex-row;
-		align-items: center;
+		@include mixins.flex(row, flex-start, center);
 		padding-left: 1rem;
 		
-		/* hit first child of whatever, and not second childs  */
+		/* hit first child of whatever, and not second children  */
 		& > :first-child {
-			margin: 0px 1rem;
+			margin: 0 1rem;
 		}
 		&_button {
 			padding: 0.5rem;
@@ -67,12 +66,11 @@ $searchbar-color_hover: #fff4;
 
 	// header right side elements	
 	&__right {
-		@include mixins.flex-row;
-		align-items: center;
+		@include mixins.flex(row, flex-end, cetner);
 		padding-right: 2rem;
 		
 		& > :first-child {
-			margin: 0px 1rem;
+			margin: 0 1rem;
 		}
 	}
 	&__search_bar {
@@ -108,7 +106,7 @@ $searchbar-color_hover: #fff4;
 	/* right hi label */
 	&__profile_button {
 		cursor: default;
-		margin: 0px 1rem;
+		margin: 0 1rem;
 	}
 }
 

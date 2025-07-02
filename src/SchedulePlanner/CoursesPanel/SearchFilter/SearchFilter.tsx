@@ -1,28 +1,27 @@
-import styles from './Filterbox.module.scss'
+import styles from './SearchFIlter.module.scss'
 import Select from 'react-select'
-import { useState, Dispatch } from 'react'
-import { FilterChooser, Filters } from '../../global/types'
+import { Dispatch } from 'react'
+import { FilterChooser, Filters } from '../../../global/types.ts'
 
 
-// requires: the filterchooser, i dont know how to name it
-// the user filters, and the setter for these user filters
-interface FilterboxArgs {
+interface SearchFilterProps {
   filterChooser: FilterChooser;
   selectedFilters: Filters;
   selectedFiltersSetter: Dispatch<React.SetStateAction<Filters>>;
 }
 
-interface selectArgument {
+interface selectFilterOption {
   label: string;
   value: string;
 }
 
-function Filterbox({filterChooser, selectedFilters, selectedFiltersSetter}: FilterboxArgs) {
+
+function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: SearchFilterProps) {
   return (
     <div className={styles.filterbox}>
       {/* separate Select element for each category in filterChooser */}
       {/*
-        when a select element from here changes the filters, the useEffect of CalendarAside
+        when a select element from here changes the filters, the useEffect of CoursesPanel
         reconfigures the courses available
       */}
       <Select
@@ -43,7 +42,7 @@ function Filterbox({filterChooser, selectedFilters, selectedFiltersSetter}: Filt
       }}
       onChange={(newValue: unknown) => {
         selectedFiltersSetter({
-          career: newValue.value,
+          career: (newValue as selectFilterOption).value,
           cycle: selectedFilters.cycle,
           year: selectedFilters.year
         })
@@ -69,7 +68,7 @@ function Filterbox({filterChooser, selectedFilters, selectedFiltersSetter}: Filt
       onChange={(newValue: unknown) => {
         selectedFiltersSetter({
           career: selectedFilters.career,
-          cycle: newValue.value as string,
+          cycle: (newValue as selectFilterOption).value,
           year: selectedFilters.year
         })
       }}>
@@ -95,7 +94,7 @@ function Filterbox({filterChooser, selectedFilters, selectedFiltersSetter}: Filt
         selectedFiltersSetter({
           career: selectedFilters.career,
           cycle: selectedFilters.cycle,
-          year: newValue.value as string,
+          year: (newValue as selectFilterOption).value,
         })
       }}>
       </Select>
@@ -104,5 +103,5 @@ function Filterbox({filterChooser, selectedFilters, selectedFiltersSetter}: Filt
   )
 }
 
-export default Filterbox;
+export default SearchFilter;
 

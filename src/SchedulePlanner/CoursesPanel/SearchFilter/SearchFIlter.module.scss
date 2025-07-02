@@ -1,0 +1,14 @@
+@use '../../../global/variables' as vars;
+@use '../../../global/mixins' as mixins;
+
+
+.filterbox {
+  @include mixins.flex(row, flex-start, center);
+  background-color: vars.$color-1;
+
+  &__list {
+    font-size: 0.8rem;
+    color: black;
+  }
+}
+

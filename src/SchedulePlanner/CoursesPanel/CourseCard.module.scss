@@ -1,0 +1,34 @@
+@use '../../global/mixins' as mixins;
+@use '../../global/variables' as vars;
+
+
+.course_item {
+	width: 100%;
+	font-size: 1rem;
+	color: white;
+  	text-align: center;
+  	background-color: #fff4;
+  	margin-bottom: 1rem;
+	border: 1px solid black;
+
+	&__title {
+		color: white;
+	}
+
+	&__class_groups {
+		 @include mixins.flex(row, flex-start, center);
+	}
+	&__class_group {
+		width: fit-content;
+		padding: 0.25rem 0.5rem;
+		background-color: transparent;
+		border-radius: 0.25rem;
+		font-size: 0.75rem;
+		
+    &:active {
+			background-color: gray;
+			color: white;
+		}
+	}
+}
+

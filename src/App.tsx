@@ -1,25 +1,19 @@
-import Calendar from './Calendar/Calendar.tsx'
 import Header from './Header/Header.tsx'
-import CalendarAside from './CalendarAside/CalendarAside.tsx'
+import SchedulePlanner from './SchedulePlanner/SchedulePlanner.tsx'
 import styles from './global/App.module.scss'
 
 function App() {
 
-  return (
-    <>
-      <header className={styles.App_header}>
-        <Header />
-      </header>
-      <main className={styles.App_main}>
-        <aside className={styles.App_aside}>
-          <CalendarAside />
-        </aside>
-        <div className={styles.App_content}>
-          <Calendar />
-        </div>
-      </main>
-    </>
-  )
+    return (
+        <>
+            <header className={styles.App_header}>
+                <Header />
+            </header>
+            <main className={styles.App_main}>
+                <SchedulePlanner></SchedulePlanner>
+            </main>
+        </>
+    )
 }
 
 export default App
