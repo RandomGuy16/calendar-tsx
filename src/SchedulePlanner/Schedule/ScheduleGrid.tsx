@@ -78,7 +78,7 @@ function renderSections(sections: CourseSection[]) {
 
 // element for the calendar grid
 function ScheduleGrid({ selectedSections, }: ScheduleGridProps) {
-
+  // lists for the EventCards of each day
   // const [mondaySchedules, setMondaySchedules] = useState<Set<Schedule>>(new Set())
   const [mondayEvents, setMondayEvents] = useState<ReactElement[]>([])
   const [tuesdayEvents, setTuesdayEvents] = useState<ReactElement[]>([])
@@ -87,7 +87,8 @@ function ScheduleGrid({ selectedSections, }: ScheduleGridProps) {
   const [fridayEvents, setFridayEvents] = useState<ReactElement[]>([])
   const [saturdayEvents, setSaturdayEvents] = useState<ReactElement[]>([])
 
-  // render every selected CourseSection
+  // hook used to render every selected CourseSection
+  // meant to run every time the user updates its selection
   useEffect(() => {
     const rendered = renderSections(selectedSections)
     setMondayEvents(rendered[0])
