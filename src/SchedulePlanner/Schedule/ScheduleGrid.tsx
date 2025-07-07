@@ -17,16 +17,16 @@ interface ScheduleGridProps {
   sectionsTracker: Set<CourseSection>;
 }
 
-
-function renderSection(section: CourseSection) {
-  return section
+// render all selectd courses
+function renderSections(sections: CourseSection[]) {
+  return sections
 }
 
-
+// element for the calendar grid
 function ScheduleGrid({ selectedSections, }: ScheduleGridProps) {
   // render every selected CourseSection
   useEffect(() => {
-    selectedSections.forEach((section: CourseSection) => renderSection(section))
+    renderSections(selectedSections)
   }, [selectedSections]);
 
   return (

@@ -5,10 +5,11 @@ import { useState } from 'react'
 
 interface CourseCardCheckboxProps {
   section: CourseSection;
-  sectionsTracker: Set<CourseSection>;
+  addSection: (section: CourseSection) => void;
+  removeSection: (section: CourseSection) => void;
 }
 
-function CourseCardCheckbox({ section, sectionsTracker }: CourseCardCheckboxProps) {
+function CourseCardCheckbox({ section, addSection, removeSection }: CourseCardCheckboxProps) {
   // checkbox state
   const [checked, setChecked] = useState(false)
   return (
@@ -18,10 +19,10 @@ function CourseCardCheckbox({ section, sectionsTracker }: CourseCardCheckboxProp
         value={` `}
         checked={checked}
         onChange={() => {
-          if (!checked) sectionsTracker.add(section)
-          else sectionsTracker.delete(section)
+          if (!checked) addSection(section)
+          else removeSection(section)
 
-          console.log(checked, sectionsTracker)
+          console.log(checked)
           // setChecked runs at last because it takes a moment to update its value
           setChecked(!checked)
         }}
@@ -32,7 +33,10 @@ function CourseCardCheckbox({ section, sectionsTracker }: CourseCardCheckboxProp
 }
 
 // iterative function to create all checkboxes for each course
-function createSectionButtons(sections: CourseSection[], sectionsTracker: Set<CourseSection>) {
+function createSectionButtons(
+  sections: CourseSection[],
+  addSection: (section: CourseSection) => void,
+  removeSection: (section: CourseSection) => void) {
   // array to return fullfilled with checkbox buttons
   const courseSectionsList = []
   // iterate over all sections using a for loop
@@ -45,7 +49,8 @@ function createSectionButtons(sections: CourseSection[], sectionsTracker: Set<Co
     courseSectionsList.push(
       <CourseCardCheckbox
         section={section}
-        sectionsTracker={sectionsTracker}
+        addSection={addSection}
+        removeSection={removeSection}
         key={itemKey}
       >
       </CourseCardCheckbox>
@@ -58,7 +63,8 @@ interface CourseCardProps {
   name: string;
   sections: CourseSection[];
   id: string;
-  sectionsTracker: Set<CourseSection>;
+  addSection: (section: CourseSection) => void;
+  removeSection: (section: CourseSection) => void;
 }
 
 /**
@@ -66,13 +72,13 @@ interface CourseCardProps {
  * @param course to be displayed
  * @returns a styled div with the course
  */
-function CourseCard({ name, sections, id, sectionsTracker }: CourseCardProps) {
+function CourseCard({ name, sections, id, addSection, removeSection }: CourseCardProps) {
   return (
     <div className={styles.course_item} id={id}>
       <span className={styles.course_item__title}>{name}</span>
       <div className={styles.course_item__class_groups}>
         {/* creates a button for every group in classGroups */}
-        {(sections.length > 0) && createSectionButtons(sections, sectionsTracker)}
+        {(sections.length > 0) && createSectionButtons(sections, addSection, removeSection)}
       </div>
     </div>
   )
