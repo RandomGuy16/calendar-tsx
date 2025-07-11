@@ -27,6 +27,14 @@
     border-radius: 1rem 1rem 0 0;
     background-color: vars.$calendar-days-row-bg;
     cursor: default;
+    flex: 8;
+    padding-right: 0.5rem;
+  }
+
+  &__day {
+    margin: auto;
+    flex: 1;
+    text-align: center;
   }
 
   &__content {
@@ -54,7 +62,8 @@
     height: 100%;
     
     &_column {
-      @include mixins.flex(column, start, center);
+      /*@include mixins.flex(column, start, center);*/
+      position: relative;
       height: 100%;
       flex: 14;
     }

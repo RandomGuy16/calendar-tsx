@@ -17,7 +17,7 @@ import {
 import { getCoursesFromData, initializeFilters } from '../../global/loaddata.ts'
 
 
-function renderCoursesSidebar(courses: Course[], sectionsTracker: Set<CourseSection>) {
+function renderCoursesSidebar(courses: Course[], addSection: (section: CourseSection) => void, removeSection: (section: CourseSection) => void) {
   // list to append all formatted course items
   const courseItemsList = []
   for (let i = 0; i < courses.length; i++) {
@@ -32,7 +32,9 @@ function renderCoursesSidebar(courses: Course[], sectionsTracker: Set<CourseSect
         id={course.id}
         name={course.name}
         sections={course.sections}
-        sectionsTracker={sectionsTracker}>
+        addSection={addSection}
+        removeSection={removeSection}
+      >
       </CourseCard>
     )
   }
@@ -43,11 +45,12 @@ function renderCoursesSidebar(courses: Course[], sectionsTracker: Set<CourseSect
 interface CourseListProps {
   data: UniversityCurriculumData | undefined;
   isDataLoaded: boolean;
-  sectionsTracker: Set<CourseSection>;
+  addSection: (section: CourseSection) => void;
+  removeSection: (section: CourseSection) => void;
 }
 
 // Element for the sidebar which currently displays only the list of available courses
-function CourseList({ data, isDataLoaded, sectionsTracker }: CourseListProps) {
+function CourseList({ data, isDataLoaded, addSection, removeSection }: CourseListProps) {
   // variables
   const [courses, setCourses] = useState<Course[]>([])
   const [years, setYears] = useState<Year[]>([])
@@ -131,7 +134,7 @@ function CourseList({ data, isDataLoaded, sectionsTracker }: CourseListProps) {
                   <section className={styles.sidebar__courses}>
                     <span className={styles.sidebar__subtitle}>Cursos</span>
                     <div className={styles.sidebar__list}>
-                      {isDataLoaded && renderCoursesSidebar(courses, sectionsTracker)}
+                      {isDataLoaded && renderCoursesSidebar(courses, addSection, removeSection)}
                     </div>
                   </section>
                 </div>

@@ -30,16 +30,22 @@ export async function loadJSON() {
  * @returns formated cycle
  */
 function formatCycles([cycle, sectionsList]: [string, any]) {
+  // cycle scope
   return {
     name: cycle,
     courseSections: sectionsList.map((section: any) => {
+      // course section scope
       return {
-        assignment: section["Asignatura"],
+        assignment: section["Asignatura"].split(" - ")[1],
+        assignmentId: section["Asignatura"].split(" - ")[0],
         teacher: section["Docente"],
         sectionNumber: Number(section["Sec_"]),
         credits: Number(section["Créd_"]),
         schedules: section.Horarios.map((schedule: any) => {
+          // schedule scope
           return {
+            assignment: section["Asignatura"].split(" - ")[1],
+            assignmentId: section["Asignatura"].split(" - ")[0],
             day: schedule["Día"],
             start: schedule["Inicio"],
             end: schedule["Fin"],
@@ -92,8 +98,8 @@ function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
     // start checking if the array is empty to add a new courseItem
     if (courses.length == 0) {
       courses.push({
-        id: section.assignment.split(" - ")[0],
-        name: section.assignment.split(" - ")[1],
+        id: section.assignmentId,
+        name: section.assignment,
         credits: section.credits,
         teacher: section.teacher,
         sections: []
@@ -101,14 +107,14 @@ function appendCoursesToCourseList(cycle: Cycle, courses: Course[]) {
 
       // push the section to the new course
       courses[0].sections.push(section)
-    }
+    }  // then check if we're appending a schedule to a course section
     else if (prevCourseName === section.assignment) {
       // if it is, just push the section to the course
       courses[courses.length - 1].sections.push(section)
     } else {  // if it is not, create a new course
       courses.push({
-        id: section.assignment.split(" - ")[0],
-        name: section.assignment.split(" - ")[1],
+        id: section.assignmentId,
+        name: section.assignment,
         credits: section.credits,
         teacher: section.teacher,
         sections: []
