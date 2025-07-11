@@ -68,13 +68,14 @@
 }
 
 @mixin event-card {
+  position: relative;
   margin: 0px 2px;
   padding: 4px;
   border-radius: 0.25rem;
   font-size: 0.8rem;
 
   max-width: 100%;
-  width: 100%;
+  width: 90%;
   min-height: vars.$schedule-event-card-height;
-  height: vars.$schedule-event-card-height;
+  /*height: vars.$schedule-event-card-height;*/
 }

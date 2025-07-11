@@ -42,6 +42,7 @@ function renderSections(sections: CourseSection[]) {
       const eventCard = <ScheduleEventCard key={`${i}${j}`} schedule={schedule} section={section} />
       switch (schedule.day) {
         case "LUNES":
+          // console.log(eventCard.style)
           mondayTemp.push(eventCard)
           break;
         case "MARTES":
