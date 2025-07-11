@@ -13,7 +13,7 @@ function CourseCardCheckbox({ section, addSection, removeSection }: CourseCardCh
   // checkbox state
   const [checked, setChecked] = useState(false)
   return (
-    <label>
+    <label className={`${styles.course_item__class_groups__checkbox}`} data-checked={checked}>
       <input
         type="checkbox"
         value={` `}
@@ -21,13 +21,11 @@ function CourseCardCheckbox({ section, addSection, removeSection }: CourseCardCh
         onChange={() => {
           if (!checked) addSection(section)
           else removeSection(section)
-
-          console.log(checked)
           // setChecked runs at last because it takes a moment to update its value
           setChecked(!checked)
         }}
-        name={`section:${section.assignment}${section.teacher}`}
-      />
+        name={`section:${section.assignment}${section.teacher}`} />
+      {section.sectionNumber}
     </label>
   )
 }
