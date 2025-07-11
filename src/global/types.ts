@@ -31,6 +31,7 @@ export interface Course {
 
 export interface CourseSection {
   assignment: string;
+  assignmentId: string;
   sectionNumber: number;
   teacher: string;
   schedules: Schedule[];
@@ -38,6 +39,8 @@ export interface CourseSection {
 }
 
 export interface Schedule {
+  assignment: string;
+  assignmentId: string;
   day: string;
   start: string;
   end: string;

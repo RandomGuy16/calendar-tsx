@@ -12,8 +12,8 @@ function ScheduleEventCard({ schedule, section }: ScheduleEventCardProps) {
   window.addEventListener('load', () => { console.log(document.getElementById('calendar-appointments')) })
   return (
     <div className={styles.course_calendar}>
-      <span>{schedule.day}</span>
-      <span>{section.assignment}</span>
+      <span>{schedule.assignment}</span>
+      <span>{section.sectionNumber}</span>
     </div>
   )
 }
