@@ -19,22 +19,26 @@ function SchedulePlanner() {
   const [selectedSections, setSelectedSections] = useState<CourseSection[]>([]);
 
   // CRUD operations for the set
+  // implemented using the functional update form of useState
 
   // add section
   const addSection = (section: CourseSection) => {
-    const temp = new Set(secTracker)
-    temp.add(section)
-    setSecTracker(temp)
-    setSelectedSections(Array.from(temp))
-    console.log("section tracker:", temp, Array.from(temp))
+    setSecTracker(prev => {
+      const temp = new Set(prev)
+      temp.add(section)
+      return temp
+    })
+    setSelectedSections(prev => [...prev, section])
   }
   // remove section
   const removeSection = (section: CourseSection) => {
-    const temp = new Set(secTracker)
-    temp.delete(section)
-    setSecTracker(temp)
-    setSelectedSections(Array.from(temp))
-    console.log("sectio tracker:", temp, Array.from(temp))
+    setSecTracker(prev => {
+      const temp = new Set(prev)
+      temp.delete(section)
+
+      setSelectedSections(Array.from(temp))
+      return temp
+    })
   }
   // clear the section tracker
   // const clearSecTracker = () => {

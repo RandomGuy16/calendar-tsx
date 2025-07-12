@@ -32,7 +32,7 @@ export interface Course {
 export interface CourseSection {
   assignment: string;
   assignmentId: string;
-  sectionNumber: number;
+  sectionNumber: number | string;
   teacher: string;
   schedules: Schedule[];
   credits: number;
