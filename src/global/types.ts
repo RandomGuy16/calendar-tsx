@@ -74,8 +74,7 @@ export interface SectionSelectionOps {
 }
 
 
-// colors used in the courselist
-
+// colors used in the CourseList element
 export enum CourseColors {
   PASTEL_BLUE = '#A8D8FF',
   PASTEL_GREEN = '#B4F8C8',
