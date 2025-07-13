@@ -32,7 +32,7 @@ export interface Course {
 export interface CourseSection {
   assignment: string;
   assignmentId: string;
-  sectionNumber: number;
+  sectionNumber: number | string;
   teacher: string;
   schedules: Schedule[];
   credits: number;
@@ -68,4 +68,7 @@ export interface SelectFilterOption {
   value: Career[];
 }
 
-
+export interface SectionSelectionOps {
+  addSections: (sections: CourseSection | CourseSection[]) => void;
+  removeSections: (sections: CourseSection | CourseSection[]) => void;
+}

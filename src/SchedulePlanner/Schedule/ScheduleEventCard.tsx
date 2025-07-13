@@ -18,8 +18,6 @@ function calculateStyle(schedule: Schedule) {
 
   const topOffset = (eventStartTime - 8) * REM_HEIGHT_PER_HOUR
 
-  console.log(schedule, eventStartTime, eventEndTime, eventDuration, topOffset)
-
   return {
     height: `${eventDuration}rem`,
     top: `${topOffset}rem`,
