@@ -1,18 +1,20 @@
 import styles from './CourseCard.module.scss';
-import { CourseSection } from '../../global/types.ts';
+import { CourseSection, SectionSelectionOps } from '../../global/types.ts';
 import { useState } from 'react'
 
 
+/*
+ * Properties for the 2 kinds of course checkboxes
+ * */
 interface CourseCardCheckboxProps {
   section?: CourseSection;
   sections?: CourseSection[];
   checked: boolean;
   setChecked: () => void;
-  addSection: (section: CourseSection) => void;
-  removeSection: (section: CourseSection) => void;
+  sectionOps: SectionSelectionOps;
 }
 
-function CourseCardCheckbox({ section, checked, setChecked, addSection, removeSection }: CourseCardCheckboxProps) {
+function CourseCardCheckbox({ section, checked, setChecked, sectionOps }: CourseCardCheckboxProps) {
   return (
     <label className={`${styles.course_item__class_groups__checkbox}`} data-checked={checked}>
       <input
@@ -20,8 +22,8 @@ function CourseCardCheckbox({ section, checked, setChecked, addSection, removeSe
         value={` `}
         checked={checked}
         onChange={() => {
-          if (!checked) addSection(section!)
-          else removeSection(section!)
+          if (!checked) sectionOps.addSections(section!)
+          else sectionOps.removeSections(section!)
           // setChecked runs at last because it takes a moment to update its value
           setChecked()
         }}
@@ -30,7 +32,7 @@ function CourseCardCheckbox({ section, checked, setChecked, addSection, removeSe
     </label>
   )
 }
-function CourseCardCheckboxAll({ sections, checked, setChecked, addSection, removeSection }: CourseCardCheckboxProps) {
+function CourseCardCheckboxAll({ sections, checked, setChecked, sectionOps }: CourseCardCheckboxProps) {
   return (
     <label className={`${styles.course_item__class_groups__checkbox}`} data-checked={checked}>
       <input
@@ -38,8 +40,8 @@ function CourseCardCheckboxAll({ sections, checked, setChecked, addSection, remo
         value={` `}
         checked={checked}
         onChange={() => {
-          if (!checked) sections!.forEach((section) => addSection(section))
-          else sections!.forEach(section => removeSection(section))
+          if (!checked) sectionOps.addSections(sections!)
+          else sectionOps.removeSections(sections!)
           // setChecked runs at last because it takes a moment to update its value
           setChecked()
         }}
@@ -49,57 +51,21 @@ function CourseCardCheckboxAll({ sections, checked, setChecked, addSection, remo
   )
 }
 
-// iterative function to create all checkboxes for each course
-/*function createSectionButtons(
-  sections: CourseSection[],
-  addSection: (section: CourseSection) => void,
-  removeSection: (section: CourseSection) => void) {
-  // array to return fullfilled with checkbox buttons
-  const courseSectionsList = []
-  // iterate over all sections using a for loop
-  for (let i = 0; i < sections.length; i++) {
-    const section: CourseSection = sections[i]
-    const itemKey: string = `${i}CourseItemButton:` + section.credits +
-      section.teacher + section.assignment + section.sectionNumber
-
-    // append a button for each section
-    courseSectionsList.push(
-      <CourseCardCheckbox
-        section={section}
-        addSection={addSection}
-        removeSection={removeSection}
-        key={itemKey}
-      >
-      </CourseCardCheckbox>
-    )
-  }
-  return courseSectionsList
-}*/
-
 
 interface CourseCardProps {
   name: string;
   sections: CourseSection[];
   id: string;
-  addSection: (section: CourseSection) => void;
-  removeSection: (section: CourseSection) => void;
+  sectionOps: SectionSelectionOps;
 }
 /**
  * displays a course in the course list
  * @param course to be displayed
  * @returns a styled div with the course
  */
-function CourseCard({ name, sections, id, addSection, removeSection }: CourseCardProps) {
+function CourseCard({ name, sections, id, sectionOps }: CourseCardProps) {
   // set to track locally selected sections (per course)
   const [selected, setSelected] = useState<Set<CourseSection>>(new Set())
-
-  const handleSectionToggle = (section: CourseSection) => {
-    // modify the local tracker set
-    const temp = new Set(selected)
-    if (temp.has(section)) temp.delete(section)
-    else temp.add(section)
-    setSelected(temp)
-  }
 
   return (
     <div className={styles.course_item} id={id}>
@@ -113,25 +79,26 @@ function CourseCard({ name, sections, id, addSection, removeSection }: CourseCar
               checked={selected.size === sections.length}
               setChecked={() => {
                 if (selected.size === sections.length) {  // unselect all
-                  //sections.forEach(removeSection)
                   setSelected(new Set())
                 }
                 else {  // select all
-                  //sections.forEach(addSection)
                   setSelected(new Set(sections))
                 }
               }}
-              addSection={addSection}
-              removeSection={removeSection}>
+              sectionOps={sectionOps}>
             </CourseCardCheckboxAll>
             {sections.map((section: CourseSection, index: number) =>
               <CourseCardCheckbox
                 key={`CourseItemButton:${index}` + section.sectionNumber}
                 checked={selected.has(section)}
-                setChecked={() => handleSectionToggle(section)}
+                setChecked={() => {
+                  const temp = new Set(selected)
+                  if (temp.has(section)) temp.delete(section)  // remove if it's already selected
+                  else temp.add(section)  // add if it's not tracked
+                  setSelected(temp)
+                }}
                 section={section}
-                addSection={addSection}
-                removeSection={removeSection}>
+                sectionOps={sectionOps}>
               </CourseCardCheckbox>
             )}
           </>

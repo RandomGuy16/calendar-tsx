@@ -15,35 +15,39 @@ function SchedulePlanner() {
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false)
 
   // variables to keep tracking of selected courses
-  const [secTracker, setSecTracker] = useState<Set<CourseSection>>(new Set())
-  const [selectedSections, setSelectedSections] = useState<CourseSection[]>([]);
+  const [selectedSections, setSelectedSections] = useState<Set<CourseSection>>(new Set())
+  const [sectionsRenderList, setSectionsRenderList] = useState<CourseSection[]>([]);
 
   // CRUD operations for the set
   // implemented using the functional update form of useState
+  // Combined state update function
 
   // add section
-  const addSection = (section: CourseSection) => {
-    setSecTracker(prev => {
+  const addSections = (sections: CourseSection | CourseSection[]) => {
+    sections = Array.isArray(sections) ? sections : [sections]
+    setSelectedSections(prev => {
       const temp = new Set(prev)
-      temp.add(section)
+      sections.forEach(section => temp.add(section))
       return temp
     })
-    setSelectedSections(prev => [...prev, section])
+    setSectionsRenderList(prev => [...prev, ...sections])
   }
   // remove section
-  const removeSection = (section: CourseSection) => {
-    setSecTracker(prev => {
+  const removeSections = (sections: CourseSection | CourseSection[]) => {
+    sections = Array.isArray(sections) ? sections : [sections]
+    setSelectedSections(prev => {
       const temp = new Set(prev)
-      temp.delete(section)
+      sections.forEach(section => temp.delete(section))
 
-      setSelectedSections(Array.from(temp))
+      setSectionsRenderList(Array.from(temp))
       return temp
     })
   }
   // clear the section tracker
-  // const clearSecTracker = () => {
-  //   setSecTracker(new Set())
-  // }
+  /*const clearSecTracker = () => {
+    setSectionsTracker(new Set())
+    setSectionsRenderList([])
+  }*/
 
 
   // Load the JSON data and set the data state
@@ -70,28 +74,30 @@ function SchedulePlanner() {
   // Updates the section list on every change of the section tracker
   // useMemo for renderedSectionsTracker
   // timeout meant to display the changes on our sections state variables
-  const [intervalCode, setIntervalCode] = useState<number | undefined>(undefined)
+  /*const [intervalCode, setIntervalCode] = useState<number | undefined>(undefined)
   useEffect(() => {
     clearInterval(intervalCode)
     setIntervalCode(setInterval(() => {
-      console.log(selectedSections, secTracker)
+      console.log(sectionRenderList, sectionsTracker)
     }, 2000))
-  }, [selectedSections, secTracker])
-
+  }, [sectionRenderList, sectionsTracker])
+  */
   return (
     <>
       <aside className={styles.App_aside}>
         <CourseList
           data={data}
           isDataLoaded={isDataLoaded}
-          addSection={addSection}
-          removeSection={removeSection}
+          sectionOps={{
+            addSections: addSections,
+            removeSections: removeSections,
+          }}
         />
       </aside>
       <div className={styles.App_content}>
         <ScheduleGrid
-          selectedSections={selectedSections}
-          sectionsTracker={secTracker}
+          selectedSections={sectionsRenderList}
+          sectionsTracker={selectedSections}
         />
       </div>
     </>

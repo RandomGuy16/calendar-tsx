@@ -68,4 +68,7 @@ export interface SelectFilterOption {
   value: Career[];
 }
 
-
+export interface SectionSelectionOps {
+  addSections: (sections: CourseSection | CourseSection[]) => void;
+  removeSections: (sections: CourseSection | CourseSection[]) => void;
+}
