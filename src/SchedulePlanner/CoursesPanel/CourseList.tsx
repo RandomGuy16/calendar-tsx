@@ -11,9 +11,34 @@ import {
   UniversityCurriculumData,
   FilterChooser,
   Filters,
-  SelectFilterOption, SectionSelectionOps
+  SelectFilterOption, SectionSelectionOps,
+  CourseColor, COLOR_PAIRS
 } from '../../global/types.ts'
 import { getCoursesFromData, initializeFilters } from '../../global/loaddata.ts'
+
+
+
+// Map to store course ID to color mapping
+const courseColorMap = new Map<string, CourseColor>();
+
+/**
+ * Gets or generates a consistent color pair for a course
+ * @param courseId Unique identifier for the course
+ * @returns Object containing background and text colors
+ */
+function getCourseColor(courseId: string) {
+  // returns already generated color
+  if (courseColorMap.has(courseId)) {
+    return courseColorMap.get(courseId)!;
+  }
+
+  // it hasn't generated a color for the course, generates a new pair
+  const colorIndex = courseColorMap.size % COLOR_PAIRS.length;
+  const newColor = COLOR_PAIRS[colorIndex];
+  courseColorMap.set(courseId, newColor);
+
+  return newColor;
+}
 
 
 function renderCoursesSidebar(courses: Course[], sectionOps: SectionSelectionOps) {
@@ -23,6 +48,7 @@ function renderCoursesSidebar(courses: Course[], sectionOps: SectionSelectionOps
     // create a course variable and initialize its unique key
     const course = courses[i]
     const itemKey = `${i}CourseCard:` + course.id + course.name + course.credits + course.teacher
+    const colorPair = getCourseColor(course.id)
 
     // append the course item to the list
     courseItemsList.push(
@@ -32,6 +58,7 @@ function renderCoursesSidebar(courses: Course[], sectionOps: SectionSelectionOps
         name={course.name}
         sections={course.sections}
         sectionOps={sectionOps}
+        colorPair={colorPair}
       >
       </CourseCard>
     )
@@ -144,4 +171,3 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
 }
 
 export default CourseList
-

@@ -1,5 +1,5 @@
 import styles from './CourseCard.module.scss';
-import { CourseSection, SectionSelectionOps } from '../../global/types.ts';
+import { CourseSection, SectionSelectionOps, CourseColor } from '../../global/types.ts';
 import { useState } from 'react'
 
 
@@ -57,18 +57,20 @@ interface CourseCardProps {
   sections: CourseSection[];
   id: string;
   sectionOps: SectionSelectionOps;
+  colorPair: CourseColor;
 }
 /**
  * displays a course in the course list
  * @param course to be displayed
  * @returns a styled div with the course
  */
-function CourseCard({ name, sections, id, sectionOps }: CourseCardProps) {
+function CourseCard({ name, sections, id, sectionOps, colorPair }: CourseCardProps) {
   // set to track locally selected sections (per course)
   const [selected, setSelected] = useState<Set<CourseSection>>(new Set())
 
   return (
-    <div className={styles.course_item} id={id}>
+    <div className={styles.course_item} id={id}
+      style={{ backgroundColor: colorPair.background, color: colorPair.text }}>
       <span className={styles.course_item__title}>{name}</span>
       <div className={styles.course_item__class_groups}>
         {/* creates a button for every group in classGroups */}
