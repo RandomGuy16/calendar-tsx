@@ -40,7 +40,7 @@
   &__content {
     @include mixins.flex(row, space-evenly, start);
     @include mixins.scrollable;
-    max-height: 50.5rem;
+    height: calc(100% - 1.5rem);
   }
     
   &__hours_column {
