@@ -14,7 +14,7 @@
   box-sizing: border-box;
 }
 html {
-  height: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -27,7 +27,7 @@ body {
   background-image: url('../assets/rochlitzcastle_background.webp');
   background-size: cover;
   background-position: center;
-  height: 100%;
+  background-attachment: fixed;
   margin: 0;
   padding: 0;
 }
@@ -37,7 +37,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 * {

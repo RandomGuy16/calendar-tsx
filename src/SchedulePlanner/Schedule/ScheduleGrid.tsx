@@ -1,6 +1,7 @@
 import styles from './ScheduleGrid.module.scss'
 import { CourseSection } from "../../global/types.ts";
 import ScheduleEventCard from './ScheduleEventCard.tsx'
+import ScheduleStatusHeader from "./ScheduleStatusHeader.tsx";
 import { useState, useEffect, ReactElement } from 'react'
 
 
@@ -17,7 +18,7 @@ interface ScheduleGridProps {
   sectionsTracker: Set<CourseSection>;
 }
 
-// render all selectd courses
+// render all selected courses
 function renderSections(sections: CourseSection[]) {
   // const mondayGrid = document.getElementById(MONDAY_ID);
   // const mondayUpdate: Set<Schedule> = new Set();
@@ -29,15 +30,15 @@ function renderSections(sections: CourseSection[]) {
   const fridayTemp: ReactElement[] = [];
   const saturdayTemp: ReactElement[] = [];
 
-  // even though it has 2 loops, each section shas no more than 5
+  // even though it has 2 loops, each section has no more than 5
   // and the mean is 2, so is pretty much O(n)
-  for (let i in sections) {
+  for (const i in sections) {
     const section = sections[i]
     // filter the monday schedules and track them in mondayUpdate
     //   section.schedules
     //     .filter(schedule => schedule.day === "LUNES")
     //     .forEach(schedule => mondayUpdate.add(schedule))
-    for (let j in section.schedules) {
+    for (const j in section.schedules) {
       const schedule = section.schedules[j]
       const eventCard = <ScheduleEventCard key={`${i}${j}`} schedule={schedule} section={section} />
       switch (schedule.day) {
@@ -65,7 +66,7 @@ function renderSections(sections: CourseSection[]) {
       }
     }
   }
-  // update the schedules tracker
+  // update the schedule tracker
   // setMondaySchedules(mondayUpdate)
   return [mondayTemp, tuesdayTemp, wednesdayTemp, thursdayTemp, fridayTemp, saturdayTemp];
   // lists to, teratively, remove and add new ScheduleEventCards
@@ -103,9 +104,9 @@ function ScheduleGrid({ selectedSections, }: ScheduleGridProps) {
   return (
     <div className={styles.calendar}>
       <div className={styles.calendar__header}>
-
+        <ScheduleStatusHeader />
       </div>
-      <div className={styles.calendar__grid}>
+      <div className={styles.calendar__grid} id="calendar-grid">
         <div className={styles.calendar__days_row}>
           <div className={styles.calendar__day}></div>
           <div className={styles.calendar__day}>Mon</div>

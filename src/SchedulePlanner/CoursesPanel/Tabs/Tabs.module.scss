@@ -3,6 +3,9 @@
 
 
 .tabs {
+	@include mixins.flex(column, flex-start, stretch);
+	height: 100%;
+	margin-bottom: auto;
 	&__nav {
 		@include mixins.flex(row, flex-start, center);
 		height: 2rem;
@@ -29,7 +32,6 @@
 
 
 	&__content {
-		@include mixins.flex(column, flex-start, center);
-		height: calc(100% - 2rem);
+		@include mixins.flex(column, flex-start, center);;
 	}
 }

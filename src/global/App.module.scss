@@ -1,17 +1,17 @@
-@use 'mixins';
-@use 'variables';
+@use 'mixins' as mixins;
+@use 'variables' as vars;
 
 
 /* Use background image located in assets folder */
 
 .App_main {
   width: 100%;
-  height: calc(100% - 7rem);;
-  @include mixins.flex(row, normal, center);
+  position: relative;
+  @include mixins.flex(row, normal, flex-start);
 }
 
 .App_header {
-	height: 7rem;
+	height: vars.$header-height;
 	width: 100%;
 	margin-bottom: 2rem;
 }
