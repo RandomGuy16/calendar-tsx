@@ -166,6 +166,7 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
             }
           ]}>
       </Tabs>
+      <div style={{marginTop: 'auto'}}></div>
     </div>
   )
 }

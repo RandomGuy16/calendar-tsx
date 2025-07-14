@@ -1,0 +1,19 @@
+@use '../../global/variables' as vars;
+@use '../../global/mixins' as mixins;
+
+.calendar__status_header {
+  @include mixins.flex(row, flex-start, center);
+  &__export {
+    @include mixins.text-light;
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    &[export-type="image"]{
+      background-color: mediumslateblue;
+    }
+    &[export-type="excel"]{
+      background-color: lightseagreen;
+    }
+  }
+}
