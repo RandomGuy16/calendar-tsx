@@ -71,17 +71,7 @@ function SchedulePlanner() {
     fetchData()
   }, [])
 
-  // Updates the section list on every change of the section tracker
-  // useMemo for renderedSectionsTracker
-  // timeout meant to display the changes on our sections state variables
-  /*const [intervalCode, setIntervalCode] = useState<number | undefined>(undefined)
-  useEffect(() => {
-    clearInterval(intervalCode)
-    setIntervalCode(setInterval(() => {
-      console.log(sectionRenderList, sectionsTracker)
-    }, 2000))
-  }, [sectionRenderList, sectionsTracker])
-  */
+
   return (
     <>
       <aside className={styles.App_aside}>
