@@ -61,10 +61,11 @@ function renderSections(sections: CourseSection[]) {
 
 interface ScheduleGridProps {
   selectedSections: CourseSection[];
-  sectionsTracker: Set<CourseSection>;
+  courseTracker: Set<string>;
+  credits: number;
 }
 // element for the calendar grid
-function ScheduleGrid({ selectedSections, }: ScheduleGridProps) {
+function ScheduleGrid({ selectedSections, courseTracker, credits }: ScheduleGridProps) {
   // Lists to store the schedules of each day
   const [mondayData, setMondayData] = useState<DayData>({schedules: [], eventCards: []})
   const [tuesdayData, setTuesdayData] = useState<DayData>({schedules: [], eventCards: []})
@@ -88,22 +89,21 @@ function ScheduleGrid({ selectedSections, }: ScheduleGridProps) {
   return (
     <div className={styles.calendar}>
       <div className={styles.calendar__header}>
-        <ScheduleStatusHeader daysSchedules={[
-          mondayData.schedules, tuesdayData.schedules,
-          wednesdayData.schedules, thursdayData.schedules,
-          fridayData.schedules, saturdayData.schedules
-        ]} />
+        <ScheduleStatusHeader
+          daysSchedules={[
+            mondayData.schedules, tuesdayData.schedules,
+            wednesdayData.schedules, thursdayData.schedules,
+            fridayData.schedules, saturdayData.schedules
+          ]}
+          courseTracker={courseTracker}
+          credits={credits}
+        />
       </div>
       <div className={styles.calendar__grid} id="calendar-grid">
         <div className={styles.calendar__days_row}>
-          <div className={styles.calendar__day}></div>
-          <div className={styles.calendar__day}>LUN</div>
-          <div className={styles.calendar__day}>MAR</div>
-          <div className={styles.calendar__day}>MIE</div>
-          <div className={styles.calendar__day}>JUE</div>
-          <div className={styles.calendar__day}>VIE</div>
-          <div className={styles.calendar__day}>SAB</div>
-          <div className={styles.calendar__day}>DOM</div>
+          {["", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM"].map(
+            (day, i) => (<div key={i} className={styles.calendar__day}>{day}</div>)
+          )}
         </div>
         <div className={styles.calendar__content}>
           <div className={styles.calendar__hours_column}>

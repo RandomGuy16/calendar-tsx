@@ -3,6 +3,7 @@ import * as htmlToImage from 'html-to-image'
 import ExcelJS, { Worksheet } from 'exceljs'
 import { Schedule } from "../../global/types.ts";
 
+
 // Represents a time slot with start and end times
 interface Hour {
   start: string;
@@ -53,10 +54,11 @@ function getCellLabel(daySchedules: Schedule[], hour: Hour) {
 }
 
 interface ScheduleStatusHeaderProps {
-  daysSchedules: Schedule[][]  // 2D array containing schedules for each day
+  daysSchedules: Schedule[][];  // 2D array containing schedules for each day
+  courseTracker: Set<string>;
+  credits: number;
 }
-
-export default function ScheduleStatusHeader({ daysSchedules }: ScheduleStatusHeaderProps) {
+export default function ScheduleStatusHeader({ daysSchedules, courseTracker, credits }: ScheduleStatusHeaderProps) {
   
   /**
    * Exports the calendar grid as a PNG image
@@ -127,19 +129,31 @@ export default function ScheduleStatusHeader({ daysSchedules }: ScheduleStatusHe
 
   return (
     <div className={styles.calendar__status_header}>
+      <h2 className={styles.calendar__status_header__title}>Horario</h2>
+      {/* Schedule metrics */}
+      <div className={styles.calendar__status_header__metrics}>
+        <div>
+          <span>Cursos añadidos: {courseTracker.size}</span><br/>
+          <span>Créditos: {credits}</span>
+        </div>
+      </div>
       {/* Export buttons */}
-      <button
-        className={styles.calendar__status_header__export}
-        export-type="image"
-        onClick={() => exportImage()}>
-        imagen
-      </button>
-      <button
-        className={styles.calendar__status_header__export}
-        export-type="excel"
-        onClick={() => exportToExcel()}>
-        excel
-      </button>
+      <div className={styles.calendar__status_header__export}>
+        <span>Exportar:</span>
+        <button
+          className={styles.calendar__status_header__export_button}
+          export-type="image"
+          onClick={() => exportImage()}>
+          imagen
+        </button>
+        <button
+          className={styles.calendar__status_header__export_button}
+          export-type="excel"
+          onClick={() => exportToExcel()}>
+          excel
+        </button>
+      </div>
+
     </div>
   )
 }
