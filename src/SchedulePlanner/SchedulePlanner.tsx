@@ -15,14 +15,42 @@ function SchedulePlanner() {
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false)
 
   // variables to keep tracking of selected courses
-  const [selectedSections, setSelectedSections] = useState<Set<CourseSection>>(new Set())
+  const [, setSelectedSections] = useState<Set<CourseSection>>(new Set())
   const [sectionsRenderList, setSectionsRenderList] = useState<CourseSection[]>([]);
+
+  // credits and course counter service variables
+  const [credits, setCredits] = useState<number>(0)
+  const [courseTracker, setCourseTracker] = useState<Set<string>>(new Set())
 
   // CRUD operations for the set
   // implemented using the functional update form of useState
-  // Combined state update function
 
-  // add section
+  // starting with the CRUD of the course and credits counter
+
+  // add a course
+  const addCourse = (course: string, credits: number) => {
+    if (courseTracker.has(course)) return
+    setCourseTracker(prev => {
+      const temp = new Set(prev)
+      temp.add(course)
+      return temp
+    })
+    // update credits
+    setCredits(prev => prev + credits)
+  }
+  // remove a course
+  const removeCourse = (course: string, credits: number) => {
+    if (!courseTracker.has(course)) return
+    setCourseTracker(prev => {
+      const temp = new Set(prev)
+      temp.delete(course)
+      return temp
+    })
+    // update credits
+    setCredits(prev => prev - credits)
+  }
+
+  // add a section
   const addSections = (sections: CourseSection | CourseSection[]) => {
     sections = Array.isArray(sections) ? sections : [sections]
     setSelectedSections(prev => {
@@ -31,13 +59,22 @@ function SchedulePlanner() {
       return temp
     })
     setSectionsRenderList(prev => [...prev, ...sections])
+
+    // track course added
+    addCourse(sections[0].assignment, sections[0].credits)
   }
-  // remove section
+  // remove a section
   const removeSections = (sections: CourseSection | CourseSection[]) => {
     sections = Array.isArray(sections) ? sections : [sections]
     setSelectedSections(prev => {
       const temp = new Set(prev)
       sections.forEach(section => temp.delete(section))
+
+      // if all sections of a course have been removed, remove the course
+      if (Array.from(temp).filter(section => section.assignment === sections[0].assignment).length === 0) {
+        // update course removal
+        removeCourse(sections[0].assignment, sections[0].credits)
+      }
 
       setSectionsRenderList(Array.from(temp))
       return temp
@@ -47,6 +84,8 @@ function SchedulePlanner() {
   /*const clearSecTracker = () => {
     setSectionsTracker(new Set())
     setSectionsRenderList([])
+    setCourseTracker(new Set())
+    setCredits(0)
   }*/
 
 
@@ -87,7 +126,8 @@ function SchedulePlanner() {
       <div className={styles.App_content}>
         <ScheduleGrid
           selectedSections={sectionsRenderList}
-          sectionsTracker={selectedSections}
+          courseTracker={courseTracker}
+          credits={credits}
         />
       </div>
     </>
