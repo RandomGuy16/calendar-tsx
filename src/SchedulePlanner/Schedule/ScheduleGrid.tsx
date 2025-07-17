@@ -1,5 +1,5 @@
 import styles from './ScheduleGrid.module.scss'
-import {CourseSection, Schedule} from "../../global/types.ts";
+import { CourseObj, CourseSection, Schedule } from "../../global/types.ts";
 import ScheduleEventCard from './ScheduleEventCard.tsx'
 import ScheduleStatusHeader from "./ScheduleStatusHeader.tsx";
 import { useState, useEffect, ReactElement } from 'react'
@@ -36,7 +36,7 @@ interface DayData {
 
 // render all selected courses
 function renderSections(sections: CourseSection[]) {
-  const daysData: DayData[] = Array.from({length: 6}, () => {
+  const daysData: DayData[] = Array.from({ length: 6 }, () => {
     return {
       schedules: [],
       eventCards: []
@@ -61,18 +61,18 @@ function renderSections(sections: CourseSection[]) {
 
 interface ScheduleGridProps {
   selectedSections: CourseSection[];
-  courseTracker: Set<string>;
+  courseTracker: Map<string, CourseObj>;
   credits: number;
 }
 // element for the calendar grid
 function ScheduleGrid({ selectedSections, courseTracker, credits }: ScheduleGridProps) {
   // Lists to store the schedules of each day
-  const [mondayData, setMondayData] = useState<DayData>({schedules: [], eventCards: []})
-  const [tuesdayData, setTuesdayData] = useState<DayData>({schedules: [], eventCards: []})
-  const [wednesdayData, setWednesdayData] = useState<DayData>({schedules: [], eventCards: []})
-  const [thursdayData, setThursdayData] = useState<DayData>({schedules: [], eventCards: []})
-  const [fridayData, setFridayData] = useState<DayData>({schedules: [], eventCards: []})
-  const [saturdayData, setSaturdayData] = useState<DayData>({schedules: [], eventCards: []})
+  const [mondayData, setMondayData] = useState<DayData>({ schedules: [], eventCards: [] })
+  const [tuesdayData, setTuesdayData] = useState<DayData>({ schedules: [], eventCards: [] })
+  const [wednesdayData, setWednesdayData] = useState<DayData>({ schedules: [], eventCards: [] })
+  const [thursdayData, setThursdayData] = useState<DayData>({ schedules: [], eventCards: [] })
+  const [fridayData, setFridayData] = useState<DayData>({ schedules: [], eventCards: [] })
+  const [saturdayData, setSaturdayData] = useState<DayData>({ schedules: [], eventCards: [] })
 
   // hook used to render every selected CourseSection
   // meant to run every time the user updates its selection
