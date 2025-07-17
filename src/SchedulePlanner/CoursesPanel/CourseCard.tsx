@@ -1,6 +1,6 @@
 import styles from './CourseCard.module.scss';
 import { CourseObj, CourseSection, SectionSelectionOps, CourseColor } from '../../global/types.ts';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 /*
@@ -9,49 +9,51 @@ import { useState } from 'react';
 interface CourseCardCheckboxProps {
   course: CourseObj;
   section?: CourseSection;
-  checkedVal: boolean;
+  checked: boolean;
   allChecked?: boolean;
-  setCheckedCallback?: (val: boolean) => void;
+  setAllChecked?: (val: boolean) => void;
   sectionOps: SectionSelectionOps;
 }
 
-function CourseCardCheckbox({ course, section, checkedVal, allChecked, setCheckedCallback, sectionOps }: CourseCardCheckboxProps) {
-  const [checked, setChecked] = useState(checkedVal)
+function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
+  // I named it "stateChecked" because "checked" is already used in the props"
+  // const [stateChecked, setStateChecked] = useState(checked)
+  //let checked = checked
+  useEffect(() => {
+    console.log(checked, checked, allChecked, course)
+  }, [checked])
 
   return (
-    <label className={`${styles.course_item__class_groups__checkbox}`} data-checked={checkedVal}>
+    <label className={`${styles.course_item__class_groups__checkbox}`} data-checked={checked}>
       <input
         type="checkbox"
-        value={` `}
         checked={checked || allChecked}
         onChange={() => {
-          if (!checkedVal) {
+          if (!checked) {
             sectionOps.addSections(section!)
             course.selectSection(section!)
-
           }
           else {
             sectionOps.removeSections(section!)
             course.unselectSection(section!)
           }
           // setChecked runs at last because it takes a moment to update its value
-          setChecked(!checked)
-          setCheckedCallback!(course.areAllSectionsSelected())
+          //setStateChecked(!checked)
+          setAllChecked!(course.areAllSectionsSelected())
         }}
       />
       {section!.sectionNumber}
     </label>
   )
 }
-function CourseCardCheckboxAll({ course, checkedVal, setCheckedCallback, sectionOps }: CourseCardCheckboxProps) {
+function CourseCardCheckboxAll({ course, checked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
   return (
-    <label className={`${styles.course_item__class_groups__checkbox}`} data-checked={checkedVal}>
+    <label className={`${styles.course_item__class_groups__checkbox}`} data-checked={checked}>
       <input
         type="checkbox"
-        value={` `}
-        checked={checkedVal}
+        checked={checked}
         onChange={() => {
-          if (!checkedVal) {
+          if (!checked) {
             sectionOps.addSections(course.getSections().filter(section => !course.isSectionSelected(section)))
             course.selectAllSections()
           }
@@ -60,7 +62,7 @@ function CourseCardCheckboxAll({ course, checkedVal, setCheckedCallback, section
             course.unselectAllSections()
           }
           // setChecked runs at last because it takes a moment to update its value
-          setCheckedCallback!(course.areAllSectionsSelected())
+          setAllChecked!(course.areAllSectionsSelected())
         }}
       />
       todas
@@ -81,7 +83,7 @@ interface CourseCardProps {
  */
 function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {
   // set to track locally selected sections (per course)
-  const [areAllChecked, setAreAllCeecked] = useState(course.areAllSectionsSelected())
+  const [areAllChecked, setAreAllChecked] = useState(course.areAllSectionsSelected())
 
   return (
     <div className={styles.course_item} id={course.getId()}
@@ -93,17 +95,17 @@ function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {
           <>
             <CourseCardCheckboxAll
               course={course}
-              checkedVal={areAllChecked}
-              setCheckedCallback={setAreAllCeecked}
+              checked={areAllChecked}
+              setAllChecked={setAreAllChecked}
               sectionOps={sectionOps}>
             </CourseCardCheckboxAll>
             {course.getSections().map((section: CourseSection, index: number) =>
               <CourseCardCheckbox
                 key={`CourseItemButton:${index}` + section.sectionNumber}
                 course={course}
-                checkedVal={course.isSectionSelected(section) || areAllChecked}
+                checked={course.isSectionSelected(section) || areAllChecked}
                 allChecked={areAllChecked}
-                setCheckedCallback={setAreAllCeecked}
+                setAllChecked={setAreAllChecked}
                 section={section}
                 sectionOps={sectionOps}>
               </CourseCardCheckbox>
