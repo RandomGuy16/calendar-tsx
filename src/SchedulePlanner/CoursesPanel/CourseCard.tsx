@@ -16,9 +16,8 @@ interface CourseCardCheckboxProps {
 }
 
 function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
-  // I named it "stateChecked" because "checked" is already used in the props"
-  // const [stateChecked, setStateChecked] = useState(checked)
-  //let checked = checked
+  // valuable comment: checked is the local state of the checkbox, initialized in the course object
+
   useEffect(() => {
     console.log(checked, checked, allChecked, course)
   }, [checked])
@@ -30,11 +29,15 @@ function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecke
         checked={checked || allChecked}
         onChange={() => {
           if (!checked) {
+            // update global trackers
             sectionOps.addSections(section!)
+            if (course.getSelectedSections().length === 0) sectionOps.trackCourse(course)
+            // update course
             course.selectSection(section!)
           }
           else {
             sectionOps.removeSections(section!)
+            if (course.getSelectedSections().length === 1) sectionOps.untrackCourse(course)
             course.unselectSection(section!)
           }
           // setChecked runs at last because it takes a moment to update its value
@@ -55,10 +58,14 @@ function CourseCardCheckboxAll({ course, checked, setAllChecked, sectionOps }: C
         onChange={() => {
           if (!checked) {
             sectionOps.addSections(course.getSections().filter(section => !course.isSectionSelected(section)))
+            if (course.getSelectedSections().length === 0) sectionOps.trackCourse(course)
             course.selectAllSections()
           }
           else {
+            // update the global trackers
             sectionOps.removeSections(course.getSections())
+            sectionOps.untrackCourse(course)
+            // update the course
             course.unselectAllSections()
           }
           // setChecked runs at last because it takes a moment to update its value

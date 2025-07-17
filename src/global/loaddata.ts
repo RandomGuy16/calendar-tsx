@@ -1,4 +1,4 @@
-import { Course, CourseObj, Cycle, Year, UniversityCurriculumData, Filters, Career, FilterChooser } from "./types"
+import { CourseObj, Cycle, Year, UniversityCurriculumData, Filters, Career, FilterChooser } from "./types"
 
 
 // entrypoint to load JSON
@@ -90,54 +90,37 @@ function formatJSON(rawJSONData: any) {
  *
  *
  * */
-function appendCoursesToCourseList(cycle: Cycle, courses: CourseObj[]) {
+function appendCoursesToCourseList(cycle: Cycle, courses: CourseObj[], career: string) {
   // course name checker, to filter out the courses
   let prevCourseName = ""
   for (const section of cycle.courseSections) {
     // check if the course name is already in the course array
     // start checking if the array is empty to add a new courseItem
     if (courses.length == 0) {
-      /*
-      courses.push({
-        id: section.assignmentId,
-        name: section.assignment,
-        credits: section.credits,
-        teacher: section.teacher,
-        sections: []
-      })
-      */
       courses.push(new CourseObj(
         section.assignmentId,
         section.assignment,
         section.credits,
-        section.teacher
+        section.teacher,
+        career
       ))
 
       // push the section to the new course
-      //courses[0].sections.push(section)
       courses[0].addSection(section)
     }  // then check if we're appending a schedule to a course section
     else if (prevCourseName === section.assignment) {
       // if it is, push the section to the last course added
-      // courses[courses.length - 1].sections.push(section)
       courses[courses.length - 1].addSection(section)
     }
     else {  // if it is not, create a new course
-      /*courses.push({
-        id: section.assignmentId,
-        name: section.assignment,
-        credits: section.credits,
-        teacher: section.teacher,
-        sections: []
-      })*/
       courses.push(new CourseObj(
         section.assignmentId,
         section.assignment,
         section.credits,
-        section.teacher
+        section.teacher,
+        career
       ))
       // push the section to the new course
-      //courses[courses.length - 1].sections.push(section)
       courses[courses.length - 1].addSection(section)
     }
     prevCourseName = section.assignment
@@ -181,7 +164,7 @@ export function getCoursesFromData(
       })
       for (const cycle of filteredCycles) {
         // iterate over all courses in the cycle
-        appendCoursesToCourseList(cycle, courses)
+        appendCoursesToCourseList(cycle, courses, career.name)
       }
     }
   }

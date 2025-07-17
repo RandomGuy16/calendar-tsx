@@ -52,16 +52,18 @@ export interface Schedule {
 export class CourseObj {
   private readonly id: string;
   private readonly name: string;
+  private readonly career: string;
   private readonly credits: number;
   private readonly teacher: string;
   private readonly sections: CourseSection[];
   private readonly selectedSections: Set<CourseSection>;
 
-  constructor(id: string, name: string, credits: number, teacher: string, section?: CourseSection) {
+  constructor(id: string, name: string, credits: number, teacher: string, career: string, section?: CourseSection) {
     this.id = id
     this.name = name
     this.credits = credits
     this.teacher = teacher
+    this.career = career
     this.sections = []
     this.selectedSections = new Set()
     if (section) this.sections.push(section)
@@ -100,6 +102,7 @@ export class CourseObj {
   getName(): string { return this.name }
   getCredits(): number { return this.credits }
   getTeacher(): string { return this.teacher }
+  getCareer(): string { return this.career }
 
 }
 
@@ -127,6 +130,8 @@ export interface SelectFilterOption {
 export interface SectionSelectionOps {
   addSections: (sections: CourseSection | CourseSection[]) => void;
   removeSections: (sections: CourseSection | CourseSection[]) => void;
+  trackCourse: (course: CourseObj) => void;
+  untrackCourse: (course: CourseObj) => void;
 }
 
 
