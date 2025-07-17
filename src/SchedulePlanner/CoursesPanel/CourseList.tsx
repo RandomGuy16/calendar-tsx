@@ -6,7 +6,7 @@ import Tabs from './Tabs/Tabs.tsx'
 import CourseCard from './CourseCard.tsx'
 import SearchFilter from './SearchFilter/SearchFilter.tsx'
 import {
-  Course,
+  CourseObj,
   Year,
   UniversityCurriculumData,
   FilterChooser,
@@ -41,22 +41,20 @@ function getCourseColor(courseId: string) {
 }
 
 
-function renderCoursesSidebar(courses: Course[], sectionOps: SectionSelectionOps) {
+function renderCoursesSidebar(courses: CourseObj[], sectionOps: SectionSelectionOps) {
   // list to append all formatted course items
   const courseItemsList = []
   for (let i = 0; i < courses.length; i++) {
     // create a course variable and initialize its unique key
     const course = courses[i]
-    const itemKey = `${i}CourseCard:` + course.id + course.name + course.credits + course.teacher
-    const colorPair = getCourseColor(course.id)
+    const itemKey = `${i}CourseCard:` + course.getId() + course.getName() + course.getCredits()
+    const colorPair = getCourseColor(course.getId())
 
     // append the course item to the list
     courseItemsList.push(
       <CourseCard
         key={itemKey}
-        id={course.id}
-        name={course.name}
-        sections={course.sections}
+        course={course}
         sectionOps={sectionOps}
         colorPair={colorPair}
       >
@@ -76,7 +74,7 @@ interface CourseListProps {
 // Element for the sidebar which currently displays only the list of available courses
 function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
   // variables
-  const [courses, setCourses] = useState<Course[]>([])
+  const [courses, setCourses] = useState<CourseObj[]>([])
   const [years, setYears] = useState<Year[]>([])
   const [selectedValue, setSelectedValue] = useState<SelectFilterOption>()
   const [filters, setFilters] = useState<FilterChooser>({
@@ -166,7 +164,7 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
             }
           ]}>
       </Tabs>
-      <div style={{marginTop: 'auto'}}></div>
+      <div style={{ marginTop: 'auto' }}></div>
     </div>
   )
 }
