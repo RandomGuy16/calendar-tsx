@@ -48,6 +48,62 @@ export interface Schedule {
   scheduleNumber: number;
 }
 
+
+export class CourseObj {
+  private readonly id: string;
+  private readonly name: string;
+  private readonly credits: number;
+  private readonly teacher: string;
+  private readonly sections: CourseSection[];
+  private readonly selectedSections: Set<CourseSection>;
+
+  constructor(id: string, name: string, credits: number, teacher: string, section?: CourseSection) {
+    this.id = id
+    this.name = name
+    this.credits = credits
+    this.teacher = teacher
+    this.sections = []
+    this.selectedSections = new Set()
+    if (section) this.sections.push(section)
+  }
+
+  addSection(section: CourseSection) {
+    this.sections.push(section)
+  }
+
+  selectSection(section: CourseSection) {
+    this.selectedSections.add(section)
+  }
+  selectAllSections() {
+    this.sections.forEach(section => this.selectedSections.add(section))
+  }
+  unselectSection(section: CourseSection) {
+    this.selectedSections.delete(section)
+  }
+  unselectAllSections() {
+    this.selectedSections.clear()
+  }
+  isSectionSelected(section: CourseSection): boolean {
+    return this.selectedSections.has(section)
+  }
+  areAllSectionsSelected(): boolean {
+    return this.selectedSections.size === this.sections.length
+  }
+
+  getSections(): CourseSection[] {
+    return this.sections
+  }
+  getSelectedSections(): CourseSection[] {
+    return Array.from(this.selectedSections)
+  }
+  getId(): string { return this.id }
+  getName(): string { return this.name }
+  getCredits(): number { return this.credits }
+  getTeacher(): string { return this.teacher }
+
+}
+
+
 // These interfaces help filter course
 // FilterChooser gets data from the webpage and outputs it to Filters
 export interface FilterChooser {
