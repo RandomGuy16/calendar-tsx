@@ -1,5 +1,5 @@
 import styles from './ScheduleGrid.module.scss'
-import { CourseObj, CourseSection, Schedule } from "../../global/types.ts";
+import { Course, CourseSection, Schedule } from "../../global/types.ts";
 import ScheduleEventCard from './ScheduleEventCard.tsx'
 import ScheduleStatusHeader from "./ScheduleStatusHeader.tsx";
 import { useState, useEffect, ReactElement } from 'react'
@@ -61,7 +61,7 @@ function renderSections(sections: CourseSection[]) {
 
 interface ScheduleGridProps {
   selectedSections: CourseSection[];
-  courseTracker: Map<string, CourseObj>;
+  courseTracker: Map<string, Course>;
   credits: number;
 }
 // element for the calendar grid

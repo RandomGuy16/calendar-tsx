@@ -2,7 +2,7 @@ import styles from './SchedulePlanner.module.scss'
 import { useEffect, useState } from 'react'
 import ScheduleGrid from './Schedule/ScheduleGrid.tsx'
 import CourseList from "./CoursesPanel/CourseList.tsx"
-import { UniversityCurriculumData, CourseSection, CourseObj, getCourseKey } from "../global/types.ts"
+import { UniversityCurriculumData, CourseSection, Course, getCourseKey } from "../global/types.ts"
 import { loadJSON } from "../global/loaddata.ts"
 
 
@@ -20,7 +20,7 @@ function SchedulePlanner() {
 
   // credits and course counter service variables
   const [credits, setCredits] = useState<number>(0)
-  const [courseTracker, setCourseTracker] = useState<Map<string, CourseObj>>(new Map())
+  const [courseTracker, setCourseTracker] = useState<Map<string, Course>>(new Map())
 
   // CRUD operations for the set
   // implemented using the functional update form of useState
@@ -28,7 +28,7 @@ function SchedulePlanner() {
   // starting with the CRUD of the course and credits counter
 
   // add a course
-  const addCourse = (course: CourseObj) => {
+  const addCourse = (course: Course) => {
     // the keys of the courses have this structure
     const courseKey = getCourseKey(course)
     // if is already added, do not add it again
@@ -42,7 +42,7 @@ function SchedulePlanner() {
     setCredits(prev => prev + course.getCredits())
   }
   // remove a course
-  const removeCourse = (course: CourseObj) => {
+  const removeCourse = (course: Course) => {
     const courseKey = getCourseKey(course)
     if (!courseTracker.has(courseKey)) return
 

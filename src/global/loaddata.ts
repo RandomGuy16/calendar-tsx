@@ -1,5 +1,5 @@
 import {
-  CourseObj,
+  Course,
   Cycle,
   Year,
   UniversityCurriculumData,
@@ -27,6 +27,7 @@ export async function loadJSON() {
     return formatJSON(jsonData)
   } catch (error) {
     console.error("Error loading JSON data:", error)
+    return null
   }
 }
 
@@ -39,20 +40,17 @@ export async function loadJSON() {
  * @returns formated cycle
  */
 function formatCycles([cycle, sectionsList]: [string, any]) {
-  // cycle scope
-  return {
+  return {  // cycle scope
     name: cycle,
     courseSections: sectionsList.map((section: any) => {
-      // course section scope
-      return {
+      return {  // course section scope
         assignment: section["Asignatura"].split(" - ")[1],
         assignmentId: section["Asignatura"].split(" - ")[0],
         teacher: section["Docente"],
         sectionNumber: Number(section["Sec_"]),
         credits: Number(section["Créd_"]),
         schedules: section.Horarios.map((schedule: any) => {
-          // schedule scope
-          return {
+          return {  // schedule scope
             assignment: section["Asignatura"].split(" - ")[1],
             assignmentId: section["Asignatura"].split(" - ")[0],
             day: schedule["Día"],
@@ -95,65 +93,44 @@ function formatJSON(rawJSONData: any) {
  * Create courses
  * */
 
+// variable to implement memoization/caching with the courses
+const courseCache: Map<string, Course> = new Map()
 
 function getOrCreateCourse(courseKey: string, section: CourseSection, career: string) {
-  if (coursesCached.has(courseKey)) return coursesCached.get(courseKey)!
+  if (courseCache.has(courseKey)) return courseCache.get(courseKey)!
 
-  const newCourse = new CourseObj(
+  const newCourse = new Course(
     section.assignmentId,
     section.assignment,
     section.credits,
     section.teacher,
     career
   )
-  coursesCached.set(courseKey, newCourse)
+  courseCache.set(courseKey, newCourse)
   return newCourse
 }
-
-// variable to implement memoization/caching with the courses
-const coursesCached: Map<string, CourseObj> = new Map()
 
 /**
  * Appends courses to CourseList
  * */
-function appendCoursesToCourseList(cycle: Cycle, courses: CourseObj[], career: string) {
+function appendCoursesToCourseList(cycle: Cycle, courses: Course[], career: string) {
   // course name checker, to filter out the courses
   let prevCourseName = ""
   for (const section of cycle.courseSections) {
     // create a key to use in the rendered courses tracker
     const newCourseKey = createCourseKey({section, career})
 
-    // check if the course name is already in the course array
-    // start checking if the array is empty to add a new courseItem
-    if (courses.length == 0) {
-      // create a new course object
-      const temp: CourseObj = getOrCreateCourse(newCourseKey, section, career)
-      // append temp to the course list and the tracker
-      courses.push(temp)
-
-      // push the section to the new course if isn't already there
-      if (!courses[0].hasSection(section)) {
-        courses[0].addSection(section)
-      }
-
-    }  // then check if we're appending a schedule to a course section
-    else if (prevCourseName === section.assignment) {
-      // if it is, push the section to the last course added
-      if (!courses[courses.length - 1].getSections().includes(section)) {
-        courses[courses.length - 1].addSection(section)
-      }
-
+    // check if the section belongs to a previous course added
+    if (prevCourseName !== section.assignment) {  // if it is not, create a new course
+      // append it to the course list as well
+      courses.push(getOrCreateCourse(newCourseKey, section, career))
     }
-    else {  // if it is not, create a new course
-      const temp = getOrCreateCourse(newCourseKey, section, career)
-      courses.push(temp)
 
-      // push the section to the new course
-      if (!courses[courses.length - 1].hasSection(section)) {
-        courses[courses.length - 1].addSection(section)
-      }
-
+    // push the section to the new course, or last course added
+    if (!courses[courses.length - 1].hasSection(section)) {
+      courses[courses.length - 1].addSection(section)
     }
+
     prevCourseName = section.assignment
   }
 }
@@ -171,7 +148,7 @@ export function getCoursesFromData(
     career: 'Ingeniería De Sistemas',
     cycle: 'CICLO 1',
   }) {
-  const courses: CourseObj[] = []
+  const courses: Course[] = []
 
   /**
    * NOTES ON SCOPE OF THE PROJECT
@@ -202,6 +179,7 @@ export function getCoursesFromData(
   return courses
 }
 
+
 export function initializeFilters(data: UniversityCurriculumData) {
   // initialize a new filters object, we'll return its value
   const filters: FilterChooser = {
@@ -210,12 +188,9 @@ export function initializeFilters(data: UniversityCurriculumData) {
     careers: []
   }
 
-  // years
-  for (const year of data.years) {
-    filters.years.push(year.year)  // just add every study plan
-
-    // career
-    for (const career of year.careerCurriculums) {
+  for (const year of data.years) {  // years
+    filters.years.push(year.year)  // add every study plan
+    for (const career of year.careerCurriculums) {  // career
       // if the career across the study plans isn't added, add it
       if (!filters.careers.includes(career.name)) {
         filters.careers.push(career.name)
