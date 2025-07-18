@@ -122,30 +122,7 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
                 <div className={styles.sidebar__menu}>
                   <h2>Tus cursos</h2>
                   <section className={styles.sidebar__curriculums}>
-                    <span className={styles.sidebar__curriculums__title}>Malla curricular</span>
-                    <Select
-                      className={styles.sidebar__curriculums__list}
-                      options={
-                        years.map(curriculum => ({
-                          value: curriculum.careerCurriculums,
-                          label: curriculum.year,
-                        }))
-                      }
-                      value={selectedValue}
-                      defaultValue={selectedValue}
-                      onChange={(newValue: unknown) => {
-                        // Cast newValue to SelectCurriculumOption
-                        const selected = newValue as SelectFilterOption | null;
-                        // if isn't null or undefined update selectedValue
-                        if (selected) {
-                          setSelectedValue({
-                            value: selected.value,
-                            label: selected.label
-                          });
-                        }
-                      }}
-                      styles={reactSelectStyles}>
-                    </Select>
+                    <span className={styles.sidebar__curriculums__title}>Filtrar por:</span>
                   </section>
                   <SearchFilter
                     filterChooser={filters}
