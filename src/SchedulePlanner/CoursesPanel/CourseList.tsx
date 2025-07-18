@@ -6,7 +6,7 @@ import Tabs from './Tabs/Tabs.tsx'
 import CourseCard from './CourseCard.tsx'
 import SearchFilter from './SearchFilter/SearchFilter.tsx'
 import {
-  CourseObj,
+  Course,
   Year,
   UniversityCurriculumData,
   FilterChooser,
@@ -41,7 +41,7 @@ function getCourseColor(courseId: string) {
 }
 
 
-function renderCoursesSidebar(courses: CourseObj[], sectionOps: SectionSelectionOps) {
+function renderCoursesSidebar(courses: Course[], sectionOps: SectionSelectionOps) {
   // list to append all formatted course items
   const courseItemsList = []
   for (let i = 0; i < courses.length; i++) {
@@ -74,7 +74,7 @@ interface CourseListProps {
 // Element for the sidebar which currently displays only the list of available courses
 function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
   // variables
-  const [courses, setCourses] = useState<CourseObj[]>([])
+  const [courses, setCourses] = useState<Course[]>([])
   const [years, setYears] = useState<Year[]>([])
   const [selectedValue, setSelectedValue] = useState<SelectFilterOption>()
   const [filters, setFilters] = useState<FilterChooser>({

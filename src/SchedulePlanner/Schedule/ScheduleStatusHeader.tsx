@@ -1,7 +1,7 @@
 import styles from './ScheduleStatusHeader.module.scss'
 import * as htmlToImage from 'html-to-image'
 import ExcelJS, { Worksheet } from 'exceljs'
-import { CourseObj, Schedule } from "../../global/types.ts";
+import { Course, Schedule } from "../../global/types.ts";
 
 
 // Represents a time slot with start and end times
@@ -55,7 +55,7 @@ function getCellLabel(daySchedules: Schedule[], hour: Hour) {
 
 interface ScheduleStatusHeaderProps {
   daysSchedules: Schedule[][];  // 2D array containing schedules for each day
-  courseTracker: Map<string, CourseObj>;
+  courseTracker: Map<string, Course>;
   credits: number;
 }
 export default function ScheduleStatusHeader({ daysSchedules, courseTracker, credits }: ScheduleStatusHeaderProps) {

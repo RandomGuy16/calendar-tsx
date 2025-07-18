@@ -21,14 +21,6 @@ export interface Cycle {
   courseSections: CourseSection[];
 }
 
-export interface Course {
-  id: string;
-  name: string;
-  credits: number;
-  teacher: string;
-  sections: CourseSection[];
-}
-
 export interface CourseSection {
   assignment: string;
   assignmentId: string;
@@ -49,7 +41,7 @@ export interface Schedule {
 }
 
 
-export class CourseObj {
+export class Course {
   private readonly id: string;
   private readonly name: string;
   private readonly career: string;
@@ -133,8 +125,8 @@ export interface SelectFilterOption {
 export interface SectionSelectionOps {
   addSections: (sections: CourseSection | CourseSection[]) => void;
   removeSections: (sections: CourseSection | CourseSection[]) => void;
-  trackCourse: (course: CourseObj) => void;
-  untrackCourse: (course: CourseObj) => void;
+  trackCourse: (course: Course) => void;
+  untrackCourse: (course: Course) => void;
 }
 
 
@@ -165,8 +157,8 @@ interface SectionAndCareer {
   career: string;
 }
 
-export function createCourseKey(input: SectionAndCareer | CourseObj): string {
-  if (input instanceof CourseObj) return `${input.getId()} ${input.getName()} ${input.getCareer()}`
+export function createCourseKey(input: SectionAndCareer | Course): string {
+  if (input instanceof Course) return `${input.getId()} ${input.getName()} ${input.getCareer()}`
   else return `${input.section.assignmentId} ${input.section.assignment} ${input.career}`
 }
 
@@ -187,7 +179,7 @@ export const COLOR_PAIRS: CourseColor[] = [
 ];
 
 
-export function getCourseKey(course: CourseObj): string {
+export function getCourseKey(course: Course): string {
   return `${course.getId()} ${course.getName()} ${course.getCareer()}`
 }
 

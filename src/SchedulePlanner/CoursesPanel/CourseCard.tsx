@@ -1,5 +1,5 @@
 import styles from './CourseCard.module.scss';
-import { CourseObj, CourseSection, SectionSelectionOps, CourseColor } from '../../global/types.ts';
+import { Course, CourseSection, SectionSelectionOps, CourseColor } from '../../global/types.ts';
 import { useState, useEffect } from 'react';
 
 
@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
  * Properties for the 2 kinds of course checkboxes
  * */
 interface CourseCardCheckboxProps {
-  course: CourseObj;
+  course: Course;
   section?: CourseSection;
   checked: boolean;
   allChecked?: boolean;
@@ -79,7 +79,7 @@ function CourseCardCheckboxAll({ course, checked, setAllChecked, sectionOps }: C
 
 
 interface CourseCardProps {
-  course: CourseObj;
+  course: Course;
   sectionOps: SectionSelectionOps;
   colorPair: CourseColor;
 }
