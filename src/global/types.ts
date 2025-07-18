@@ -55,7 +55,7 @@ export class CourseObj {
   private readonly career: string;
   private readonly credits: number;
   private readonly teacher: string;
-  private readonly sections: CourseSection[];
+  private readonly sections: Set<CourseSection>;
   private readonly selectedSections: Set<CourseSection>;
 
   constructor(id: string, name: string, credits: number, teacher: string, career: string, section?: CourseSection) {
@@ -64,13 +64,16 @@ export class CourseObj {
     this.credits = credits
     this.teacher = teacher
     this.career = career
-    this.sections = []
+    this.sections = new Set()
     this.selectedSections = new Set()
-    if (section) this.sections.push(section)
+    if (section) this.sections.add(section)
   }
 
   addSection(section: CourseSection) {
-    this.sections.push(section)
+    this.sections.add(section)
+  }
+  hasSection(section: CourseSection): boolean {
+    return this.sections.has(section)
   }
 
   selectSection(section: CourseSection) {
@@ -89,11 +92,11 @@ export class CourseObj {
     return this.selectedSections.has(section)
   }
   areAllSectionsSelected(): boolean {
-    return this.selectedSections.size === this.sections.length
+    return this.selectedSections.size === this.sections.size
   }
 
   getSections(): CourseSection[] {
-    return this.sections
+    return Array.from(this.sections)
   }
   getSelectedSections(): CourseSection[] {
     return Array.from(this.selectedSections)
@@ -156,6 +159,18 @@ export interface CourseColor {
   text: string;
 }
 
+
+interface SectionAndCareer {
+  section: CourseSection;
+  career: string;
+}
+
+export function createCourseKey(input: SectionAndCareer | CourseObj): string {
+  if (input instanceof CourseObj) return `${input.getId()} ${input.getName()} ${input.getCareer()}`
+  else return `${input.section.assignmentId} ${input.section.assignment} ${input.career}`
+}
+
+
 export const COLOR_PAIRS: CourseColor[] = [
   { background: CourseColors.PASTEL_BLUE, text: '#2C5282' },    // Dark blue
   { background: CourseColors.PASTEL_GREEN, text: '#276749' },   // Dark green
@@ -170,3 +185,9 @@ export const COLOR_PAIRS: CourseColor[] = [
   { background: CourseColors.PASTEL_AQUA, text: '#285E61' },    // Dark aqua
   { background: CourseColors.PASTEL_ROSE, text: '#9B2C2C' }     // Dark rose
 ];
+
+
+export function getCourseKey(course: CourseObj): string {
+  return `${course.getId()} ${course.getName()} ${course.getCareer()}`
+}
+
