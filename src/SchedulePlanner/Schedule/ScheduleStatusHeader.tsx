@@ -1,7 +1,7 @@
 import styles from './ScheduleStatusHeader.module.scss'
 import * as htmlToImage from 'html-to-image'
 import ExcelJS, { Worksheet } from 'exceljs'
-import { Schedule } from "../../global/types.ts";
+import { Course, Schedule } from "../../global/types.ts";
 
 
 // Represents a time slot with start and end times
@@ -55,11 +55,11 @@ function getCellLabel(daySchedules: Schedule[], hour: Hour) {
 
 interface ScheduleStatusHeaderProps {
   daysSchedules: Schedule[][];  // 2D array containing schedules for each day
-  courseTracker: Set<string>;
+  courseTracker: Map<string, Course>;
   credits: number;
 }
 export default function ScheduleStatusHeader({ daysSchedules, courseTracker, credits }: ScheduleStatusHeaderProps) {
-  
+
   /**
    * Exports the calendar grid as a PNG image
    * Uses html-to-image library to convert the DOM element to image
@@ -113,7 +113,7 @@ export default function ScheduleStatusHeader({ daysSchedules, courseTracker, cre
     // Generate and download the Excel file
     try {
       const buffer = await workbook.xlsx.writeBuffer()
-      const blob = new Blob([buffer], { 
+      const blob = new Blob([buffer], {
         type: 'applicacion/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
       })
       const url = window.URL.createObjectURL(blob)
@@ -133,7 +133,7 @@ export default function ScheduleStatusHeader({ daysSchedules, courseTracker, cre
       {/* Schedule metrics */}
       <div className={styles.calendar__status_header__metrics}>
         <div>
-          <span>Cursos añadidos: {courseTracker.size}</span><br/>
+          <span>Cursos añadidos: {courseTracker.size}</span><br />
           <span>Créditos: {credits}</span>
         </div>
       </div>

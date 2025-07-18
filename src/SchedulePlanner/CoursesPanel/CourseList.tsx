@@ -47,16 +47,14 @@ function renderCoursesSidebar(courses: Course[], sectionOps: SectionSelectionOps
   for (let i = 0; i < courses.length; i++) {
     // create a course variable and initialize its unique key
     const course = courses[i]
-    const itemKey = `${i}CourseCard:` + course.id + course.name + course.credits + course.teacher
-    const colorPair = getCourseColor(course.id)
+    const itemKey = `${i}CourseCard:` + course.getId() + course.getName() + course.getCredits()
+    const colorPair = getCourseColor(course.getId())
 
     // append the course item to the list
     courseItemsList.push(
       <CourseCard
         key={itemKey}
-        id={course.id}
-        name={course.name}
-        sections={course.sections}
+        course={course}
         sectionOps={sectionOps}
         colorPair={colorPair}
       >
@@ -166,7 +164,7 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
             }
           ]}>
       </Tabs>
-      <div style={{marginTop: 'auto'}}></div>
+      <div style={{ marginTop: 'auto' }}></div>
     </div>
   )
 }

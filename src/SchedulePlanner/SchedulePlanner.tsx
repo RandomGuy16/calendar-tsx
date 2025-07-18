@@ -2,7 +2,7 @@ import styles from './SchedulePlanner.module.scss'
 import { useEffect, useState } from 'react'
 import ScheduleGrid from './Schedule/ScheduleGrid.tsx'
 import CourseList from "./CoursesPanel/CourseList.tsx"
-import { UniversityCurriculumData, CourseSection } from "../global/types.ts"
+import { UniversityCurriculumData, CourseSection, Course, getCourseKey } from "../global/types.ts"
 import { loadJSON } from "../global/loaddata.ts"
 
 
@@ -20,7 +20,7 @@ function SchedulePlanner() {
 
   // credits and course counter service variables
   const [credits, setCredits] = useState<number>(0)
-  const [courseTracker, setCourseTracker] = useState<Set<string>>(new Set())
+  const [courseTracker, setCourseTracker] = useState<Map<string, Course>>(new Map())
 
   // CRUD operations for the set
   // implemented using the functional update form of useState
@@ -28,26 +28,31 @@ function SchedulePlanner() {
   // starting with the CRUD of the course and credits counter
 
   // add a course
-  const addCourse = (course: string, credits: number) => {
-    if (courseTracker.has(course)) return
+  const addCourse = (course: Course) => {
+    // the keys of the courses have this structure
+    const courseKey = getCourseKey(course)
+    // if is already added, do not add it again
+    if (courseTracker.has(courseKey)) return
     setCourseTracker(prev => {
-      const temp = new Set(prev)
-      temp.add(course)
+      const temp = new Map(prev)
+      temp.set(courseKey, course)
       return temp
     })
     // update credits
-    setCredits(prev => prev + credits)
+    setCredits(prev => prev + course.getCredits())
   }
   // remove a course
-  const removeCourse = (course: string, credits: number) => {
-    if (!courseTracker.has(course)) return
+  const removeCourse = (course: Course) => {
+    const courseKey = getCourseKey(course)
+    if (!courseTracker.has(courseKey)) return
+
     setCourseTracker(prev => {
-      const temp = new Set(prev)
-      temp.delete(course)
+      const temp = new Map(prev)
+      temp.delete(courseKey)
       return temp
     })
     // update credits
-    setCredits(prev => prev - credits)
+    setCredits(prev => prev - course.getCredits())
   }
 
   // add a section
@@ -61,7 +66,7 @@ function SchedulePlanner() {
     setSectionsRenderList(prev => [...prev, ...sections])
 
     // track course added
-    addCourse(sections[0].assignment, sections[0].credits)
+    // addCourse(`${sections[0].assignment} ${sections[0].assignmentId}`, sections[0].credits)
   }
   // remove a section
   const removeSections = (sections: CourseSection | CourseSection[]) => {
@@ -69,13 +74,6 @@ function SchedulePlanner() {
     setSelectedSections(prev => {
       const temp = new Set(prev)
       sections.forEach(section => temp.delete(section))
-
-      // if all sections of a course have been removed, remove the course
-      if (Array.from(temp).filter(section => section.assignment === sections[0].assignment).length === 0) {
-        // update course removal
-        removeCourse(sections[0].assignment, sections[0].credits)
-      }
-
       setSectionsRenderList(Array.from(temp))
       return temp
     })
@@ -120,6 +118,8 @@ function SchedulePlanner() {
           sectionOps={{
             addSections: addSections,
             removeSections: removeSections,
+            trackCourse: addCourse,
+            untrackCourse: removeCourse
           }}
         />
       </aside>

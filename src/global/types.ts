@@ -21,14 +21,6 @@ export interface Cycle {
   courseSections: CourseSection[];
 }
 
-export interface Course {
-  id: string;
-  name: string;
-  credits: number;
-  teacher: string;
-  sections: CourseSection[];
-}
-
 export interface CourseSection {
   assignment: string;
   assignmentId: string;
@@ -47,6 +39,68 @@ export interface Schedule {
   type: string;
   scheduleNumber: number;
 }
+
+
+export class Course {
+  private readonly id: string;
+  private readonly name: string;
+  private readonly career: string;
+  private readonly credits: number;
+  private readonly teacher: string;
+  private readonly sections: Set<CourseSection>;
+  private readonly selectedSections: Set<CourseSection>;
+
+  constructor(id: string, name: string, credits: number, teacher: string, career: string, section?: CourseSection) {
+    this.id = id
+    this.name = name
+    this.credits = credits
+    this.teacher = teacher
+    this.career = career
+    this.sections = new Set()
+    this.selectedSections = new Set()
+    if (section) this.sections.add(section)
+  }
+
+  addSection(section: CourseSection) {
+    this.sections.add(section)
+  }
+  hasSection(section: CourseSection): boolean {
+    return this.sections.has(section)
+  }
+
+  selectSection(section: CourseSection) {
+    this.selectedSections.add(section)
+  }
+  selectAllSections() {
+    this.sections.forEach(section => this.selectedSections.add(section))
+  }
+  unselectSection(section: CourseSection) {
+    this.selectedSections.delete(section)
+  }
+  unselectAllSections() {
+    this.selectedSections.clear()
+  }
+  isSectionSelected(section: CourseSection): boolean {
+    return this.selectedSections.has(section)
+  }
+  areAllSectionsSelected(): boolean {
+    return this.selectedSections.size === this.sections.size
+  }
+
+  getSections(): CourseSection[] {
+    return Array.from(this.sections)
+  }
+  getSelectedSections(): CourseSection[] {
+    return Array.from(this.selectedSections)
+  }
+  getId(): string { return this.id }
+  getName(): string { return this.name }
+  getCredits(): number { return this.credits }
+  getTeacher(): string { return this.teacher }
+  getCareer(): string { return this.career }
+
+}
+
 
 // These interfaces help filter course
 // FilterChooser gets data from the webpage and outputs it to Filters
@@ -71,6 +125,8 @@ export interface SelectFilterOption {
 export interface SectionSelectionOps {
   addSections: (sections: CourseSection | CourseSection[]) => void;
   removeSections: (sections: CourseSection | CourseSection[]) => void;
+  trackCourse: (course: Course) => void;
+  untrackCourse: (course: Course) => void;
 }
 
 
@@ -95,6 +151,18 @@ export interface CourseColor {
   text: string;
 }
 
+
+interface SectionAndCareer {
+  section: CourseSection;
+  career: string;
+}
+
+export function createCourseKey(input: SectionAndCareer | Course): string {
+  if (input instanceof Course) return `${input.getId()} ${input.getName()} ${input.getCareer()}`
+  else return `${input.section.assignmentId} ${input.section.assignment} ${input.career}`
+}
+
+
 export const COLOR_PAIRS: CourseColor[] = [
   { background: CourseColors.PASTEL_BLUE, text: '#2C5282' },    // Dark blue
   { background: CourseColors.PASTEL_GREEN, text: '#276749' },   // Dark green
@@ -109,3 +177,9 @@ export const COLOR_PAIRS: CourseColor[] = [
   { background: CourseColors.PASTEL_AQUA, text: '#285E61' },    // Dark aqua
   { background: CourseColors.PASTEL_ROSE, text: '#9B2C2C' }     // Dark rose
 ];
+
+
+export function getCourseKey(course: Course): string {
+  return `${course.getId()} ${course.getName()} ${course.getCareer()}`
+}
+
