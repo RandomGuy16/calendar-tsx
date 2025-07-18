@@ -1,5 +1,4 @@
 import styles from './Header.module.scss'
-// import SettingsIcon from '../Miscellaneous/Settingsicon.tsx'
 
 
 function Header() {
@@ -12,9 +11,6 @@ function Header() {
         <h1 className={styles.header__title}>Calendar</h1>
       </div>
       <div className={styles.header__right}>
-        {/* <input type="text" className={styles.header__search_bar} placeholder="Search..." /> */}
-        {/* <button className={styles.header__settings_button}><SettingsIcon /></button> */}
-        {/* <span className={styles.header__profile_button}>Hi...</span> */}
       </div>
     </div>
   )
