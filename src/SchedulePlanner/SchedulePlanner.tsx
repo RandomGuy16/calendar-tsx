@@ -2,7 +2,7 @@ import styles from './SchedulePlanner.module.scss'
 import { useEffect, useState } from 'react'
 import ScheduleGrid from './Schedule/ScheduleGrid.tsx'
 import CourseList from "./CoursesPanel/CourseList.tsx"
-import { UniversityCurriculumData, CourseSection, CourseObj } from "../global/types.ts"
+import { UniversityCurriculumData, CourseSection, CourseObj, getCourseKey } from "../global/types.ts"
 import { loadJSON } from "../global/loaddata.ts"
 
 
@@ -30,7 +30,7 @@ function SchedulePlanner() {
   // add a course
   const addCourse = (course: CourseObj) => {
     // the keys of the courses have this structure
-    const courseKey = `${course.getId()} ${course.getName()} ${course.getCareer()}`
+    const courseKey = getCourseKey(course)
     // if is already added, do not add it again
     if (courseTracker.has(courseKey)) return
     setCourseTracker(prev => {
@@ -43,8 +43,9 @@ function SchedulePlanner() {
   }
   // remove a course
   const removeCourse = (course: CourseObj) => {
-    const courseKey = `${course.getId()} ${course.getName()} ${course.getCareer()}`
+    const courseKey = getCourseKey(course)
     if (!courseTracker.has(courseKey)) return
+
     setCourseTracker(prev => {
       const temp = new Map(prev)
       temp.delete(courseKey)
@@ -73,13 +74,6 @@ function SchedulePlanner() {
     setSelectedSections(prev => {
       const temp = new Set(prev)
       sections.forEach(section => temp.delete(section))
-
-      // // if all sections of a course have been removed, remove the course
-      // if (Array.from(temp).filter(section => section.assignment === sections[0].assignment).length === 0) {
-      //   // update course removal
-      //   removeCourse(sections[0].assignment, sections[0].credits)
-      // }
-
       setSectionsRenderList(Array.from(temp))
       return temp
     })

@@ -1,4 +1,14 @@
-import { CourseObj, Cycle, Year, UniversityCurriculumData, Filters, Career, FilterChooser } from "./types"
+import {
+  CourseObj,
+  Cycle,
+  Year,
+  UniversityCurriculumData,
+  Filters,
+  Career,
+  FilterChooser,
+  createCourseKey,
+  CourseSection
+} from "./types"
 
 
 // entrypoint to load JSON
@@ -16,8 +26,7 @@ export async function loadJSON() {
     const jsonData = await response.json()
     return formatJSON(jsonData)
   } catch (error) {
-    console.error("Error loading JSON data:", error);
-    throw error;
+    console.error("Error loading JSON data:", error)
   }
 }
 
@@ -82,46 +91,68 @@ function formatJSON(rawJSONData: any) {
   return formattedData
 }
 
+/**
+ * Create courses
+ * */
 
-// Rendering courses
+
+function getOrCreateCourse(courseKey: string, section: CourseSection, career: string) {
+  if (coursesCached.has(courseKey)) return coursesCached.get(courseKey)!
+
+  const newCourse = new CourseObj(
+    section.assignmentId,
+    section.assignment,
+    section.credits,
+    section.teacher,
+    career
+  )
+  coursesCached.set(courseKey, newCourse)
+  return newCourse
+}
+
+// variable to implement memoization/caching with the courses
+const coursesCached: Map<string, CourseObj> = new Map()
 
 /**
  * Appends courses to CourseList
- *
- *
  * */
 function appendCoursesToCourseList(cycle: Cycle, courses: CourseObj[], career: string) {
   // course name checker, to filter out the courses
   let prevCourseName = ""
   for (const section of cycle.courseSections) {
+    // create a key to use in the rendered courses tracker
+    const newCourseKey = createCourseKey({section, career})
+
     // check if the course name is already in the course array
     // start checking if the array is empty to add a new courseItem
     if (courses.length == 0) {
-      courses.push(new CourseObj(
-        section.assignmentId,
-        section.assignment,
-        section.credits,
-        section.teacher,
-        career
-      ))
+      // create a new course object
+      const temp: CourseObj = getOrCreateCourse(newCourseKey, section, career)
+      // append temp to the course list and the tracker
+      courses.push(temp)
 
-      // push the section to the new course
-      courses[0].addSection(section)
+      // push the section to the new course if isn't already there
+      if (!courses[0].hasSection(section)) {
+        courses[0].addSection(section)
+      }
+
     }  // then check if we're appending a schedule to a course section
     else if (prevCourseName === section.assignment) {
       // if it is, push the section to the last course added
-      courses[courses.length - 1].addSection(section)
+      if (!courses[courses.length - 1].getSections().includes(section)) {
+        courses[courses.length - 1].addSection(section)
+      }
+
     }
     else {  // if it is not, create a new course
-      courses.push(new CourseObj(
-        section.assignmentId,
-        section.assignment,
-        section.credits,
-        section.teacher,
-        career
-      ))
+      const temp = getOrCreateCourse(newCourseKey, section, career)
+      courses.push(temp)
+
       // push the section to the new course
-      courses[courses.length - 1].addSection(section)
+      if (!courses[courses.length - 1].hasSection(section)) {
+        courses[courses.length - 1].addSection(section)
+      }
+
     }
     prevCourseName = section.assignment
   }
