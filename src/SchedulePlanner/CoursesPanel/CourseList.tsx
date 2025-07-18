@@ -1,21 +1,17 @@
 import { useEffect, useState } from 'react'
 import styles from './CourseList.module.scss'
-import Select from 'react-select'
-import reactSelectStyles from './ReactSelectStyles.ts'
 import Tabs from './Tabs/Tabs.tsx'
 import CourseCard from './CourseCard.tsx'
 import SearchFilter from './SearchFilter/SearchFilter.tsx'
 import {
   Course,
-  Year,
   UniversityCurriculumData,
   FilterChooser,
   Filters,
-  SelectFilterOption, SectionSelectionOps,
+  SectionSelectionOps,
   CourseColor, COLOR_PAIRS
 } from '../../global/types.ts'
 import { getCoursesFromData, initializeFilters } from '../../global/loaddata.ts'
-
 
 
 // Map to store course ID to color mapping
@@ -75,8 +71,6 @@ interface CourseListProps {
 function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
   // variables
   const [courses, setCourses] = useState<Course[]>([])
-  const [years, setYears] = useState<Year[]>([])
-  const [selectedValue, setSelectedValue] = useState<SelectFilterOption>()
   const [filters, setFilters] = useState<FilterChooser>({
     cycles: [],
     years: [],
@@ -95,11 +89,6 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
       // setCourses(getCoursesFromData(data, chosenFilters))
       setFilters(initializeFilters(data))  // initialize filters
       setCourses(getCoursesFromData(data))
-      setYears(data.years)
-      setSelectedValue({
-        value: data.years[0].careerCurriculums,
-        label: data.years[0].year
-      })
     }
   }, [data, isDataLoaded])
 

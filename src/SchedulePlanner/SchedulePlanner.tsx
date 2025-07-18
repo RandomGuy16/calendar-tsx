@@ -94,10 +94,10 @@ function SchedulePlanner() {
     const fetchData = async () => {
       try {
         // load the JSON data
-        const jsonData: UniversityCurriculumData = await loadJSON()
+        const jsonData: UniversityCurriculumData | null = await loadJSON()
 
         // get the courses from the data
-        setData(jsonData)
+        setData(jsonData!)
         setIsDataLoaded(true)
       } catch (error) {
         // in the future add a label to tell the user the data couldn't load properly
