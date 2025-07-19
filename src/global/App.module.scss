@@ -9,9 +9,3 @@
   position: relative;
   @include mixins.flex(row, normal, flex-start);
 }
-
-.App_header {
-	height: vars.$header-height;
-	width: 100%;
-	margin-bottom: 2rem;
-}
