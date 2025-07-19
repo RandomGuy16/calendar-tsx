@@ -1,4 +1,3 @@
-import styles from './SchedulePlanner.module.scss'
 import { useEffect, useState } from 'react'
 import ScheduleGrid from './Schedule/ScheduleGrid.tsx'
 import CourseList from "./CoursesPanel/CourseList.tsx"
@@ -111,7 +110,7 @@ function SchedulePlanner() {
 
   return (
     <>
-      <aside className={styles.App_aside}>
+      <aside className="h-max flex flex-col justify-start mr-4 items-center">
         <CourseList
           data={data}
           isDataLoaded={isDataLoaded}
@@ -123,7 +122,7 @@ function SchedulePlanner() {
           }}
         />
       </aside>
-      <div className={styles.App_content}>
+      <div className="w-full flex flex-row justify-center mx-4">
         <ScheduleGrid
           selectedSections={sectionsRenderList}
           courseTracker={courseTracker}

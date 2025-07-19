@@ -3,16 +3,16 @@ import styles from './Header.module.scss'
 
 function Header() {
   return (
-    <div className={styles.header}>
-      <div className={styles.header__left}>
-        <button className={styles.header__left_button}>
-          <span className={styles.header__left_icon}>☰</span>
+    <>
+      <div className="flex flex-row justify-between items-center ml-8">
+        <button className="px-2 rounded-xl hover:bg-neutral-700 duration-100">
+          <span className="text-lg">☰</span>
         </button>
-        <h1 className={styles.header__title}>Calendar</h1>
+        <h1 className="ml-4 text-xl font-normal">Calendar</h1>
       </div>
       <div className={styles.header__right}>
       </div>
-    </div>
+    </>
   )
 }
 

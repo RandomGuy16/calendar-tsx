@@ -1,4 +1,3 @@
-import styles from './CourseCard.module.scss';
 import { Course, CourseSection, SectionSelectionOps, CourseColor } from '../../global/types.ts';
 import { useState, useEffect } from 'react';
 
@@ -23,8 +22,9 @@ function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecke
   }, [checked])
 
   return (
-    <label className={`${styles.course_item__class_groups__checkbox}`} data-checked={checked}>
+    <label className={`p-2 mx-1/2 font-normal text-sm duration-100 ease-linear select-none ${checked ? "bg-neutral-800" : ""}`} data-checked={checked}>
       <input
+        className="hidden"
         type="checkbox"
         checked={checked || allChecked}
         onChange={() => {
@@ -51,8 +51,9 @@ function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecke
 }
 function CourseCardCheckboxAll({ course, checked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
   return (
-    <label className={`${styles.course_item__class_groups__checkbox}`} data-checked={checked}>
+    <label className={`p-2 mx-1/2 font-normal text-sm duration-100 ease-linear select-none ${checked ? "bg-neutral-800" : ""}`} data-checked={checked}>
       <input
+        className="hidden"
         type="checkbox"
         checked={checked}
         onChange={() => {
@@ -93,10 +94,10 @@ function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {
   const [areAllChecked, setAreAllChecked] = useState(course.areAllSectionsSelected())
 
   return (
-    <div className={styles.course_item} id={course.getId()}
+    <div className="w-full font-normal text-left my-2 rounded-md p-2" id={course.getId()}
       style={{ backgroundColor: colorPair.background, color: colorPair.text }}>
-      <span className={styles.course_item__title}>{course.getName()}</span>
-      <div className={styles.course_item__class_groups}>
+      <span className="text-right text-base mb-2">{course.getName()}</span>
+      <div className="flex flex-row justify-start items-center mt-2">
         {/* creates a button for every group in classGroups */}
         {(course.getSections().length > 0) && (
           <>

@@ -1,4 +1,3 @@
-import styles from './SearchFIlter.module.scss'
 import Select from 'react-select'
 import { Dispatch } from 'react'
 import { FilterChooser, Filters } from '../../../global/types.ts'
@@ -18,83 +17,83 @@ interface selectFilterOption {
 
 function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: SearchFilterProps) {
   return (
-    <div className={styles.filterbox}>
+    <div className="flex flex-row justify-start items-center w-full">
       {/* separate Select element for each category in filterChooser */}
       {/*
         when a select element from here changes the filters, the useEffect of CoursesPanel
         reconfigures the courses available
       */}
       <Select
-      className={styles.filterbox__list}
-      options={
-        filterChooser.careers.map(filterOption => ({
-          value: filterOption,
-          label: filterOption,
-        }))
-      }
-      defaultValue={{
-        label: selectedFilters.career,
-        value: selectedFilters.career
-      }}
-      value={{
-        label: selectedFilters.career,
-        value: selectedFilters.career
-      }}
-      onChange={(newValue: unknown) => {
-        selectedFiltersSetter({
-          career: (newValue as selectFilterOption).value,
-          cycle: selectedFilters.cycle,
-          year: selectedFilters.year
+        className="text-base font-normal text-gray-700 dark:text-white"
+        options={
+          filterChooser.careers.map(filterOption => ({
+            value: filterOption,
+            label: filterOption,
+          }))
+        }
+        defaultValue={{
+          label: selectedFilters.career,
+          value: selectedFilters.career
+        }}
+        value={{
+          label: selectedFilters.career,
+          value: selectedFilters.career
+        }}
+        onChange={(newValue: unknown) => {
+          selectedFiltersSetter({
+            career: (newValue as selectFilterOption).value,
+            cycle: selectedFilters.cycle,
+            year: selectedFilters.year
         })
       }}>
       </Select>
 
       <Select
-      className={styles.filterbox__list}
-      options={
-        filterChooser.cycles.map(filterOption => ({
-          label: filterOption,
-          value: filterOption,
-        }))
-      }
-      defaultValue={{
-        label: selectedFilters.cycle,
-        value: selectedFilters.cycle
-      }}
-      value={{
-        label: selectedFilters.cycle,
-        value: selectedFilters.cycle
-      }}
-      onChange={(newValue: unknown) => {
-        selectedFiltersSetter({
-          career: selectedFilters.career,
-          cycle: (newValue as selectFilterOption).value,
-          year: selectedFilters.year
+        className="text-base font-normal text-gray-700 dark:text-white"
+        options={
+          filterChooser.cycles.map(filterOption => ({
+            label: filterOption,
+            value: filterOption,
+          }))
+        }
+        defaultValue={{
+          label: selectedFilters.cycle,
+          value: selectedFilters.cycle
+        }}
+        value={{
+          label: selectedFilters.cycle,
+          value: selectedFilters.cycle
+        }}
+        onChange={(newValue: unknown) => {
+          selectedFiltersSetter({
+            career: selectedFilters.career,
+            cycle: (newValue as selectFilterOption).value,
+            year: selectedFilters.year
         })
       }}>
       </Select>
 
       <Select
-      className={styles.filterbox__list}
-      options={
-        filterChooser.years.map(filterOption => ({
-          label: filterOption,
-          value: filterOption
-        }))
-      }
-      defaultValue={{
-        label: selectedFilters.year,
-        value: selectedFilters.year
-      }}
-      value={{
-        label: selectedFilters.year,
-        value: selectedFilters.year
-      }}
-      onChange={(newValue: unknown) => {
-        selectedFiltersSetter({
-          career: selectedFilters.career,
-          cycle: selectedFilters.cycle,
-          year: (newValue as selectFilterOption).value,
+        className="text-base font-normal text-gray-700 dark:text-white"
+        options={
+          filterChooser.years.map(filterOption => ({
+            label: filterOption,
+            value: filterOption
+          }))
+        }
+        defaultValue={{
+          label: selectedFilters.year,
+          value: selectedFilters.year
+        }}
+        value={{
+          label: selectedFilters.year,
+          value: selectedFilters.year
+        }}
+        onChange={(newValue: unknown) => {
+          selectedFiltersSetter({
+            career: selectedFilters.career,
+            cycle: selectedFilters.cycle,
+            year: (newValue as selectFilterOption).value,
         })
       }}>
       </Select>
