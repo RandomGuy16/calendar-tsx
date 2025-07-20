@@ -30,7 +30,7 @@ function ScheduleEventCard({ schedule, section }: ScheduleEventCardProps) {
   return (
     <div className="
     absolute mx-1 p-1 min-h-20 w-full rounded-lg border-2 text-sm
-    border-neutral-500 bg-neutral-300 dark:bg-neutral-800 dark:border-neutral-600" style={calculateStyle(schedule)}>
+    border-neutral-200 bg-neutral-100 dark:bg-neutral-900 dark:border-neutral-700" style={calculateStyle(schedule)}>
       <span>{schedule.assignment}</span>
       <span>{section.sectionNumber}</span>
     </div>

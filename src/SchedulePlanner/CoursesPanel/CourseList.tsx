@@ -94,8 +94,8 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
 
   return (
     <div className="
-      h-full w-96 mx-auto p-4 rounded-tr-lg
-      flex flex-col justify-start items-end shadow-lg bg-neutral-800
+      h-full w-96 mx-auto p-4 rounded-r-lg flex flex-col justify-start items-end
+      shadow-lg bg-white dark:bg-neutral-800 dark:shadow-md dark:shadow-black
     ">
         <Tabs
           tabs={[{
@@ -117,10 +117,8 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
                   <span className="inline-block font-normal mb-2">Cursos</span>
                   <div 
                     className="
-                      flex flex-col justify-start items-stretch
-                      text-xs min-h-32 flex-1 p-2
-                      border-2 border-neutral-700 rounded-lg
-                      overflow-y-auto
+                      flex flex-col justify-start items-stretch text-xs min-h-32 flex-1 p-2
+                      border-2 border-neutral-200 dark:border-neutral-700 rounded-lg overflow-y-auto
                       transition-colors duration-200"
                   >
                     {isDataLoaded && renderCoursesSidebar(courses, sectionOps)}

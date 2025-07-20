@@ -18,14 +18,14 @@ interface selectFilterOption {
 
 function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: SearchFilterProps) {
   return (
-    <div className="flex flex-row justify-start items-center w-full">
+    <div className="flex flex-col justify-start items-start w-full">
       {/* separate Select element for each category in filterChooser */}
       {/*
         when a select element from here changes the filters, the useEffect of CoursesPanel
         reconfigures the courses available
       */}
       <Select
-        className="text-base font-normal text-gray-700 dark:text-white"
+        className="text-base font-normal text-white my-1 mt-0 shadow-lg dark:shadow-md dark:shadow-black"
         styles={reactSelectStyles}
         options={
           filterChooser.careers.map(filterOption => ({
@@ -51,7 +51,7 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: S
       </Select>
 
       <Select
-        className="text-base font-normal text-gray-700 dark:text-white"
+        className="text-base font-normal text-white my-1 shadow-lg dark:shadow-md dark:shadow-black"
         styles={reactSelectStyles}
         options={
           filterChooser.cycles.map(filterOption => ({
@@ -77,7 +77,7 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: S
       </Select>
 
       <Select
-        className="text-base font-normal text-gray-700 dark:text-white"
+        className="text-base font-normal text-white my-1 mb-0 shadow-lg dark:shadow-md dark:shadow-black"
         styles={reactSelectStyles}
         options={
           filterChooser.years.map(filterOption => ({

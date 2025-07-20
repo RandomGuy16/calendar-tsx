@@ -127,11 +127,8 @@ export default function ScheduleStatusHeader({ daysSchedules, courseTracker, cre
   }
 
   return (
-    <div className="
-      flex flex-row justify-between items-center p-2 relative h-full w-full
-      font-light">
-      <h2 className="
-      absolute -top-2 left-2 text-xl">Horario</h2>
+    <div className="flex flex-row justify-between items-center p-2 relative h-full w-full">
+      <h2 className="absolute -top-2 left-2 text-xl">Horario</h2>
       {/* Schedule metrics */}
       <div className="font-normal text-sm">
         <div>
@@ -140,16 +137,20 @@ export default function ScheduleStatusHeader({ daysSchedules, courseTracker, cre
         </div>
       </div>
       {/* Export buttons */}
-      <div className="">
+      <div>
         <span className="mx-1 text-black dark:text-white">Exportar:</span>
         <button
-          className="font-light py-2 px-4 mx-1 border-none rounded-lg text-black dark:text-white bg-neutral-100 dark:bg-neutral-800"
+          className="
+          py-2 px-4 mx-1 border-none rounded-lg shadow-md dark:shadow-black
+          text-black bg-white dark:bg-neutral-800 dark:text-white"
           export-type="image"
           onClick={() => exportImage()}>
           imagen
         </button>
         <button
-          className="font-light py-2 px-4 mx-1 border-none rounded-lg text-black dark:text-white bg-neutral-100 dark:bg-neutral-800"
+          className="
+          py-2 px-4 mx-1 border-none rounded-lg shadow-md dark:shadow-black
+          text-black bg-white dark:text-white dark:bg-neutral-800"
           export-type="excel"
           onClick={() => exportToExcel()}>
           excel

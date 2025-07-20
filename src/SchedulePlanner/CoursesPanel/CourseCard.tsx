@@ -8,13 +8,14 @@ import { useState, useEffect } from 'react';
 interface CourseCardCheckboxProps {
   course: Course;
   section?: CourseSection;
+  colorPair: CourseColor;
   checked: boolean;
   allChecked?: boolean;
   setAllChecked?: (val: boolean) => void;
   sectionOps: SectionSelectionOps;
 }
 
-function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
+function CourseCardCheckbox({ course, section, colorPair, checked, allChecked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
   // valuable comment: checked is the local state of the checkbox, initialized in the course object
 
   useEffect(() => {
@@ -24,8 +25,8 @@ function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecke
   return (
     <label className={
       `p-2 pb-1 mr-1 font-normal text-sm duration-100 ease-linear select-none
-      rounded-md ${checked ? "bg-neutral-800 dark:bg-neutral-100" : ""}`
-    } data-checked={checked}>
+      rounded-md shadow-lg border ${checked ? "bg-white" : ""}`
+    } data-checked={checked} style={{ borderColor: colorPair.text }}>
       <input
         className="hidden"
         type="checkbox"
@@ -52,12 +53,12 @@ function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecke
     </label>
   )
 }
-function CourseCardCheckboxAll({ course, checked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
+function CourseCardCheckboxAll({ course, colorPair, checked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
   return (
     <label className={
       `p-2 pb-1 mr-1 font-normal text-sm duration-100 ease-linear select-none
-       rounded-md ${checked ? "bg-neutral-800 dark:bg-neutral-100" : ""}`
-    } data-checked={checked}>
+       rounded-md shadow-lg border ${checked ? "bg-white" : ""}`
+    } data-checked={checked} style={{ borderColor: colorPair.text }}>
       <input
         className="hidden"
         type="checkbox"
@@ -103,8 +104,8 @@ function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {
   const [areAllChecked, setAreAllChecked] = useState(course.areAllSectionsSelected())
 
   return (
-    <div className="w-full font-normal text-left my-2 rounded-md py-2 px-4" id={course.getId()}
-      style={{ backgroundColor: colorPair.background, color: colorPair.text }}>
+    <div className="w-full font-normal text-left my-2 border rounded-md py-2 px-4 shadow-lg dark:shadow-md dark:shadow-black" id={course.getId()}
+      style={{ backgroundColor: colorPair.background, color: colorPair.text, borderColor: colorPair.text }}>
       <h3 className="text-base">{course.getName()}</h3>
       <hr className="mb-2" style={{ borderColor: colorPair.text }}/>
       <span className="text-sm">Añadir secciones:</span>
@@ -114,6 +115,7 @@ function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {
           <>
             <CourseCardCheckboxAll
               course={course}
+              colorPair={colorPair}
               checked={areAllChecked}
               setAllChecked={setAreAllChecked}
               sectionOps={sectionOps}>
@@ -122,6 +124,7 @@ function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {
               <CourseCardCheckbox
                 key={`CourseItemButton:${index}` + section.sectionNumber}
                 course={course}
+                colorPair={colorPair}
                 checked={course.isSectionSelected(section) || areAllChecked}
                 allChecked={areAllChecked}
                 setAllChecked={setAreAllChecked}
