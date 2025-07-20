@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import styles from './CourseList.module.scss'
 import Tabs from './Tabs/Tabs.tsx'
 import CourseCard from './CourseCard.tsx'
 import SearchFilter from './SearchFilter/SearchFilter.tsx'
@@ -67,9 +66,7 @@ interface CourseListProps {
   sectionOps: SectionSelectionOps;
 }
 
-// Element for the sidebar which currently displays only the list of available courses
 function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
-  // variables
   const [courses, setCourses] = useState<Course[]>([])
   const [filters, setFilters] = useState<FilterChooser>({
     cycles: [],
@@ -82,17 +79,13 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
     year: '2023'
   })
 
-  // initial script on startup. Is embedded in a useEffect because it doesn't load instantly.
-  // It's meant to only run once
   useEffect(() => {
     if (isDataLoaded && data) {
-      // setCourses(getCoursesFromData(data, chosenFilters))
-      setFilters(initializeFilters(data))  // initialize filters
+      setFilters(initializeFilters(data))
       setCourses(getCoursesFromData(data))
     }
   }, [data, isDataLoaded])
 
-  // update the course list to render the filter object changes every time
   useEffect(() => {
     if (isDataLoaded && data) {
       setCourses(getCoursesFromData(data, chosenFilters))
@@ -100,37 +93,41 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
   }, [chosenFilters]);
 
   return (
-    <div className={styles.sidebar}>
-      <Tabs
-        tabs={
-          [
-            {
-              id: "courses-menu",
-              label: "Tus cursos",
-              content: (
-                <div className={styles.sidebar__menu}>
-                  <h2>Tus cursos</h2>
-                  <section className={styles.sidebar__curriculums}>
-                    <span className={styles.sidebar__curriculums__title}>Filtrar por:</span>
-                  </section>
+    <div className="
+      h-full w-96 mx-auto p-4 rounded-r-lg flex flex-col justify-start items-end
+      shadow-lg bg-white dark:bg-neutral-800 dark:shadow-md dark:shadow-black
+    ">
+        <Tabs
+          tabs={[{
+            id: "courses-menu",
+            label: "Tus cursos",
+            content: (
+              <div>
+                <h2 className="font-normal text-lg">Tus cursos</h2>
+
+                <section className="text-base w-full h-fit my-4">
+                  <span className="inline-block font-normal mb-2">Filtrar por:</span>
                   <SearchFilter
                     filterChooser={filters}
                     selectedFilters={chosenFilters}
                     selectedFiltersSetter={setChosenFilters}
+                  />
+                </section>
+                <section className="w-full min-h-20 h-fit my-4">
+                  <span className="inline-block font-normal mb-2">Cursos</span>
+                  <div 
+                    className="
+                      flex flex-col justify-start items-stretch text-xs min-h-32 flex-1 p-2
+                      border-2 border-neutral-200 dark:border-neutral-700 rounded-lg overflow-y-auto
+                      transition-colors duration-200"
                   >
-                  </SearchFilter>
-                  <section className={styles.sidebar__courses}>
-                    <span className={styles.sidebar__subtitle}>Cursos</span>
-                    <div className={styles.sidebar__list}>
-                      {isDataLoaded && renderCoursesSidebar(courses, sectionOps)}
-                    </div>
-                  </section>
-                </div>
-              )
-            }
-          ]}>
-      </Tabs>
-      <div style={{ marginTop: 'auto' }}></div>
+                    {isDataLoaded && renderCoursesSidebar(courses, sectionOps)}
+                  </div>
+                </section>
+              </div>
+            )
+          }]}
+        />
     </div>
   )
 }

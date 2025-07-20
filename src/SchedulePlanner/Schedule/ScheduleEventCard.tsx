@@ -1,4 +1,3 @@
-import styles from './ScheduleEventCard.module.scss'
 import { CourseSection, Schedule } from '../../global/types.tsx'
 
 
@@ -29,7 +28,9 @@ function ScheduleEventCard({ schedule, section }: ScheduleEventCardProps) {
   // wait until the page is fully loaded to log the calendar appointments element
   window.addEventListener('load', () => { console.log(document.getElementById('calendar-appointments')) })
   return (
-    <div className={styles.course_calendar} style={calculateStyle(schedule)}>
+    <div className="
+    absolute mx-1 p-1 min-h-20 w-full rounded-lg border-2 text-sm
+    border-neutral-200 bg-neutral-100 dark:bg-neutral-900 dark:border-neutral-700" style={calculateStyle(schedule)}>
       <span>{schedule.assignment}</span>
       <span>{section.sectionNumber}</span>
     </div>

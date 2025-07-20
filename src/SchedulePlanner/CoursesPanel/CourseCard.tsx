@@ -1,4 +1,3 @@
-import styles from './CourseCard.module.scss';
 import { Course, CourseSection, SectionSelectionOps, CourseColor } from '../../global/types.ts';
 import { useState, useEffect } from 'react';
 
@@ -9,13 +8,14 @@ import { useState, useEffect } from 'react';
 interface CourseCardCheckboxProps {
   course: Course;
   section?: CourseSection;
+  colorPair: CourseColor;
   checked: boolean;
   allChecked?: boolean;
   setAllChecked?: (val: boolean) => void;
   sectionOps: SectionSelectionOps;
 }
 
-function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
+function CourseCardCheckbox({ course, section, colorPair, checked, allChecked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
   // valuable comment: checked is the local state of the checkbox, initialized in the course object
 
   useEffect(() => {
@@ -23,8 +23,12 @@ function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecke
   }, [checked])
 
   return (
-    <label className={`${styles.course_item__class_groups__checkbox}`} data-checked={checked}>
+    <label className={
+      `p-2 pb-1 mr-1 font-normal text-sm duration-100 ease-linear select-none
+      rounded-md shadow-lg border ${checked ? "bg-white" : ""}`
+    } data-checked={checked} style={{ borderColor: colorPair.text }}>
       <input
+        className="hidden"
         type="checkbox"
         checked={checked || allChecked}
         onChange={() => {
@@ -49,15 +53,20 @@ function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecke
     </label>
   )
 }
-function CourseCardCheckboxAll({ course, checked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
+function CourseCardCheckboxAll({ course, colorPair, checked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
   return (
-    <label className={`${styles.course_item__class_groups__checkbox}`} data-checked={checked}>
+    <label className={
+      `p-2 pb-1 mr-1 font-normal text-sm duration-100 ease-linear select-none
+       rounded-md shadow-lg border ${checked ? "bg-white" : ""}`
+    } data-checked={checked} style={{ borderColor: colorPair.text }}>
       <input
+        className="hidden"
         type="checkbox"
         checked={checked}
         onChange={() => {
           if (!checked) {
-            sectionOps.addSections(course.getSections().filter(section => !course.isSectionSelected(section)))
+            sectionOps.addSections(course.getSections().filter(
+              section => !course.isSectionSelected(section)))
             if (course.getSelectedSections().length === 0) sectionOps.trackCourse(course)
             course.selectAllSections()
           }
@@ -86,6 +95,8 @@ interface CourseCardProps {
 /**
  * displays a course in the course list
  * @param course to be displayed
+ * @param sectionOps operations to update the global trackers
+ * @param colorPair ... colorful
  * @returns a styled div with the course
  */
 function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {
@@ -93,15 +104,19 @@ function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {
   const [areAllChecked, setAreAllChecked] = useState(course.areAllSectionsSelected())
 
   return (
-    <div className={styles.course_item} id={course.getId()}
-      style={{ backgroundColor: colorPair.background, color: colorPair.text }}>
-      <span className={styles.course_item__title}>{course.getName()}</span>
-      <div className={styles.course_item__class_groups}>
+    <div className="w-full font-normal text-left my-2 border rounded-md py-2 px-4 shadow-lg dark:shadow-md dark:shadow-black" id={course.getId()}
+      style={{ backgroundColor: colorPair.background, color: colorPair.text, borderColor: colorPair.text }}>
+      <h3 className="text-base">{course.getName()}</h3>
+      <span className="text-sm">créditos: {course.getCredits()}<br/>{course.getCareer()}</span>
+      <hr className="mb-2" style={{ borderColor: colorPair.text }}/>
+      <span className="text-sm">Añadir secciones:</span>
+      <div className="flex flex-row justify-start items-center mt-1">
         {/* creates a button for every group in classGroups */}
         {(course.getSections().length > 0) && (
           <>
             <CourseCardCheckboxAll
               course={course}
+              colorPair={colorPair}
               checked={areAllChecked}
               setAllChecked={setAreAllChecked}
               sectionOps={sectionOps}>
@@ -110,6 +125,7 @@ function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {
               <CourseCardCheckbox
                 key={`CourseItemButton:${index}` + section.sectionNumber}
                 course={course}
+                colorPair={colorPair}
                 checked={course.isSectionSelected(section) || areAllChecked}
                 allChecked={areAllChecked}
                 setAllChecked={setAreAllChecked}

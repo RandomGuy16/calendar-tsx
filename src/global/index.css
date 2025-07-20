@@ -1,3 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
   font-family: 'Open Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -13,18 +24,20 @@
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
 }
+
 html {
   min-height: 100%;
   margin: 0;
   padding: 0;
 }
+
 body {
   display: flex;
   flex-direction: column;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-image: url('../assets/rochlitzcastle_background.webp');
+  /*background-image: url('../assets/rochlitzcastle_background.webp');*/
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -40,12 +53,7 @@ body {
   min-height: 100vh;
 }
 
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
+/* Light mode styles */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

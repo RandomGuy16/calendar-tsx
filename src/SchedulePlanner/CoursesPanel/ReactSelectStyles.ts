@@ -1,7 +1,7 @@
 import { StylesConfig } from "react-select";
 
-const selectColor= "#6faaf7"
-const menuColor = "#4f82c4"
+const selectColor= "#404040"
+const menuColor = "#303030"
 const reactSelectStyles: StylesConfig = {
 // github copilot generated styles
 	control: (baseStyles, state) => ({
@@ -10,7 +10,7 @@ const reactSelectStyles: StylesConfig = {
 		border: "1px solid transparent",
 		boxShadow: state.isFocused ? "0 0 0 1px var(--color-blue-500)" : "none",
 		"&:hover": {
-			borderColor: "blue",
+			borderColor: "rgb(90, 90, 90)",
 		},
 		color: "white",
 	}),
@@ -29,7 +29,7 @@ const reactSelectStyles: StylesConfig = {
 		...baseStyles,
 		color: "var(--color-blue-500)",
 		"&:hover": {
-			color: "var(--color-blue-500)",
+			color: "var(--color-blue-600)",
 		},
 	}),
 	menu: (baseStyles) => ({
