@@ -110,7 +110,7 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
                   <SearchFilter
                     filterChooser={filters}
                     selectedFilters={chosenFilters}
-                    selectedFiltersSetter={setChosenFilters}
+                    setSelectedFiltersSet={setChosenFilters}
                   />
                 </section>
                 <section className="w-full min-h-20 h-fit my-4">

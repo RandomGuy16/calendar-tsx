@@ -1,13 +1,14 @@
 import Select from 'react-select'
-import { Dispatch } from 'react'
+import { useState } from 'react'
 import { FilterChooser, Filters } from '../../../global/types.ts'
-import reactSelectStyles from "../ReactSelectStyles.ts";
+import getReactSelectStyles from "../ReactSelectStyles.ts";
+
 
 
 interface SearchFilterProps {
   filterChooser: FilterChooser;
   selectedFilters: Filters;
-  selectedFiltersSetter: Dispatch<React.SetStateAction<Filters>>;
+  setSelectedFiltersSet: (filters: Filters) => void;
 }
 
 interface selectFilterOption {
@@ -16,17 +17,24 @@ interface selectFilterOption {
 }
 
 
-function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: SearchFilterProps) {
+function SearchFilter({filterChooser, selectedFilters, setSelectedFiltersSet}: SearchFilterProps) {
+  // Listen for theme changes
+  const [selectStyles, setSelectStyles] = useState<any>(getReactSelectStyles())
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    // Re-render or update styles
+    setSelectStyles(getReactSelectStyles())
+  });
   return (
     <div className="flex flex-col justify-start items-start w-full">
       {/* separate Select element for each category in filterChooser */}
+
       {/*
         when a select element from here changes the filters, the useEffect of CoursesPanel
         reconfigures the courses available
       */}
       <Select
-        className="text-base font-normal text-white my-1 mt-0 shadow-lg dark:shadow-md dark:shadow-black"
-        styles={reactSelectStyles}
+        className="text-base font-normal my-1 mt-0 shadow-lg dark:shadow-md dark:shadow-black"
+        styles={selectStyles} // Call the function
         options={
           filterChooser.careers.map(filterOption => ({
             value: filterOption,
@@ -42,7 +50,7 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: S
           value: selectedFilters.career
         }}
         onChange={(newValue: unknown) => {
-          selectedFiltersSetter({
+          setSelectedFiltersSet({
             career: (newValue as selectFilterOption).value,
             cycle: selectedFilters.cycle,
             year: selectedFilters.year
@@ -52,7 +60,7 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: S
 
       <Select
         className="text-base font-normal text-white my-1 shadow-lg dark:shadow-md dark:shadow-black"
-        styles={reactSelectStyles}
+        styles={selectStyles}
         options={
           filterChooser.cycles.map(filterOption => ({
             label: filterOption,
@@ -68,17 +76,17 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: S
           value: selectedFilters.cycle
         }}
         onChange={(newValue: unknown) => {
-          selectedFiltersSetter({
+          setSelectedFiltersSet({
             career: selectedFilters.career,
             cycle: (newValue as selectFilterOption).value,
             year: selectedFilters.year
         })
       }}>
       </Select>
-
+      
       <Select
         className="text-base font-normal text-white my-1 mb-0 shadow-lg dark:shadow-md dark:shadow-black"
-        styles={reactSelectStyles}
+        styles={selectStyles}
         options={
           filterChooser.years.map(filterOption => ({
             label: filterOption,
@@ -94,7 +102,7 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: S
           value: selectedFilters.year
         }}
         onChange={(newValue: unknown) => {
-          selectedFiltersSetter({
+          setSelectedFiltersSet({
             career: selectedFilters.career,
             cycle: selectedFilters.cycle,
             year: (newValue as selectFilterOption).value,
@@ -107,4 +115,3 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: S
 }
 
 export default SearchFilter;
-
