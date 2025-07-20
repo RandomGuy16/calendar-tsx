@@ -107,6 +107,7 @@ function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {
     <div className="w-full font-normal text-left my-2 border rounded-md py-2 px-4 shadow-lg dark:shadow-md dark:shadow-black" id={course.getId()}
       style={{ backgroundColor: colorPair.background, color: colorPair.text, borderColor: colorPair.text }}>
       <h3 className="text-base">{course.getName()}</h3>
+      <span className="text-sm">créditos: {course.getCredits()}<br/>{course.getCareer()}</span>
       <hr className="mb-2" style={{ borderColor: colorPair.text }}/>
       <span className="text-sm">Añadir secciones:</span>
       <div className="flex flex-row justify-start items-center mt-1">

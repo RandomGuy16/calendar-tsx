@@ -130,19 +130,27 @@ export default function ScheduleStatusHeader({ daysSchedules, courseTracker, cre
     <div className="flex flex-row justify-between items-center p-2 relative h-full w-full">
       <h2 className="absolute -top-2 left-2 text-xl">Horario</h2>
       {/* Schedule metrics */}
-      <div className="font-normal text-sm">
+      <div className="font-normal text-normal">
         <div>
           <span>Cursos añadidos: {courseTracker.size}</span><br />
           <span>Créditos: {credits}</span>
         </div>
       </div>
       {/* Export buttons */}
+      {/*
+        Light theme: #059669 (green-600)
+        Dark theme: #10B981 (emerald-500)
+
+        Light theme: #2563EB (blue-600)
+        Dark theme: #3B82F6 (blue-500)
+
+      */}
       <div>
         <span className="mx-1 text-black dark:text-white">Exportar:</span>
         <button
           className="
           py-2 px-4 mx-1 border-none rounded-lg shadow-md dark:shadow-black
-          text-black bg-white dark:bg-neutral-800 dark:text-white"
+          text-black bg-blue-400 dark:bg-blue-500 dark:text-white"
           export-type="image"
           onClick={() => exportImage()}>
           imagen
@@ -150,7 +158,7 @@ export default function ScheduleStatusHeader({ daysSchedules, courseTracker, cre
         <button
           className="
           py-2 px-4 mx-1 border-none rounded-lg shadow-md dark:shadow-black
-          text-black bg-white dark:text-white dark:bg-neutral-800"
+          text-black bg-emerald-400 dark:text-white dark:bg-emerald-500"
           export-type="excel"
           onClick={() => exportToExcel()}>
           excel
