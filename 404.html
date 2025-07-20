@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // Get the current URL path
+    var path = window.location.pathname;
+    // Get the repository name from the homepage property in package.json (replace with your repo name)
+    var repoName = "/calendar-tsx";
+    // If the path starts with the repo name, redirect to the root of the app
+    if (path.startsWith(repoName)) {
+      window.location.replace(repoName + '/#' + path.substring(repoName.length));
+    } else {
+      // Fallback for direct access to subpaths without the repo name
+      window.location.replace(window.location.origin + repoName + '/');
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
