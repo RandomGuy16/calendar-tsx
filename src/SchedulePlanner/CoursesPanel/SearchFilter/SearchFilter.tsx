@@ -1,6 +1,7 @@
 import Select from 'react-select'
 import { Dispatch } from 'react'
 import { FilterChooser, Filters } from '../../../global/types.ts'
+import reactSelectStyles from "../ReactSelectStyles.ts";
 
 
 interface SearchFilterProps {
@@ -25,6 +26,7 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: S
       */}
       <Select
         className="text-base font-normal text-gray-700 dark:text-white"
+        styles={reactSelectStyles}
         options={
           filterChooser.careers.map(filterOption => ({
             value: filterOption,
@@ -50,6 +52,7 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: S
 
       <Select
         className="text-base font-normal text-gray-700 dark:text-white"
+        styles={reactSelectStyles}
         options={
           filterChooser.cycles.map(filterOption => ({
             label: filterOption,
@@ -75,6 +78,7 @@ function SearchFilter({filterChooser, selectedFilters, selectedFiltersSetter}: S
 
       <Select
         className="text-base font-normal text-gray-700 dark:text-white"
+        styles={reactSelectStyles}
         options={
           filterChooser.years.map(filterOption => ({
             label: filterOption,

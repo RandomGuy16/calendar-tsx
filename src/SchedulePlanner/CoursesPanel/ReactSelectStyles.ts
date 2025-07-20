@@ -10,7 +10,7 @@ const reactSelectStyles: StylesConfig = {
 		border: "1px solid transparent",
 		boxShadow: state.isFocused ? "0 0 0 1px var(--color-blue-500)" : "none",
 		"&:hover": {
-			borderColor: "blue",
+			borderColor: "var(--color-blue-500)",
 		},
 		color: "white",
 	}),

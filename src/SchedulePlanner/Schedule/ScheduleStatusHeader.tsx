@@ -1,4 +1,3 @@
-import styles from './ScheduleStatusHeader.module.scss'
 import * as htmlToImage from 'html-to-image'
 import ExcelJS, { Worksheet } from 'exceljs'
 import { Course, Schedule } from "../../global/types.ts";
@@ -128,26 +127,29 @@ export default function ScheduleStatusHeader({ daysSchedules, courseTracker, cre
   }
 
   return (
-    <div className={styles.calendar__status_header}>
-      <h2 className={styles.calendar__status_header__title}>Horario</h2>
+    <div className="
+      flex flex-row justify-between items-center p-2 relative h-full w-full
+      font-light">
+      <h2 className="
+      absolute -top-2 left-2 text-xl">Horario</h2>
       {/* Schedule metrics */}
-      <div className={styles.calendar__status_header__metrics}>
+      <div className="font-normal text-sm">
         <div>
           <span>Cursos añadidos: {courseTracker.size}</span><br />
           <span>Créditos: {credits}</span>
         </div>
       </div>
       {/* Export buttons */}
-      <div className={styles.calendar__status_header__export}>
-        <span>Exportar:</span>
+      <div className="">
+        <span className="mx-1 text-black dark:text-white">Exportar:</span>
         <button
-          className={styles.calendar__status_header__export_button}
+          className="font-light py-2 px-4 mx-1 border-none rounded-lg text-black dark:text-white bg-neutral-100 dark:bg-neutral-800"
           export-type="image"
           onClick={() => exportImage()}>
           imagen
         </button>
         <button
-          className={styles.calendar__status_header__export_button}
+          className="font-light py-2 px-4 mx-1 border-none rounded-lg text-black dark:text-white bg-neutral-100 dark:bg-neutral-800"
           export-type="excel"
           onClick={() => exportToExcel()}>
           excel

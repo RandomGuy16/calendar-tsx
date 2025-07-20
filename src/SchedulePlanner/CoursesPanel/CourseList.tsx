@@ -119,12 +119,9 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
                     className="
                       flex flex-col justify-start items-stretch
                       text-xs min-h-32 flex-1 p-2
-                      border border-transparent rounded
+                      border-2 border-neutral-700 rounded-lg
                       overflow-y-auto
-                      hover:border-blue-500
-                      transition-colors duration-200
-                    "
-                    style={{ backgroundColor: '#3d68a0' }}
+                      transition-colors duration-200"
                   >
                     {isDataLoaded && renderCoursesSidebar(courses, sectionOps)}
                   </div>

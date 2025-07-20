@@ -1,4 +1,3 @@
-import styles from './ScheduleGrid.module.scss'
 import { Course, CourseSection, Schedule } from "../../global/types.ts";
 import ScheduleEventCard from './ScheduleEventCard.tsx'
 import ScheduleStatusHeader from "./ScheduleStatusHeader.tsx";
@@ -87,8 +86,8 @@ function ScheduleGrid({ selectedSections, courseTracker, credits }: ScheduleGrid
   }, [selectedSections]);
 
   return (
-    <div className={styles.calendar}>
-      <div className={styles.calendar__header}>
+    <div className="flex flex-col justify-start items-stretch h-full w-full">
+      <div className="w-full h-24">
         <ScheduleStatusHeader
           daysSchedules={[
             mondayData.schedules, tuesdayData.schedules,
@@ -99,36 +98,40 @@ function ScheduleGrid({ selectedSections, courseTracker, credits }: ScheduleGrid
           credits={credits}
         />
       </div>
-      <div className={styles.calendar__grid} id="calendar-grid">
-        <div className={styles.calendar__days_row}>
+      <div className="
+        flex flex-col justify-start items-stretch w-full relative
+        bg-neutral:200 dark:bg-neutral-700 rounded-xl"
+        id="calendar-grid">
+        <div className="
+        flex flex-[8] flex-row justify-evenly items-center w-full h-6 rounded-t-xl font-light
+        text-black bg-neutral-300 dark:text-white dark:bg-neutral-800 cursor-default">
           {["", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM"].map(
-            (day, i) => (<div key={i} className={styles.calendar__day}>{day}</div>)
+            (day, i) => (<div key={i} className="m-auto text-center flex-1">{day}</div>)
           )}
         </div>
-        <div className={styles.calendar__content}>
-          <div className={styles.calendar__hours_column}>
-            <div className={styles.calendar__hour_tag}>8:00</div>
-            <div className={styles.calendar__hour_tag}>9:00</div>
-            <div className={styles.calendar__hour_tag}>10:00</div>
-            <div className={styles.calendar__hour_tag}>11:00</div>
-            <div className={styles.calendar__hour_tag}>12:00</div>
-            <div className={styles.calendar__hour_tag}>13:00</div>
-            <div className={styles.calendar__hour_tag}>14:00</div>
-            <div className={styles.calendar__hour_tag}>15:00</div>
-            <div className={styles.calendar__hour_tag}>16:00</div>
-            <div className={styles.calendar__hour_tag}>17:00</div>
-            <div className={styles.calendar__hour_tag}>18:00</div>
-            <div className={styles.calendar__hour_tag}>19:00</div>
-            <div className={styles.calendar__hour_tag}>20:00</div>
+        <div className="flex flex-[8] flex-row justify-evenly items-start overscroll-y-auto h-full">
+          <div className="flex flex-1 flex-col justify-evenly items-stretch text-right">
+            {["08", "09", 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map(
+              (hour, i) => (<div key={i} className="
+              h-20 border-t border-neutral-600 p-1 text-right font-light">{`${hour}:00`}</div>)
+            )}
           </div>
-          <div className={styles.calendar__appointments} id='calendar-appointments'>
-            <div className={styles.calendar__appointments_column} id={MONDAY_ID}>{mondayData.eventCards}</div>
-            <div className={styles.calendar__appointments_column} id={TUESDAY_ID}>{tuesdayData.eventCards}</div>
-            <div className={styles.calendar__appointments_column} id={WEDNESDAY_ID}>{wednesdayData.eventCards}</div>
-            <div className={styles.calendar__appointments_column} id={THURSDAY_ID}>{thursdayData.eventCards}</div>
-            <div className={styles.calendar__appointments_column} id={FRIDAY_ID}>{fridayData.eventCards}</div>
-            <div className={styles.calendar__appointments_column} id={SATURDAY_ID}>{saturdayData.eventCards}</div>
-            <div className={styles.calendar__appointments_column} id={SUNDAY_ID}></div>
+          <div className="flex flex-[7] flex-row justify-evenly items-center h-full"
+               id='calendar-appointments'>
+            <div className="flex flex-1 flex-col justify-start items-center relative h-full"
+                 id={MONDAY_ID}>{mondayData.eventCards}</div>
+            <div className="flex flex-1 flex-col justify-start items-center relative h-full"
+                 id={TUESDAY_ID}>{tuesdayData.eventCards}</div>
+            <div className="flex flex-1 flex-col justify-start items-center relative h-full"
+                 id={WEDNESDAY_ID}>{wednesdayData.eventCards}</div>
+            <div className="flex flex-1 flex-col justify-start items-center relative h-full"
+                 id={THURSDAY_ID}>{thursdayData.eventCards}</div>
+            <div className="flex flex-1 flex-col justify-start items-center relative h-full"
+                 id={FRIDAY_ID}>{fridayData.eventCards}</div>
+            <div className="flex flex-1 flex-col justify-start items-center relative h-full"
+                 id={SATURDAY_ID}>{saturdayData.eventCards}</div>
+            <div className="flex flex-1 flex-col justify-start items-center relative h-full"
+                 id={SUNDAY_ID}></div>
           </div>
         </div>
       </div>

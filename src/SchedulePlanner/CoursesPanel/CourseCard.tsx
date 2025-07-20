@@ -22,7 +22,10 @@ function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecke
   }, [checked])
 
   return (
-    <label className={`p-2 mx-1/2 font-normal text-sm duration-100 ease-linear select-none ${checked ? "bg-neutral-800" : ""}`} data-checked={checked}>
+    <label className={
+      `p-2 pb-1 mr-1 font-normal text-sm duration-100 ease-linear select-none
+      rounded-md ${checked ? "bg-neutral-800 dark:bg-neutral-100" : ""}`
+    } data-checked={checked}>
       <input
         className="hidden"
         type="checkbox"
@@ -51,14 +54,18 @@ function CourseCardCheckbox({ course, section, checked, allChecked, setAllChecke
 }
 function CourseCardCheckboxAll({ course, checked, setAllChecked, sectionOps }: CourseCardCheckboxProps) {
   return (
-    <label className={`p-2 mx-1/2 font-normal text-sm duration-100 ease-linear select-none ${checked ? "bg-neutral-800" : ""}`} data-checked={checked}>
+    <label className={
+      `p-2 pb-1 mr-1 font-normal text-sm duration-100 ease-linear select-none
+       rounded-md ${checked ? "bg-neutral-800 dark:bg-neutral-100" : ""}`
+    } data-checked={checked}>
       <input
         className="hidden"
         type="checkbox"
         checked={checked}
         onChange={() => {
           if (!checked) {
-            sectionOps.addSections(course.getSections().filter(section => !course.isSectionSelected(section)))
+            sectionOps.addSections(course.getSections().filter(
+              section => !course.isSectionSelected(section)))
             if (course.getSelectedSections().length === 0) sectionOps.trackCourse(course)
             course.selectAllSections()
           }
@@ -94,10 +101,12 @@ function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {
   const [areAllChecked, setAreAllChecked] = useState(course.areAllSectionsSelected())
 
   return (
-    <div className="w-full font-normal text-left my-2 rounded-md p-2" id={course.getId()}
+    <div className="w-full font-normal text-left my-2 rounded-md py-2 px-4" id={course.getId()}
       style={{ backgroundColor: colorPair.background, color: colorPair.text }}>
-      <span className="text-right text-base mb-2">{course.getName()}</span>
-      <div className="flex flex-row justify-start items-center mt-2">
+      <h3 className="text-base">{course.getName()}</h3>
+      <hr className="mb-2" style={{ borderColor: colorPair.text }}/>
+      <span className="text-sm">Añadir secciones:</span>
+      <div className="flex flex-row justify-start items-center mt-1">
         {/* creates a button for every group in classGroups */}
         {(course.getSections().length > 0) && (
           <>
