@@ -1,4 +1,3 @@
-import './styles/Curriculum.scss'
 
 type CurriculumData = {
 	title: string,

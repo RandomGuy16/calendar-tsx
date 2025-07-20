@@ -94,6 +94,8 @@ interface CourseCardProps {
 /**
  * displays a course in the course list
  * @param course to be displayed
+ * @param sectionOps operations to update the global trackers
+ * @param colorPair ... colorful
  * @returns a styled div with the course
  */
 function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {

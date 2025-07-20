@@ -1,4 +1,3 @@
-import styles from './Header.module.scss'
 
 
 function Header() {
@@ -10,7 +9,7 @@ function Header() {
         </button>
         <h1 className="ml-4 text-xl font-normal">Calendar</h1>
       </div>
-      <div className={styles.header__right}>
+      <div>
       </div>
     </>
   )
