@@ -58,6 +58,7 @@ function formatCycles([cycle, sectionsList]: [string, any]) {
             end: schedule["Fin"],
             type: schedule["Tipo"],
             scheduleNumber: schedule["Horario"],
+            sectionNumber: Number(section["Sec_"])
           }
         })
       }

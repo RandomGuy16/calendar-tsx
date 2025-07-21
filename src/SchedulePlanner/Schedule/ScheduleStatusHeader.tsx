@@ -33,9 +33,10 @@ const HOURS: Hour[] = [
  * @returns boolean indicating if the schedule fits in the hour slot
  */
 function isScheduleInHourSlot(schedule: Schedule, hour: Hour) {
-  const [scheduleStart, scheduleEnd] = schedule.start.split(':').map(Number)
+  const scheduleStart = Number(schedule.start.split(':')[0])
+  const scheduleEnd = Number(schedule.end.split(':')[0])
   const hourStart = Number(hour.start.split(':')[0])
-  const hourEnd = Number(hour.start.split(':')[1])
+  const hourEnd = Number(hour.end.split(':')[0])
 
   return (scheduleStart <= hourStart && hourEnd <= scheduleEnd)
 }
@@ -47,9 +48,14 @@ function isScheduleInHourSlot(schedule: Schedule, hour: Hour) {
  * @returns A string containing assignment name and schedule number, or empty string if no match
  */
 function getCellLabel(daySchedules: Schedule[], hour: Hour) {
-  const result: Schedule = daySchedules.filter(schedule => isScheduleInHourSlot(schedule, hour))[0]
-  if (!result) return ""
-  return `${result.assignment} ${result.scheduleNumber}`
+  let result = ""
+  const SchedulesInCell: Schedule[] = daySchedules.filter(schedule => isScheduleInHourSlot(schedule, hour))
+
+  SchedulesInCell.forEach((schedule: Schedule) => {
+    result += `${schedule.assignment}\n${schedule.sectionNumber}\n`
+  })
+
+  return result
 }
 
 interface ScheduleStatusHeaderProps {
@@ -95,7 +101,6 @@ export default function ScheduleStatusHeader({ daysSchedules, courseTracker, cre
       { header: 'Friday', key: 'friday', width: 15 },
       { header: 'Saturday', key: 'saturday', width: 15 }
     ]
-
     // Add rows for each hour slot
     HOURS.forEach((hour: Hour) => {
       worksheet.addRow({

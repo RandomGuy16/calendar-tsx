@@ -26,7 +26,7 @@ function calculateStyle(schedule: Schedule) {
 
 function ScheduleEventCard({ schedule, section }: ScheduleEventCardProps) {
   // wait until the page is fully loaded to log the calendar appointments element
-  window.addEventListener('load', () => { console.log(document.getElementById('calendar-appointments')) })
+  // window.addEventListener('load', () => { console.log(document.getElementById('calendar-appointments')) })
   return (
     <div className="
     absolute mx-1 p-1 min-h-20 w-full rounded-lg border-2 text-sm
