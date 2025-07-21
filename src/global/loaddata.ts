@@ -18,7 +18,7 @@ import {
  */
 export async function loadJSON() {
   try {
-    const response = await fetch('/UNMSM-FISI.json')
+    const response = await fetch('./UNMSM-FISI.json')
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
@@ -118,7 +118,7 @@ function appendCoursesToCourseList(cycle: Cycle, courses: Course[], career: stri
   let prevCourseName = ""
   for (const section of cycle.courseSections) {
     // create a key to use in the rendered courses tracker
-    const newCourseKey = createCourseKey({section, career})
+    const newCourseKey = createCourseKey({ section, career })
 
     // check if the section belongs to a previous course added
     if (prevCourseName !== section.assignment) {  // if it is not, create a new course
