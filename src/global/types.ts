@@ -38,6 +38,7 @@ export interface Schedule {
   end: string;
   type: string;
   scheduleNumber: number;
+  sectionNumber: number;
 }
 
 

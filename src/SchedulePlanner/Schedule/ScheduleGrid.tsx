@@ -41,6 +41,7 @@ function renderSections(sections: CourseSection[]) {
       eventCards: []
     }
   })
+
   sections.forEach((section, i) => {
     section.schedules.forEach((schedule, j) => {
       const dayIndex = DAYS_MAP[schedule.day as DayKey]
@@ -117,21 +118,21 @@ function ScheduleGrid({ selectedSections, courseTracker, credits }: ScheduleGrid
             )}
           </div>
           <div className="flex flex-[7] flex-row justify-evenly items-center h-full"
-               id='calendar-appointments'>
+            id='calendar-appointments'>
             <div className="flex flex-1 flex-col justify-start items-center relative h-full"
-                 id={MONDAY_ID}>{mondayData.eventCards}</div>
+              id={MONDAY_ID}>{mondayData.eventCards}</div>
             <div className="flex flex-1 flex-col justify-start items-center relative h-full"
-                 id={TUESDAY_ID}>{tuesdayData.eventCards}</div>
+              id={TUESDAY_ID}>{tuesdayData.eventCards}</div>
             <div className="flex flex-1 flex-col justify-start items-center relative h-full"
-                 id={WEDNESDAY_ID}>{wednesdayData.eventCards}</div>
+              id={WEDNESDAY_ID}>{wednesdayData.eventCards}</div>
             <div className="flex flex-1 flex-col justify-start items-center relative h-full"
-                 id={THURSDAY_ID}>{thursdayData.eventCards}</div>
+              id={THURSDAY_ID}>{thursdayData.eventCards}</div>
             <div className="flex flex-1 flex-col justify-start items-center relative h-full"
-                 id={FRIDAY_ID}>{fridayData.eventCards}</div>
+              id={FRIDAY_ID}>{fridayData.eventCards}</div>
             <div className="flex flex-1 flex-col justify-start items-center relative h-full"
-                 id={SATURDAY_ID}>{saturdayData.eventCards}</div>
+              id={SATURDAY_ID}>{saturdayData.eventCards}</div>
             <div className="flex flex-1 flex-col justify-start items-center relative h-full"
-                 id={SUNDAY_ID}></div>
+              id={SUNDAY_ID}></div>
           </div>
         </div>
       </div>
