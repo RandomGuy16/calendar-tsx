@@ -5,7 +5,7 @@ import './global/index.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter basename='/calendar-tsx/'>
+  <BrowserRouter basename='/'>
     <Routes>
       <Route path="" element={<App />} />
     </Routes>

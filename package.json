@@ -3,14 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://randomguy16.github.io/calendar-tsx",
+  "homepage": "https://randomguy16.github.io/",
   "scripts": {
     "dev": "vite",
-    "sass": "sass --watch /src/styles:/dist/styles",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "postbuild": "purgecss --css dist/assets/*.css --content dist/index.html dist/assets/*.js --output dist/assets",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
