@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Redirecting...</title>
-  <script>
-    // Get the current URL path
-    var path = window.location.pathname;
-    // Get the repository name from the homepage property in package.json (replace with your repo name)
-    var repoName = "/calendar-tsx";
-    // If the path starts with the repo name, redirect to the root of the app
-    if (path.startsWith(repoName)) {
-      window.location.replace(repoName + '/#' + path.substring(repoName.length));
-    } else {
-      // Fallback for direct access to subpaths without the repo name
-      window.location.replace(window.location.origin + repoName + '/');
-    }
-  </script>
-</head>
-<body>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FISI calendar</title>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+    </style>
+
+  </head>
+  <body>
+    <div id="root" class="bg-gray-100 dark:bg-neutral-900"></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
 </html>
