@@ -63,10 +63,14 @@ function renderCoursesSidebar(courses: Course[], sectionOps: SectionSelectionOps
 interface CourseListProps {
   data: UniversityCurriculumData | undefined;
   isDataLoaded: boolean;
+  isMobile: boolean;
+  isTablet: boolean;
+  isOpen: boolean;
+  sidebarSwitch: (isOpen: boolean) => void;
   sectionOps: SectionSelectionOps;
 }
 
-function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
+function CourseList({ data, isDataLoaded, isMobile, isTablet, isOpen, sidebarSwitch, sectionOps }: CourseListProps) {
   const [courses, setCourses] = useState<Course[]>([])
   const [filters, setFilters] = useState<FilterChooser>({
     cycles: [],
@@ -93,41 +97,52 @@ function CourseList({ data, isDataLoaded, sectionOps }: CourseListProps) {
   }, [chosenFilters]);
 
   return (
-    <div className="
-      h-full w-96 mx-auto p-4 rounded-r-lg flex flex-col justify-start items-end
+    <div className={`
+      w-full mx-auto p-4 rounded-r-lg flex flex-col justify-start items-end
       shadow-lg bg-white dark:bg-neutral-800 dark:shadow-md dark:shadow-black
-    ">
-        <Tabs
-          tabs={[{
-            id: "courses-menu",
-            label: "Tus cursos",
-            content: (
-              <div>
-                <h2 className="font-normal text-lg">Tus cursos</h2>
+      transform transition-transform duration-300 ease-in-out
+      ${(isMobile || isTablet)
+        ? `fixed top-0 left-0 h-full max-h-screen max-w-sm z-50 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`
+        : 'relative'}
+    `}>
+      <Tabs
+        tabs={[{
+          id: "courses-menu",
+          label: "Tus cursos",
+          content: (
+            <>
+              <div className="flex flex-row justify-between items-center">
+                <h2 className="inline-block ml-2 font-normal text-lg">Tus cursos</h2>
+                {(isMobile || isTablet) && <button
+                  className="text-lg my-2 ml-4 px-2 rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                  onClick={() => sidebarSwitch(!isOpen)}>
+                  {'>'}
+                </button>}
 
-                <section className="text-base w-full h-fit my-4">
-                  <span className="inline-block font-normal mb-2">Filtrar por:</span>
-                  <SearchFilter
-                    filterChooser={filters}
-                    selectedFilters={chosenFilters}
-                    setSelectedFiltersSet={setChosenFilters}
-                  />
-                </section>
-                <section className="w-full min-h-20 h-fit my-4">
-                  <span className="inline-block font-normal mb-2">Cursos</span>
-                  <div 
-                    className="
-                      flex flex-col justify-start items-stretch text-xs min-h-32 flex-1 p-2
-                      border-2 border-neutral-200 dark:border-neutral-700 rounded-lg overflow-y-auto
-                      transition-colors duration-200"
-                  >
-                    {isDataLoaded && renderCoursesSidebar(courses, sectionOps)}
-                  </div>
-                </section>
               </div>
-            )
-          }]}
-        />
+
+              <section className="text-base w-full h-fit my-4">
+                <span className="inline-block font-normal mb-2">Filtrar por:</span>
+                <SearchFilter
+                  filterChooser={filters}
+                  selectedFilters={chosenFilters}
+                  setSelectedFiltersSet={setChosenFilters}
+                />
+              </section>
+              <section className="flex flex-col justify-start items-stretch w-full min-h-20 h-fit my-4">
+                <span className="inline-block font-normal mb-2">Cursos</span>
+                <div
+                  className="flex flex-col justify-start items-stretch text-xs flex-1 p-2
+                    border-2 border-neutral-200 dark:border-neutral-700 rounded-lg overflow-y-auto
+                    transition-colors duration-200"
+                >
+                  {isDataLoaded && renderCoursesSidebar(courses, sectionOps)}
+                </div>
+              </section>
+            </>
+          )
+        }]}
+      />
     </div>
   )
 }

@@ -87,8 +87,8 @@ function ScheduleGrid({ selectedSections, courseTracker, credits }: ScheduleGrid
   }, [selectedSections]);
 
   return (
-    <div className="flex flex-col justify-start items-stretch h-full w-full">
-      <div className="w-full h-24">
+    <div className="flex flex-col justify-start items-stretch h-full w-full my-4">
+      <div className="w-full min-h-24">
         <ScheduleStatusHeader
           daysSchedules={[
             mondayData.schedules, tuesdayData.schedules,
