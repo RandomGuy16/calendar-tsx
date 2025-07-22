@@ -64,13 +64,12 @@ interface CourseListProps {
   data: UniversityCurriculumData | undefined;
   isDataLoaded: boolean;
   isMobile: boolean;
-  isTablet: boolean;
   isOpen: boolean;
   sidebarSwitch: (isOpen: boolean) => void;
   sectionOps: SectionSelectionOps;
 }
 
-function CourseList({ data, isDataLoaded, isMobile, isTablet, isOpen, sidebarSwitch, sectionOps }: CourseListProps) {
+function CourseList({ data, isDataLoaded, isMobile, isOpen, sidebarSwitch, sectionOps }: CourseListProps) {
   const [courses, setCourses] = useState<Course[]>([])
   const [filters, setFilters] = useState<FilterChooser>({
     cycles: [],

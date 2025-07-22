@@ -9,15 +9,12 @@ import { loadJSON } from "./global/loaddata.ts"
 function App() {
   // responsive design check for the sidebar
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 768)
-  const [isTablet, setIsTablet] = useState<boolean>(window.innerWidth >= 768 && window.innerWidth < 1024)
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false)
 
   // Handle resize of window
   useEffect(() => {
     const checkMobile = () => {
-
       setIsMobile(window.innerWidth < 768)
-      setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024)
     }
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
@@ -127,7 +124,7 @@ function App() {
       shadow-md dark:shadow-black">
         <Header isSidebarOpen={isSidebarOpen} sidebarSwitch={setIsSidebarOpen} />
       </header>
-      <aside className="area-sidebar fixed top-20 z-50 left-0 height-[calc(100vh-5rem)] md:w-[300px] lg:w-[350px] grid-rows-1 row-span-1 flex flex-col justify-start items-center">
+      <aside className="area-sidebar fixed top-20 z-50 left-0 height-[calc(100vh-5rem)] md:w-[300px] lg:w-[360px] grid-rows-1 row-span-1 flex flex-col justify-start items-center">
         <CourseList
           data={data}
           isDataLoaded={isDataLoaded}
@@ -138,7 +135,6 @@ function App() {
             untrackCourse: removeCourse
           }}
           isMobile={isMobile}
-          isTablet={isTablet}
           isOpen={isSidebarOpen}
           sidebarSwitch={setIsSidebarOpen}
         />
