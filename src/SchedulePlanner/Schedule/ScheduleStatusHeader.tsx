@@ -1,4 +1,5 @@
 import * as htmlToImage from 'html-to-image'
+import { Sheet, Image } from 'lucide-react'
 import ExcelJS, { Worksheet } from 'exceljs'
 import { Course, Schedule } from "../../global/types.ts";
 
@@ -132,17 +133,18 @@ export default function ScheduleStatusHeader({ daysSchedules, courseTracker, cre
   }
 
   return (
-    <div className="flex flex-row justify-between items-center p-2 relative h-full w-full">
-      <h2 className="absolute -top-2 left-2 text-xl">Horario</h2>
+    <div className="flex flex-col p-2 h-full w-full">
+      <h2 className="text-xl">Horario</h2>
       {/* Schedule metrics */}
-      <div className="font-normal text-normal">
-        <div>
-          <span>Cursos añadidos: {courseTracker.size}</span><br />
-          <span>Créditos: {credits}</span>
+      <div className="flex flex-row justify-between items-center w-full">
+        <div className="font-normal text-normal">
+          <div>
+            <span>Cursos: {courseTracker.size}</span><br />
+            <span>Créditos: {credits}</span>
+          </div>
         </div>
-      </div>
-      {/* Export buttons */}
-      {/*
+        {/* Export buttons */}
+        {/*
         Light theme: #059669 (green-600)
         Dark theme: #10B981 (emerald-500)
 
@@ -150,25 +152,29 @@ export default function ScheduleStatusHeader({ daysSchedules, courseTracker, cre
         Dark theme: #3B82F6 (blue-500)
 
       */}
-      <div>
-        <span className="mx-1 text-black dark:text-white">Exportar:</span>
-        <button
-          className="
+        <div className="flex flex-row justify-end items-center">
+          <span className="mx-1 text-black dark:text-white">Exportar:</span>
+          <button
+            className="
           py-2 px-4 mx-1 border-none rounded-lg shadow-md dark:shadow-black
           text-black bg-blue-400 dark:bg-blue-500 dark:text-white"
-          export-type="image"
-          onClick={() => exportImage()}>
-          imagen
-        </button>
-        <button
-          className="
+            export-type="image"
+            onClick={() => exportImage()}>
+            <Image className="inline text-sm mr-1" />
+            <span className="text-sm">imagen</span>
+          </button> <br />
+          <button
+            className="
           py-2 px-4 mx-1 border-none rounded-lg shadow-md dark:shadow-black
           text-black bg-emerald-400 dark:text-white dark:bg-emerald-500"
-          export-type="excel"
-          onClick={() => exportToExcel()}>
-          excel
-        </button>
+            export-type="excel"
+            onClick={() => exportToExcel()}>
+            <Sheet className="inline text-sm mr-1" />
+            <span className="text-sm">excel</span>
+          </button>
+        </div>
       </div>
+
 
     </div>
   )
