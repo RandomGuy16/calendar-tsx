@@ -133,7 +133,8 @@ function CourseList({ data, isDataLoaded, isMobile, isOpen, sidebarSwitch, secti
                 <div
                   className="flex flex-col justify-start items-stretch text-xs flex-1 p-2
                     border-2 border-neutral-200 dark:border-neutral-700 rounded-lg overflow-y-auto
-                    transition-colors duration-200"
+                    scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100
+                    dark:scrollbar-thumb-gray-700 dark:scrollbar-track-gray-800"
                 >
                   {isDataLoaded && renderCoursesSidebar(courses, sectionOps)}
                 </div>
@@ -142,7 +143,7 @@ function CourseList({ data, isDataLoaded, isMobile, isOpen, sidebarSwitch, secti
           )
         }]}
       />
-    </div>
+    </div >
   )
 }
 

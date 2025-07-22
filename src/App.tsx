@@ -122,7 +122,7 @@ function App() {
     <div className="grid calendar-layout relative">
       <header className="area-header sticky top-0 z-30 h-20 w-full bg-white dark:bg-neutral-800 flex flex-row justify-start items-center
       shadow-md dark:shadow-black">
-        <Header isSidebarOpen={isSidebarOpen} sidebarSwitch={setIsSidebarOpen} />
+        <Header isMobile={isMobile} isSidebarOpen={isSidebarOpen} sidebarSwitch={setIsSidebarOpen} />
       </header>
       <aside className="area-sidebar fixed top-20 z-50 left-0 height-[calc(100vh-5rem)] md:w-[300px] lg:w-[360px] grid-rows-1 row-span-1 flex flex-col justify-start items-center">
         <CourseList
