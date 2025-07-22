@@ -136,13 +136,15 @@ export default function ScheduleStatusHeader({ daysSchedules, courseTracker, cre
     <div className="flex flex-col p-2 h-full w-full">
       <h2 className="text-xl">Horario</h2>
       {/* Schedule metrics */}
-      <div className="flex flex-row justify-between items-center w-full">
-        <div className="font-normal text-normal">
+      <div className="flex flex-1 flex-row justify-between items-center w-full">
+        <div className="mx-2 font-normal text-normal">
           <div>
             <span>Cursos: {courseTracker.size}</span><br />
             <span>Créditos: {credits}</span>
           </div>
         </div>
+
+
         {/* Export buttons */}
         {/*
         Light theme: #059669 (green-600)
@@ -152,30 +154,44 @@ export default function ScheduleStatusHeader({ daysSchedules, courseTracker, cre
         Dark theme: #3B82F6 (blue-500)
 
       */}
-        <div className="flex flex-row justify-end items-center">
-          <span className="mx-1 text-black dark:text-white">Exportar:</span>
-          <button
-            className="
-          py-2 px-4 mx-1 border-none rounded-lg shadow-md dark:shadow-black
+        <div className="mx-2 flex flex-row justify-end items-start">
+          <span className="mx-1 my-2 text-sm text-black dark:text-white">Exportar:</span>
+          <div className='flex flex-col justify-center items-start'>
+            <button
+              className="
+          py-2 px-4 mx-1 mb-2 border-none rounded-lg shadow-md dark:shadow-black
           text-black bg-blue-400 dark:bg-blue-500 dark:text-white"
-            export-type="image"
-            onClick={() => exportImage()}>
-            <Image className="inline text-sm mr-1" />
-            <span className="text-sm">imagen</span>
-          </button> <br />
-          <button
-            className="
+              export-type="image"
+              onClick={() => exportImage()}>
+              <Image className="inline text-xs mr-1" />
+              <span className="text-sm">imagen</span>
+            </button>
+            <button
+              className="
+            flex flex-row justify-center items-center
           py-2 px-4 mx-1 border-none rounded-lg shadow-md dark:shadow-black
           text-black bg-emerald-400 dark:text-white dark:bg-emerald-500"
-            export-type="excel"
-            onClick={() => exportToExcel()}>
-            <Sheet className="inline text-sm mr-1" />
-            <span className="text-sm">excel</span>
-          </button>
+              export-type="excel"
+              onClick={() => exportToExcel()}>
+              <Sheet className="inline text-xs mr-1" />
+              <span className="text-sm">excel</span>
+            </button>
+          </div>
         </div>
       </div>
-
-
+      <div className="flex flex-row justify-between items-center flex-1 mx-2 my-4 p-2 rounded-lg bg-gray-300 dark:bg-gray-700">
+        <span className="mx-2 text-sm text-neutral-800 dark:text-white">
+          Hola, estás probando una versión beta de la aplicación. Me gustaría mucho que me brindes tus comentarios sobre el programa,
+          no te tomará más de 5 minutos. Si quieres ayudarme, por favor
+        </span>
+        <a
+          className='inline-block p-2 rounded-lg text-center text-sm text-black dark:text-white bg-indigo-400/40 dark:bg-indigo-700/40'
+          href='https://docs.google.com/forms/d/e/1FAIpQLSdoM0cX4kJZNB4c2wZ6-1SzW7Ff4Zw4DVBcnHQhO3Z-b0AOkA/viewform?usp=dialog'
+          target="_blank" rel="noopener noreferrer"
+        >
+          click aquí
+        </a>
+      </div>
     </div>
   )
 }
