@@ -18,7 +18,7 @@ function Header({ isMobile, isSidebarOpen, sidebarSwitch }: Readonly<HeaderProps
           </button>
         }
         <Calendar className="ml-4 mr-2 text-blue-500 dark:text-blue-400" />
-        <h1 className="text-xl font-normal">UScheduleMkr</h1>
+        <h1 className="text-xl font-normal">UniHorario</h1>
       </div>
       <div>
       </div>
