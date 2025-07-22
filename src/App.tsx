@@ -122,13 +122,12 @@ function App() {
   }, [])
 
   return (
-    <div
-      className="grid calendar-layout">
-      <header className="area-header h-20 w-full bg-white dark:bg-neutral-800 flex flex-row justify-start items-center
+    <div className="grid calendar-layout relative">
+      <header className="area-header sticky top-0 z-30 h-20 w-full bg-white dark:bg-neutral-800 flex flex-row justify-start items-center
       shadow-md dark:shadow-black">
         <Header isSidebarOpen={isSidebarOpen} sidebarSwitch={setIsSidebarOpen} />
       </header>
-      <aside className="area-sidebar grid-rows-1 row-span-1 h-max flex flex-col justify-start items-center">
+      <aside className="area-sidebar fixed top-20 z-50 left-0 height-[calc(100vh-5rem)] md:w-[300px] lg:w-[350px] grid-rows-1 row-span-1 flex flex-col justify-start items-center">
         <CourseList
           data={data}
           isDataLoaded={isDataLoaded}
@@ -151,7 +150,6 @@ function App() {
           credits={credits}
         />
       </main>
-      <footer className="area-footer w-full h-4 mt-auto"></footer>
     </div>
   )
 }

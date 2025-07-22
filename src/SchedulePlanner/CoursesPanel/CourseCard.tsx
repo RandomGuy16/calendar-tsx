@@ -106,7 +106,7 @@ function CourseCard({ course, sectionOps, colorPair }: CourseCardProps) {
       <span className="text-sm">créditos: {course.getCredits()}<br />{course.getCareer()}</span>
       <hr className="mb-2" style={{ borderColor: colorPair.text }} />
       <span className="text-sm">Añadir secciones:</span>
-      <div className="flex flex-row justify-start items-center mt-1">
+      <div className="flex flex-row justify-start items-center mt-1 overflow-x-auto">
         {/* creates a button for every group in classGroups */}
         {(course.getSections().length > 0) && (
           <>

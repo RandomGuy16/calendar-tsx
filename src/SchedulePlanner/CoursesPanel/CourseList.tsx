@@ -101,9 +101,9 @@ function CourseList({ data, isDataLoaded, isMobile, isTablet, isOpen, sidebarSwi
       w-full mx-auto p-4 rounded-r-lg flex flex-col justify-start items-end
       shadow-lg bg-white dark:bg-neutral-800 dark:shadow-md dark:shadow-black
       transform transition-transform duration-300 ease-in-out
-      ${(isMobile || isTablet)
+      ${(isMobile)
         ? `fixed top-0 left-0 h-full max-h-screen max-w-sm z-50 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`
-        : 'relative'}
+        : 'stick h-[calc(100vh-5rem)]'}
     `}>
       <Tabs
         tabs={[{
@@ -113,7 +113,7 @@ function CourseList({ data, isDataLoaded, isMobile, isTablet, isOpen, sidebarSwi
             <>
               <div className="flex flex-row justify-between items-center">
                 <h2 className="inline-block ml-2 font-normal text-lg">Tus cursos</h2>
-                {(isMobile || isTablet) && <button
+                {(isMobile) && <button
                   className="text-lg my-2 ml-4 px-2 rounded-xl hover:bg-neutral-200 dark:hover:bg-neutral-700"
                   onClick={() => sidebarSwitch(!isOpen)}>
                   {'>'}
