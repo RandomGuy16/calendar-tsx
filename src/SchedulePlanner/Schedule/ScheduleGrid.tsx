@@ -87,7 +87,7 @@ function ScheduleGrid({ selectedSections, courseTracker, credits }: ScheduleGrid
   }, [selectedSections]);
 
   return (
-    <div className="flex flex-col justify-start items-stretch h-full w-full my-4">
+    <div className="flex flex-col justify-start items-stretch w-full my-4">
       <div className="w-full min-h-24">
         <ScheduleStatusHeader
           daysSchedules={[
@@ -104,7 +104,7 @@ function ScheduleGrid({ selectedSections, courseTracker, credits }: ScheduleGrid
         bg-white dark:bg-neutral-800 rounded-xl shadow-lg dark:shadow-md dark:shadow-black"
         id="calendar-grid">
         <div className="
-        flex flex-[8] flex-row justify-evenly items-center w-full h-6 rounded-t-xl font-light
+        flex flex-[8] flex-row justify-evenly items-center w-full max-h-6 rounded-t-xl font-light
         text-black bg-gray-200 dark:text-white dark:bg-gray-800 cursor-default">
           <div className="flex flex-1 sm:max-w-12 md:max-w-12 lg:max-w-none flex-col justify-evenly items-center"></div>
           {["LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM"].map(

@@ -43,12 +43,15 @@ function ScheduleEventCard({ schedule, section }: ScheduleEventCardProps) {
   })
 
   return (
-    <div className={`
-    absolute mx-1 p-1 min-h-20 w-full rounded-lg border-2 text-sm text-black dark:text-white`} style={{
+    <div className="
+      absolute mx-1 p-1 min-h-20 w-full rounded-lg border-2 text-ellipsis text-[0.5rem] md:text-[0.5rem] lg:text-xs"
+      style={{
         top: positionStyle.top, height: positionStyle.height, backgroundColor: `${bgColor}60`, borderColor: `${textColor}60`
       }}>
-      <span>{schedule.assignment}</span>
-      <span>{section.sectionNumber}</span>
+      <p className='inline-block w-full overflow-hidden text-ellipsis'>
+        {schedule.assignment.toLocaleLowerCase()}<br />
+        sección {section.sectionNumber}
+      </p>
     </div>
   )
 }
