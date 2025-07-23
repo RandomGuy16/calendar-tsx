@@ -29,10 +29,12 @@ function ScheduleEventCard({ schedule, section }: ScheduleEventCardProps) {
   // window.addEventListener('load', () => { console.log(document.getElementById('calendar-appointments')) })
   return (
     <div className="
-    absolute mx-1 p-1 min-h-20 w-full rounded-lg border-2 text-sm
+    absolute mx-1 p-1 min-h-20 w-full rounded-lg border-2 text-ellipsis text-[0.5rem] md:text-[0.5rem] lg:text-xs
     border-neutral-200 bg-neutral-100 dark:bg-neutral-900 dark:border-neutral-700" style={calculateStyle(schedule)}>
-      <span>{schedule.assignment}</span>
-      <span>{section.sectionNumber}</span>
+      <p className='inline-block w-full overflow-hidden text-ellipsis'>
+        {schedule.assignment.toLocaleLowerCase()}<br />
+        sección {section.sectionNumber}
+      </p>
     </div>
   )
 }

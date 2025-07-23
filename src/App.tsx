@@ -124,7 +124,7 @@ function App() {
       shadow-md dark:shadow-black">
         <Header isMobile={isMobile} isSidebarOpen={isSidebarOpen} sidebarSwitch={setIsSidebarOpen} />
       </header>
-      <aside className="area-sidebar fixed top-20 z-50 left-0 height-[calc(100vh-5rem)] md:w-[300px] lg:w-[360px] grid-rows-1 row-span-1 flex flex-col justify-start items-center">
+      <aside className="area-sidebar fixed top-20 z-50 left-0 h-[calc(100vh-5rem)] md:w-[300px] lg:w-[360px] grid-rows-1 row-span-1 flex flex-col justify-start items-center">
         <CourseList
           data={data}
           isDataLoaded={isDataLoaded}
@@ -139,13 +139,14 @@ function App() {
           sidebarSwitch={setIsSidebarOpen}
         />
       </aside>
-      <main className="area-main w-full flex flex-row justify-center">
+      <main className="area-main row-span-1 w-full h-full flex flex-row justify-center">
         <ScheduleGrid
           selectedSections={sectionsRenderList}
           courseTracker={courseTracker}
           credits={credits}
         />
       </main>
+      {/* <footer className="area-footer h-2 w-full"></footer> */}
     </div>
   )
 }

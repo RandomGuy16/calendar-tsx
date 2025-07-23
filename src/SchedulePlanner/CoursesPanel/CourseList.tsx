@@ -97,12 +97,12 @@ function CourseList({ data, isDataLoaded, isMobile, isOpen, sidebarSwitch, secti
 
   return (
     <div className={`
-      w-full mx-auto p-4 rounded-r-lg flex flex-col justify-start items-end
+      w-full h-full mx-auto p-4 rounded-r-lg flex flex-col justify-start items-stretch
       shadow-lg bg-white dark:bg-neutral-800 dark:shadow-md dark:shadow-black
       transform transition-transform duration-300 ease-in-out
       ${(isMobile)
-        ? `fixed top-0 left-0 h-full max-h-screen max-w-sm z-50 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`
-        : 'stick h-[calc(100vh-5rem)]'}
+        ? `fixed top-0 left-0 max-w-sm z-50 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`
+        : 'sticky'}
     `}>
       <Tabs
         tabs={[{
@@ -131,7 +131,7 @@ function CourseList({ data, isDataLoaded, isMobile, isOpen, sidebarSwitch, secti
               <section className="flex flex-col justify-start items-stretch w-full min-h-20 h-fit my-4">
                 <span className="inline-block font-normal mb-2">Cursos</span>
                 <div
-                  className="flex flex-col justify-start items-stretch text-xs flex-1 p-2
+                  className="flex flex-col justify-start items-center flex-1 p-2
                     border-2 border-neutral-200 dark:border-neutral-700 rounded-lg overflow-y-auto
                     scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100
                     dark:scrollbar-thumb-gray-700 dark:scrollbar-track-gray-800"
