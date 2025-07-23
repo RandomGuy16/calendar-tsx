@@ -1507,21 +1507,21 @@
         {
           "Asignatura": "INO102 - MÉTODOS DE ESTUDIO UNIVERSITARIO",
           "Créd_": "2.0",
-          "Docente": "09620253 - COLCA GARCIA, HEDDY LILIANA",
+          "Docente": "44752092 - LUCIO PONCE, PILAR",
           "Horarios": [
             {
-              "Día": "JUEVES",
+              "Día": "MARTES",
               "Horario": "1",
               "Tipo": "Práctica",
               "Inicio": "14:00",
               "Fin": "15:00"
             },
             {
-              "Día": "JUEVES",
+              "Día": "MIERCOLES",
               "Horario": "2",
               "Tipo": "Práctica",
-              "Inicio": "15:00",
-              "Fin": "17:00"
+              "Inicio": "14:00",
+              "Fin": "16:00"
             }
           ],
           "Sec_": "5"
@@ -1664,14 +1664,14 @@
           "Docente": "41388541 - AGUILAR CORONEL, JHONATHAN",
           "Horarios": [
             {
-              "Día": "SABADO",
+              "Día": "JUEVES",
               "Horario": "1",
               "Tipo": "Práctica",
               "Inicio": "08:00",
               "Fin": "09:00"
             },
             {
-              "Día": "SABADO",
+              "Día": "JUEVES",
               "Horario": "2",
               "Tipo": "Práctica",
               "Inicio": "09:00",
@@ -1683,7 +1683,7 @@
         {
           "Asignatura": "INO104 - CÁLCULO I",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "41185268 - ASIS LOPEZ, EFRACIO HERMINIO",
           "Horarios": [
             {
               "Día": "MARTES",
@@ -1705,7 +1705,7 @@
         {
           "Asignatura": "INO104 - CÁLCULO I",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "40764399 - MARAVI PERCCA, EDWIN",
           "Horarios": [
             {
               "Día": "MARTES",
@@ -1727,7 +1727,7 @@
         {
           "Asignatura": "INO104 - CÁLCULO I",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "41185268 - ASIS LOPEZ, EFRACIO HERMINIO",
           "Horarios": [
             {
               "Día": "LUNES",
@@ -1749,7 +1749,7 @@
         {
           "Asignatura": "INO104 - CÁLCULO I",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "40764399 - MARAVI PERCCA, EDWIN",
           "Horarios": [
             {
               "Día": "LUNES",
@@ -1759,11 +1759,11 @@
               "Fin": "10:00"
             },
             {
-              "Día": "VIERNES",
+              "Día": "MIERCOLES",
               "Horario": "2",
               "Tipo": "Práctica",
-              "Inicio": "08:00",
-              "Fin": "12:00"
+              "Inicio": "14:00",
+              "Fin": "18:00"
             }
           ],
           "Sec_": "4"
@@ -1793,7 +1793,7 @@
         {
           "Asignatura": "INO104 - CÁLCULO I",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "40764399 - MARAVI PERCCA, EDWIN",
           "Horarios": [
             {
               "Día": "MIERCOLES",
@@ -1854,18 +1854,18 @@
               "Fin": "16:00"
             },
             {
-              "Día": "JUEVES",
+              "Día": "LUNES",
               "Horario": "2",
-              "Tipo": "Práctica",
-              "Inicio": "14:00",
-              "Fin": "16:00"
-            },
-            {
-              "Día": "JUEVES",
-              "Horario": "3",
               "Tipo": "Práctica",
               "Inicio": "16:00",
               "Fin": "18:00"
+            },
+            {
+              "Día": "MIERCOLES",
+              "Horario": "3",
+              "Tipo": "Práctica",
+              "Inicio": "14:00",
+              "Fin": "16:00"
             }
           ],
           "Sec_": "2"
@@ -1960,28 +1960,28 @@
         {
           "Asignatura": "INO105 - BIOLOGÍA PARA CIENCIAS E INGENIERÍA",
           "Créd_": "4.0",
-          "Docente": "08458590 - ARIAS RAMIREZ, ANGELA RENEE",
+          "Docente": "70768619 - VILLASANTE BRAVO, NAYSHA",
           "Horarios": [
             {
-              "Día": "MARTES",
+              "Día": "SABADO",
               "Horario": "1",
               "Tipo": "Práctica",
-              "Inicio": "08:00",
-              "Fin": "10:00"
+              "Inicio": "11:00",
+              "Fin": "13:00"
             },
             {
-              "Día": "MARTES",
+              "Día": "SABADO",
               "Horario": "2",
               "Tipo": "Práctica",
-              "Inicio": "10:00",
-              "Fin": "12:00"
+              "Inicio": "13:00",
+              "Fin": "15:00"
             },
             {
-              "Día": "MARTES",
+              "Día": "SABADO",
               "Horario": "3",
               "Tipo": "Práctica",
-              "Inicio": "12:00",
-              "Fin": "14:00"
+              "Inicio": "15:00",
+              "Fin": "17:00"
             }
           ],
           "Sec_": "6"
@@ -1989,7 +1989,7 @@
         {
           "Asignatura": "INO106 - ÁLGEBRA Y GEOMETRÍA ANALÍTICA",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "21571331 - BARBOZA CARAPE, LUIS LEONCIO",
           "Horarios": [
             {
               "Día": "MIERCOLES",
@@ -2011,10 +2011,10 @@
         {
           "Asignatura": "INO106 - ÁLGEBRA Y GEOMETRÍA ANALÍTICA",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "40667934 - TERREROS NAVARRO, HELLEN GLORIA",
           "Horarios": [
             {
-              "Día": "MIERCOLES",
+              "Día": "VIERNES",
               "Horario": "1",
               "Tipo": "Práctica",
               "Inicio": "08:00",
@@ -2024,8 +2024,8 @@
               "Día": "VIERNES",
               "Horario": "2",
               "Tipo": "Práctica",
-              "Inicio": "08:00",
-              "Fin": "12:00"
+              "Inicio": "10:00",
+              "Fin": "14:00"
             }
           ],
           "Sec_": "2"
@@ -2033,7 +2033,7 @@
         {
           "Asignatura": "INO106 - ÁLGEBRA Y GEOMETRÍA ANALÍTICA",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "21571331 - BARBOZA CARAPE, LUIS LEONCIO",
           "Horarios": [
             {
               "Día": "MARTES",
@@ -2055,7 +2055,7 @@
         {
           "Asignatura": "INO106 - ÁLGEBRA Y GEOMETRÍA ANALÍTICA",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "40667934 - TERREROS NAVARRO, HELLEN GLORIA",
           "Horarios": [
             {
               "Día": "MARTES",
@@ -2077,7 +2077,7 @@
         {
           "Asignatura": "INO106 - ÁLGEBRA Y GEOMETRÍA ANALÍTICA",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "43313669 - SALAZAR FLORES, ELIZABETH RUTH",
           "Horarios": [
             {
               "Día": "LUNES",
@@ -2099,21 +2099,21 @@
         {
           "Asignatura": "INO106 - ÁLGEBRA Y GEOMETRÍA ANALÍTICA",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "40667934 - TERREROS NAVARRO, HELLEN GLORIA",
           "Horarios": [
             {
               "Día": "LUNES",
               "Horario": "1",
               "Tipo": "Práctica",
-              "Inicio": "08:00",
-              "Fin": "10:00"
+              "Inicio": "14:00",
+              "Fin": "16:00"
             },
             {
-              "Día": "JUEVES",
+              "Día": "MARTES",
               "Horario": "2",
               "Tipo": "Práctica",
-              "Inicio": "08:00",
-              "Fin": "12:00"
+              "Inicio": "14:00",
+              "Fin": "18:00"
             }
           ],
           "Sec_": "6"
@@ -2165,7 +2165,7 @@
         {
           "Asignatura": "INO107 - MEDIO AMBIENTE Y DESARROLLO SOSTENIBLE",
           "Créd_": "3.0",
-          "Docente": "--",
+          "Docente": "44752092 - LUCIO PONCE, PILAR",
           "Horarios": [
             {
               "Día": "JUEVES",
@@ -2187,7 +2187,7 @@
         {
           "Asignatura": "INO107 - MEDIO AMBIENTE Y DESARROLLO SOSTENIBLE",
           "Créd_": "3.0",
-          "Docente": "07493618 - INGA ALVA, ALEXANDER EDUARDO",
+          "Docente": "09958068 - CUEVA SANCHEZ, JEAN",
           "Horarios": [
             {
               "Día": "JUEVES",
@@ -2231,7 +2231,7 @@
         {
           "Asignatura": "INO107 - MEDIO AMBIENTE Y DESARROLLO SOSTENIBLE",
           "Créd_": "3.0",
-          "Docente": "07493618 - INGA ALVA, ALEXANDER EDUARDO",
+          "Docente": "44752092 - LUCIO PONCE, PILAR",
           "Horarios": [
             {
               "Día": "LUNES",
@@ -2363,7 +2363,7 @@
         {
           "Asignatura": "INO108 - PROGRAMACIÓN Y COMPUTACIÓN",
           "Créd_": "2.0",
-          "Docente": "10645375 - USCUCHAGUA FLORES, GELBER CHRISTIAN",
+          "Docente": "0A06295 - USCUCHAGUA FLORES, GELBER CHRISTIAN",
           "Horarios": [
             {
               "Día": "MIERCOLES",
@@ -2381,35 +2381,13 @@
             }
           ],
           "Sec_": "6"
-        },
-        {
-          "Asignatura": "INO108 - PROGRAMACIÓN Y COMPUTACIÓN",
-          "Créd_": "2.0",
-          "Docente": "07240690 - DAMASO RIOS, MARIA ROSA",
-          "Horarios": [
-            {
-              "Día": "SABADO",
-              "Horario": "1",
-              "Tipo": "Práctica",
-              "Inicio": "10:00",
-              "Fin": "11:00"
-            },
-            {
-              "Día": "SABADO",
-              "Horario": "2",
-              "Tipo": "Práctica",
-              "Inicio": "11:00",
-              "Fin": "13:00"
-            }
-          ],
-          "Sec_": "7"
         }
       ],
       "CICLO 2": [
         {
           "Asignatura": "INO204 - CÁLCULO II",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "40764399 - MARAVI PERCCA, EDWIN",
           "Horarios": [
             {
               "Día": "LUNES",
@@ -2543,7 +2521,7 @@
         {
           "Asignatura": "201230302 - SERIES Y ECUACIONES DIFERENCIALES",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "43313669 - SALAZAR FLORES, ELIZABETH RUTH",
           "Horarios": [
             {
               "Día": "MARTES",
@@ -2587,7 +2565,7 @@
         {
           "Asignatura": "201230302 - SERIES Y ECUACIONES DIFERENCIALES",
           "Créd_": "4.0",
-          "Docente": "--",
+          "Docente": "40667934 - TERREROS NAVARRO, HELLEN GLORIA",
           "Horarios": [
             {
               "Día": "LUNES",
@@ -2675,7 +2653,7 @@
         {
           "Asignatura": "201230303 - ELECTROMAGNETISMO Y ÓPTICA",
           "Créd_": "4.0",
-          "Docente": "0A1859 - SAAVEDRA JUAN DE DIOS, MIGUEL FIDENCIO",
+          "Docente": "0A7585 - SUSANIBA ZEVALLOS, JORGE LUIS",
           "Horarios": [
             {
               "Día": "VIERNES",
@@ -2729,21 +2707,21 @@
           "Docente": "085774 - VERA POMALAZA, VIRGINIA",
           "Horarios": [
             {
-              "Día": "MIERCOLES",
+              "Día": "VIERNES",
               "Horario": "1",
               "Tipo": "Práctica",
               "Inicio": "08:00",
               "Fin": "10:00"
             },
             {
-              "Día": "MIERCOLES",
+              "Día": "VIERNES",
               "Horario": "2",
               "Tipo": "Práctica",
               "Inicio": "10:00",
               "Fin": "12:00"
             },
             {
-              "Día": "MIERCOLES",
+              "Día": "VIERNES",
               "Horario": "3",
               "Tipo": "Práctica",
               "Inicio": "12:00",
@@ -2845,15 +2823,15 @@
           "Docente": "055123 - PRÓ CONCEPCIÓN, LUZMILA ELISA",
           "Horarios": [
             {
-              "Día": "VIERNES",
+              "Día": "MIERCOLES",
               "Horario": "1",
               "Tipo": "Práctica",
               "Inicio": "08:00",
               "Fin": "09:00"
             },
             {
-              "Día": "VIERNES",
-              "Horario": "1",
+              "Día": "MIERCOLES",
+              "Horario": "2",
               "Tipo": "Práctica",
               "Inicio": "09:00",
               "Fin": "11:00"
@@ -3193,9 +3171,31 @@
           "Sec_": "3"
         },
         {
+          "Asignatura": "201230405 - ESTADÍSTICA I",
+          "Créd_": "4.0",
+          "Docente": "043788 - MENDOZA SOLIS, JACINTO PEDRO",
+          "Horarios": [
+            {
+              "Día": "JUEVES",
+              "Horario": "1",
+              "Tipo": "Práctica",
+              "Inicio": "08:00",
+              "Fin": "11:00"
+            },
+            {
+              "Día": "JUEVES",
+              "Horario": "2",
+              "Tipo": "Práctica",
+              "Inicio": "11:00",
+              "Fin": "13:00"
+            }
+          ],
+          "Sec_": "1"
+        },
+        {
           "Asignatura": "201230406 - INGENIERÍA ECONÓMICA",
           "Créd_": "3.0",
-          "Docente": "--",
+          "Docente": "057622 - REÁTEGUI SÁNCHEZ DE SÁNCHEZ, LLEYNI",
           "Horarios": [
             {
               "Día": "JUEVES",
@@ -3252,7 +3252,7 @@
             },
             {
               "Día": "JUEVES",
-              "Horario": "1",
+              "Horario": "2",
               "Tipo": "Práctica",
               "Inicio": "11:00",
               "Fin": "13:00"
@@ -3555,7 +3555,7 @@
         {
           "Asignatura": "201230504 - ESTADÍSTICA II",
           "Créd_": "4.0",
-          "Docente": "029351 - GIRALDO LAGUNA, SUIBERTO ORLANDO",
+          "Docente": "033936 - HUAROTO SUMARI, JUSTA CARIDAD",
           "Horarios": [
             {
               "Día": "LUNES",
