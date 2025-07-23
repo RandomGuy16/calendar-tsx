@@ -44,7 +44,7 @@ function renderSections(sections: CourseSection[]) {
 
   sections.forEach((section, i) => {
     section.schedules.forEach((schedule, j) => {
-      const dayIndex = DAYS_MAP[schedule.day as DayKey]
+      const dayIndex = DAYS_MAP[schedule.day.toUpperCase() as DayKey]
 
       // skip if not a valid day
       if (dayIndex === undefined) return
