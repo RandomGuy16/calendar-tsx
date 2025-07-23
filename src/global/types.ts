@@ -123,6 +123,7 @@ export interface SelectFilterOption {
   value: Career[];
 }
 
+// Global interface for trackers selection operations
 export interface SectionSelectionOps {
   addSections: (sections: CourseSection | CourseSection[]) => void;
   removeSections: (sections: CourseSection | CourseSection[]) => void;
@@ -153,17 +154,6 @@ export interface CourseColor {
 }
 
 
-interface SectionAndCareer {
-  section: CourseSection;
-  career: string;
-}
-
-export function createCourseKey(input: SectionAndCareer | Course): string {
-  if (input instanceof Course) return `${input.getId()} ${input.getName()} ${input.getCareer()}`
-  else return `${input.section.assignmentId} ${input.section.assignment} ${input.career}`
-}
-
-
 export const COLOR_PAIRS: CourseColor[] = [
   { background: CourseColors.PASTEL_BLUE, text: '#2C5282' },    // Dark blue
   { background: CourseColors.PASTEL_GREEN, text: '#276749' },   // Dark green
@@ -178,6 +168,39 @@ export const COLOR_PAIRS: CourseColor[] = [
   { background: CourseColors.PASTEL_AQUA, text: '#285E61' },    // Dark aqua
   { background: CourseColors.PASTEL_ROSE, text: '#9B2C2C' }     // Dark rose
 ];
+
+// Map to store course ID to color mapping
+const courseColorMap = new Map<string, CourseColor>();
+
+/**
+ * Gets or generates a consistent color pair for a course
+ * @param courseId Unique identifier for the course
+ * @returns Object containing background and text colors
+ */
+export function getCourseColor(courseId: string) {
+  // returns already generated color
+  if (courseColorMap.has(courseId)) {
+    return courseColorMap.get(courseId)!;
+  }
+
+  // it hasn't generated a color for the course, generates a new pair
+  const colorIndex = courseColorMap.size % COLOR_PAIRS.length;
+  const newColor = COLOR_PAIRS[colorIndex];
+  courseColorMap.set(courseId, newColor);
+
+  return newColor;
+}
+
+
+interface SectionAndCareer {
+  section: CourseSection;
+  career: string;
+}
+
+export function createCourseKey(input: SectionAndCareer | Course): string {
+  if (input instanceof Course) return `${input.getId()} ${input.getName()} ${input.getCareer()}`
+  else return `${input.section.assignmentId} ${input.section.assignment} ${input.career}`
+}
 
 
 export function getCourseKey(course: Course): string {
