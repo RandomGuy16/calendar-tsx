@@ -135,6 +135,28 @@
           "Sec_": "6"
         },
         {
+          "Asignatura": "INO108 - PROGRAMACIÓN Y COMPUTACIÓN",
+          "Créd_": "2.0",
+          "Docente": "07240690 - DAMASO RIOS, MARIA ROSA",
+          "Horarios": [
+            {
+              "Día": "SABADO",
+              "Horario": "1",
+              "Tipo": "Práctica",
+              "Inicio": "10:00",
+              "Fin": "11:00"
+            },
+            {
+              "Día": "SABADO",
+              "Horario": "2",
+              "Tipo": "Práctica",
+              "Inicio": "11:00",
+              "Fin": "13:00"
+            }
+          ],
+          "Sec_": "7"
+        },
+        {
           "Asignatura": "INO101 - REDACCIÓN Y TÉCNICAS DE COMUNICACIÓN EFECTIVA I",
           "Créd_": "3.0",
           "Docente": "42229911 - RIOS DELGADO, JHOHANNA",
