@@ -50,7 +50,8 @@ function ScheduleEventCard({ schedule, section }: ScheduleEventCardProps) {
       }}>
       <p className='inline-block w-full overflow-hidden text-ellipsis'>
         {schedule.assignment.toLocaleLowerCase()}<br />
-        sección {section.sectionNumber}
+        sección {section.sectionNumber}<br />
+        {section.teacher}
       </p>
     </div>
   )
