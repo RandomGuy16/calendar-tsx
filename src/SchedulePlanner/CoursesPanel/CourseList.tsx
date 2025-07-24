@@ -55,7 +55,7 @@ function CourseList({ data, isDataLoaded, isMobile, isOpen, sidebarSwitch, secti
     careers: []
   })
   const [chosenFilters, setChosenFilters] = useState<Filters>({
-    cycle: 'CICLO 1',
+    cycle: 'CICLO 4',
     career: 'Ingeniería De Sistemas',
     year: '2023'
   })

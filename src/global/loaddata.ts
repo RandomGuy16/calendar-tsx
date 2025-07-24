@@ -42,7 +42,7 @@ export async function loadJSON() {
 function formatCycles([cycle, sectionsList]: [string, any]) {
   return {  // cycle scope
     name: cycle,
-    courseSections: sectionsList.map((section: any) => {
+    courseSections: sectionsList.length ? sectionsList.map((section: any) => {
       return {  // course section scope
         assignment: section["Asignatura"].split(" - ")[1],
         assignmentId: section["Asignatura"].split(" - ")[0],
@@ -53,7 +53,7 @@ function formatCycles([cycle, sectionsList]: [string, any]) {
           return {  // schedule scope
             assignment: section["Asignatura"].split(" - ")[1],
             assignmentId: section["Asignatura"].split(" - ")[0],
-            day: schedule["Día"],
+            day: schedule["Día"].toUpperCase(),
             start: schedule["Inicio"],
             end: schedule["Fin"],
             type: schedule["Tipo"],
@@ -62,7 +62,7 @@ function formatCycles([cycle, sectionsList]: [string, any]) {
           }
         })
       }
-    })
+    }) : []
   }
 }
 
@@ -147,7 +147,7 @@ export function getCoursesFromData(
   userFilters: Filters = {
     year: '2023',
     career: 'Ingeniería De Sistemas',
-    cycle: 'CICLO 1',
+    cycle: 'CICLO 4',
   }) {
   const courses: Course[] = []
 
