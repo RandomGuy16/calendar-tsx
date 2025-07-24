@@ -49,7 +49,7 @@ function renderSections(sections: CourseSection[]) {
       // skip if not a valid day
       if (dayIndex === undefined) return
 
-      const eventCard = (<ScheduleEventCard key={`${i}${j}`} schedule={schedule} section={section} />)
+      const eventCard = (<ScheduleEventCard key={`${i}${j} ${section.assignmentId} ${section.assignment}`} schedule={schedule} section={section} />)
       daysData[dayIndex].schedules.push(schedule)
       daysData[dayIndex].eventCards.push(eventCard)
     })
